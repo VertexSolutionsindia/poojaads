@@ -899,8 +899,8 @@
         <Source>Embedded</Source>
         <Value>PoojaAdd</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>0.47653cm</Top>
-        <Left>7.18488cm</Left>
+        <Top>0.51181cm</Top>
+        <Left>0.33338cm</Left>
         <Height>1.63229cm</Height>
         <Width>3.10855cm</Width>
         <ZIndex>27</ZIndex>
@@ -1153,85 +1153,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Rectangle Name="Rectangle1">
-        <ReportItems>
-          <Textbox Name="Textbox12">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Authorised Signatory</Value>
-                    <Style>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox12</rd:DefaultName>
-            <Top>24.57924cm</Top>
-            <Left>12.80431cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.60277cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Line Name="Line9">
-            <Top>22.90445cm</Top>
-            <Left>0cm</Left>
-            <Height>0cm</Height>
-            <Width>17.96966cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-        </ReportItems>
-        <KeepTogether>true</KeepTogether>
-        <Left>0cm</Left>
-        <Height>26.51125cm</Height>
-        <Width>17.96966cm</Width>
-        <ZIndex>38</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-            <Width>2.25pt</Width>
-          </Border>
-          <TopBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>2.25pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>2.25pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>2.25pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>2.25pt</Width>
-          </RightBorder>
-        </Style>
-      </Rectangle>
       <Textbox Name="Textbox11">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -1251,7 +1172,7 @@
         <Left>0cm</Left>
         <Height>1.01451cm</Height>
         <Width>17.96966cm</Width>
-        <ZIndex>39</ZIndex>
+        <ZIndex>38</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1294,10 +1215,7 @@
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>0.5in</LeftMargin>
-    <RightMargin>0.5in</RightMargin>
-    <TopMargin>0.5in</TopMargin>
-    <BottomMargin>0.5in</BottomMargin>
+    <RightMargin>0cm</RightMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

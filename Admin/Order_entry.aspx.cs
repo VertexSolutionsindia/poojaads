@@ -18,7 +18,7 @@ using System.Drawing;
 
 public partial class Admin_Department_Entry : System.Web.UI.Page
 {
-
+    float tot = 0;
     public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -39,8 +39,9 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                
                 con.Close();
             }
-            TextBox13.Attributes.Add("onkeypress", "return controlEnter('" + TextBox14.ClientID + "', event)");
+          
             getinvoiceno();
+            getinvoiceno1();
             //show_category();
             showrating();
             BindData();
@@ -164,19 +165,12 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
              cmd.Parameters.Add("@mobile",TextBox4.Text);
              cmd.Parameters.Add("@Serv_Type", DropDownList3.SelectedItem.Text);
              cmd.Parameters.Add("@Serv_Name", DropDownList5.SelectedItem.Text);
-             cmd.Parameters.Add("@Timefrom", TextBox7.Text);
-             cmd.Parameters.Add("@timeto", TextBox11.Text);
+             cmd.Parameters.Add("@Timefrom", TextBox4.Text);
+         
            
            
-             cmd.Parameters.AddWithValue("@Serv_Cost", TextBox12.Text);
-             cmd.Parameters.AddWithValue("@advance", TextBox13.Text);
-             cmd.Parameters.AddWithValue("@blnce", TextBox14.Text);
-             cmd.Parameters.AddWithValue("@payment_clctd", TextBox15.Text);
-             cmd.Parameters.AddWithValue("@blnce_pay", TextBox17.Text);
-
-             cmd.Parameters.Add("@Com_Id", company_id);
-             cmd.Parameters.AddWithValue("@total_amt", TextBox19.Text);
-             cmd.Parameters.AddWithValue("@Order_Date", TextBox20.Text);
+        
+          
             
              CON.Open();
              cmd.ExecuteNonQuery();
@@ -188,15 +182,10 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
            
             TextBox2.Text = "";
             TextBox4.Text = "";
-            TextBox7.Text = "";
+          
             TextBox8.Text = "";
-            TextBox12.Text = "";
-            TextBox13.Text = ""; 
-            TextBox14.Text = "";
-            TextBox15.Text = "";
-            TextBox17.Text = "";
-            TextBox11.Text = "";
-            TextBox19.Text = "";
+          
+          
             TextBox20.Text = "";
             getclient();
             DropDownList3.SelectedItem.Text = "All";
@@ -213,15 +202,10 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         getinvoiceno();
         TextBox2.Text = "";
         TextBox4.Text = "";
-        TextBox7.Text = "";
+       
         TextBox8.Text = "";
-        TextBox12.Text = "";
-        TextBox13.Text = "";
-        TextBox14.Text = "";
-        TextBox15.Text = "";
-        TextBox11.Text = "";
-        TextBox17.Text = "";
-        TextBox19.Text = "";
+    
+      
         TextBox20.Text = "";
         getclient();
         DropDownList3.SelectedItem.Text = "All";
@@ -252,12 +236,12 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
     {
        
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "' ORDER BY id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry_details where invoice_no='"+Label1.Text+"' and Com_Id='" + company_id + "' ORDER BY invoice_no asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        GridView2.DataSource = dt1;
+        GridView2.DataBind();
 
     }
 
@@ -288,7 +272,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select COUNT(id) from Order_entry where Com_Id='" + company_id + "'";
+        string query = "Select COUNT(invoice_no) from Order_entry where Com_Id='" + company_id + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -303,6 +287,30 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 a = Convert.ToInt32(dr[0].ToString());
                 a = a + 1;
                 Label1.Text = a.ToString();
+            }
+        }
+    }
+    private void getinvoiceno1()
+    {
+        int a;
+
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        con1.Open();
+        string query = "Select COUNT(invoice_no) from Order_entry_details where invoice_no='"+Label1.Text+"' and  Com_Id='" + company_id + "'";
+        SqlCommand cmd1 = new SqlCommand(query, con1);
+        SqlDataReader dr = cmd1.ExecuteReader();
+        if (dr.Read())
+        {
+            string val = dr[0].ToString();
+            if (val == "")
+            {
+                Label9.Text = "1";
+            }
+            else
+            {
+                a = Convert.ToInt32(dr[0].ToString());
+                a = a + 1;
+                Label9.Text = a.ToString();
             }
         }
     }
@@ -418,7 +426,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         {
 
 
-            TextBox12.Text = dr1["product_price"].ToString();
+           
            
         }
         con.Close();
@@ -527,50 +535,76 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         GridView1.DataBind();
 
     }
-  
-      
 
 
 
- 
 
 
-    //private void TextBox13_TextChanged(object sender, EventArgs e)
-    //{
-    //    TextBox14.Text = (Double.Parse(TextBox12.Text) - Double.Parse(TextBox13.Text)).ToString();
-    //}
 
 
-    protected void TextBox13_TextChanged1(object sender, EventArgs e)
+
+
+
+
+    protected void Button4_Click(object sender, EventArgs e)
     {
-          if (TextBox13.Text == "")
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Enter Advance amount you have collected from client')", true);
-        }
-          else if (TextBox12.Text == "")
-          {
-              ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Enter Service Cost')", true);
-          }
-          else
-          {
-              TextBox14.Text = (Double.Parse(TextBox12.Text) - Double.Parse(TextBox13.Text)).ToString();
-          }
+        SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("insert into Order_entry_details values(@invoice_no,@s_no,@service_type,@Service_name,@Duration,@Size,@rate,@qty,@Amount,@Com_Id)", CON);
+        cmd.Parameters.Add("@invoice_no", Label1.Text);
+        cmd.Parameters.Add("@s_no", Label9.Text);
+        cmd.Parameters.Add("@service_type", DropDownList3.SelectedItem.Text);
+        cmd.Parameters.Add("@Service_name", DropDownList5.SelectedItem.Text);
+        cmd.Parameters.Add("@Duration",TextBox23.Text+"-"+TextBox21.Text);
+        cmd.Parameters.Add("@Size",TextBox24.Text);
+        cmd.Parameters.Add("@rate", TextBox29.Text);
+        cmd.Parameters.AddWithValue("@qty", TextBox25.Text);
+        cmd.Parameters.Add("@Amount", TextBox22.Text);
+        cmd.Parameters.AddWithValue("@Com_Id", company_id);
+
+
+
+
+
+        CON.Open();
+        cmd.ExecuteNonQuery();
+        CON.Close();
+
+        BindData();
+        getinvoiceno1();
+        est_cost();
+        gettype();
+       
     }
-    protected void TextBox15_TextChanged(object sender, EventArgs e)
+    protected void TextBox24_TextChanged(object sender, EventArgs e)
     {
-        if (TextBox14.Text == "")
+       
+    }
+    protected void TextBox29_TextChanged(object sender, EventArgs e)
+    {
+        float size = float.Parse(TextBox24.Text);
+        float rate = float.Parse(TextBox29.Text);
+        float total = size * rate;
+        TextBox22.Text = total.ToString();
+    }
+    protected void TextBox25_TextChanged(object sender, EventArgs e)
+    {
+        float size = float.Parse(TextBox24.Text);
+        float rate = float.Parse(TextBox29.Text);
+        float total = size * rate;
+        float qty = float.Parse(TextBox25.Text);
+        float total1 = total * qty;
+        TextBox22.Text = total1.ToString();
+    }
+    protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Enter Balance amount of the service')", true);
-        }
-        else if (TextBox15.Text == "")
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Enter Collected Payment from Client')", true);
-        }
-        else
-        {
+            tot = tot + float.Parse(e.Row.Cells[7].Text);
 
-            TextBox17.Text = (Double.Parse(TextBox14.Text) - Double.Parse(TextBox15.Text)).ToString();
-            TextBox19.Text = (Double.Parse(TextBox13.Text) + Double.Parse(TextBox15.Text)).ToString();
         }
+        TextBox7.Text = tot.ToString();
+
+       
+       
     }
 }

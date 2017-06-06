@@ -54,13 +54,7 @@ public partial class RabbitDashboard : System.Web.UI.Page
     protected void BindData()
     {
 
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+       
 
     }
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
