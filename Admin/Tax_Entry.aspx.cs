@@ -37,7 +37,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
             if (User.Identity.IsAuthenticated)
             {
                 SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+                SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
                 SqlDataReader dr1000;
                 con1000.Open();
                 dr1000 = cmd1000.ExecuteReader();
@@ -58,6 +58,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         GridViewRow ROW = (GridViewRow)IMG.NamingContainer;
         Label16.Text = ROW.Cells[1].Text;
         TextBox11.Text = ROW.Cells[2].Text;
+        TextBox2.Text = ROW.Cells[3].Text;
         this.ModalPopupExtender2.Show();
 
     }
@@ -66,7 +67,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         if (User.Identity.IsAuthenticated)
         {
             SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
             SqlDataReader dr1000;
             con1000.Open();
             dr1000 = cmd1000.ExecuteReader();
@@ -75,7 +76,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
                 company_id = Convert.ToInt32(dr1000["com_id"].ToString());
 
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("update Tax set tax_per='" + HttpUtility.HtmlDecode(TextBox11.Text) + "' where tax_id='" + HttpUtility.HtmlDecode(Label16.Text) + "'  and Com_Id='" + company_id + "' ", CON);
+                SqlCommand cmd = new SqlCommand("update Tax set tax_name='" + HttpUtility.HtmlDecode(TextBox11.Text) + "',tax_per='" + HttpUtility.HtmlDecode(TextBox2.Text) + "' where tax_id='" + HttpUtility.HtmlDecode(Label16.Text) + "'  and Com_Id='" + company_id + "' ", CON);
 
                 CON.Open();
                 cmd.ExecuteNonQuery();
@@ -95,7 +96,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         if (User.Identity.IsAuthenticated)
         {
             SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
             SqlDataReader dr1000;
             con1000.Open();
             dr1000 = cmd1000.ExecuteReader();
@@ -122,6 +123,16 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
+        if (User.Identity.IsAuthenticated)
+        {
+            SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
+            SqlDataReader dr1000;
+            con1000.Open();
+            dr1000 = cmd1000.ExecuteReader();
+            if (dr1000.Read())
+            {
+                company_id = Convert.ToInt32(dr1000["com_id"].ToString());
         if (TextBox3.Text == "")
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter tax name')", true);
@@ -129,7 +140,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         else
         {
             SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1 = new SqlCommand("select * from Tax where tax_per='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
+            SqlCommand cmd1 = new SqlCommand("select * from Tax where tax_name='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
             con1.Open();
             SqlDataReader dr1;
             dr1 = cmd1.ExecuteReader();
@@ -142,21 +153,13 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
             else
             {
 
-                if (User.Identity.IsAuthenticated)
-                {
-                    SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
-                    SqlDataReader dr1000;
-                    con1000.Open();
-                    dr1000 = cmd1000.ExecuteReader();
-                    if (dr1000.Read())
-                    {
-                        company_id = Convert.ToInt32(dr1000["com_id"].ToString());
+              
 
                         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_per,@Com_Id)", CON);
+                        SqlCommand cmd = new SqlCommand("insert into Tax values(@tax_id,@tax_name,@tax_per,@Com_Id)", CON);
                         cmd.Parameters.AddWithValue("@tax_id", Label1.Text);
-                        cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox3.Text));
+                        cmd.Parameters.AddWithValue("@tax_name", HttpUtility.HtmlDecode(TextBox3.Text));
+                        cmd.Parameters.AddWithValue("@tax_per", HttpUtility.HtmlDecode(TextBox1.Text));
                         cmd.Parameters.AddWithValue("@Com_Id", company_id);
                         CON.Open();
                         cmd.ExecuteNonQuery();
@@ -166,10 +169,11 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
                         show_category();
                         getinvoiceno();
                         TextBox3.Text = "";
-                    }
-                    con1000.Close();
-                }
+                   
             }
+        }
+            }
+            con1000.Close();
         }
     }
 
@@ -205,7 +209,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         if (User.Identity.IsAuthenticated)
         {
             SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
             SqlDataReader dr1000;
             con1000.Open();
             dr1000 = cmd1000.ExecuteReader();
@@ -229,7 +233,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         if (User.Identity.IsAuthenticated)
         {
             SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
             SqlDataReader dr1000;
             con1000.Open();
             dr1000 = cmd1000.ExecuteReader();
@@ -259,7 +263,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         if (User.Identity.IsAuthenticated)
         {
             SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
             SqlDataReader dr1000;
             con1000.Open();
             dr1000 = cmd1000.ExecuteReader();
@@ -298,7 +302,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         if (User.Identity.IsAuthenticated)
         {
             SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd1000 = new SqlCommand("select * from user_details where company_name='" + User.Identity.Name + "'", con1000);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
             SqlDataReader dr1000;
             con1000.Open();
             dr1000 = cmd1000.ExecuteReader();
@@ -340,6 +344,17 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
     }
     protected void Button11_Click(object sender, EventArgs e)
     {
+
+          if (User.Identity.IsAuthenticated)
+        {
+            SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
+            SqlDataReader dr1000;
+            con1000.Open();
+            dr1000 = cmd1000.ExecuteReader();
+            if (dr1000.Read())
+            {
+                company_id = Convert.ToInt32(dr1000["com_id"].ToString());
         foreach (GridViewRow gvrow in GridView1.Rows)
         {
             //Finiding checkbox control in gridview for particular row
@@ -360,6 +375,9 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
         }
         BindData();
         getinvoiceno();
+            }
+            con1000.Close();
+        }
 
     }
     private void showcustomertype()
