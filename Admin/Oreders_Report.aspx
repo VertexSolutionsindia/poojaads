@@ -218,11 +218,11 @@
                         <li class="dropdown profile-dropdown">
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" ><img src="../default-profile-pic.png" alt="" width="25px"><%=User.Identity.Name%></b></span>  <span class="fa fa-caret-down" aria-hidden="true" style=""></a>
                             <ul class="dropdown-menu">
-                                <li><a href="Profile_main.aspx"><i class="fa fa-user"></i>My Profile</a></li>
+                      <%--          <li><a href="Profile_main.aspx"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="Seetings.aspx"><i class="fa fa-calendar"></i>Settings</a></li>                         
                                 <li><a href="Advanced_Settings.aspx"><i class="fa fa-envelope"></i>Advanced Settings</a></li>
                                 <li><a href="#"><i class="fa fa-barcode"></i>Custom Field</a></li>
-                                <li class="divider"></li>
+                                <li class="divider"></li>--%>
                                
                                  <li ><a href="#" ><asp:LinkButton id="LoginLink" Text="Log Out"  class="fa fa-sign-out" aria-hidden="true"
                       OnClick="LoginLink_OnClick" runat="server" /></a></li>
@@ -234,7 +234,7 @@
         </nav>
         <section class="page">
 
-                <nav class="navbar-aside navbar-static-side" role="navigation">
+             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -242,7 +242,7 @@
                             <li class="active">
                                 <a href="Dashboard.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Home </span><span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level collapse">
-                                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
+                                    <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
                             <li>
@@ -251,58 +251,29 @@
                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_Type.aspx">Service Type</a></li>
                            </ul>
+                            <ul class="nav nav-second-level collapse">
+                                    <li><a href="Service_name.aspx">Service Name</a></li>
+                           </ul>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Location.aspx">Location</a></li>
                            </ul>
                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Service_Entry.aspx">Service Entry</a></li>
+                                    <li><a href="Tax_Entry.aspx">Tax Entry</a></li>
                            </ul>
-                          
-                           
-                          
-                               
-                            </li>
+                              <ul class="nav nav-second-level collapse">
+                                    <li><a href="Partners_entry.aspx">Partner Entry</a></li>
+                           </ul>
+                            
                              
-                              <li>
-                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse">
-                                    <li><a href="Expenses.aspx">Expenses</a></li>
-                           </ul>
-                                 <ul class="nav nav-second-level collapse">
-                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
-                           </ul>
-                          
                                
                             </li>
-                                   <li>
-                                <a href="#"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Account</span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse">
-                                    <li><a href="Account_Entry.aspx">Account_Entry</a></li>
-                           </ul>
-                           
-                          
-                               
-                            </li>
-
-                         
-                              <li>
+                             <li>
                                 <a href="#"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customers </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Client_Entry.aspx">Client Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
-                            
-                           
-                             <li>
-                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Order</span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Order_entry.aspx">Order Entry</a></li>
-                                    <li><a href="Oreders_Report.aspx">Orders Report</a></li>
                            </ul>
                           
                                
@@ -315,6 +286,63 @@
                           
                                
                             </li>
+                             <li>
+                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level collapse">
+                                    <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                             <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
+                            </ul>
+                          
+                               
+                            </li>
+                              <li>
+                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="ExpenseName_Entry.aspx">Expense Name Entry</a></li>
+                           </ul>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="Expense_entry.aspx">Expense Entry</a></li>
+                            </ul>
+                          
+                               
+                            </li>
+                                   <li>
+                                <a href="#"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Bank Details</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="Account_Entry.aspx">Account Entry</a></li>
+                           </ul>
+                           
+                          
+                               
+                            </li>
+
+                             <li>
+                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level collapse">
+                                     <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                             <li><a href="profit_loss.aspx">Profit & loss</a></li>  
+                            </ul>
+                          
+                               
+                            </li>
+                         
+                             
+                            
+                           
+                             <li>
+                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Order</span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Order_entry.aspx">Order Entry</a></li>
+                                    <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
                             
                              <li>
                                 <a href="#"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Estimate </span><span class="fa arrow"></span></a>
@@ -343,8 +371,7 @@
                              <ul class="nav nav-second-level collapse">
                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
                                     <li><a href="Service_report.aspx">Service Report</a></li>
-                                     <li><a href="profit_loss.aspx">Profit and Loss</a></li>
-                                      <li><a href="Estimate_report.aspx">Invoice Report</a></li>
+                                <li><a href="Estimate_report.aspx">Invoice Report</a></li>
                                      
                                      
                            </ul>
@@ -458,7 +485,7 @@
   
                                     <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
                                         ontextchanged="TextBox3_TextChanged"></asp:TextBox>
-                                      <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox3" Format="dd/MM/yyyy"></asp:CalendarExtender>
+                                      <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox3" Format="dd-MM-yyyy"></asp:CalendarExtender>
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -474,7 +501,7 @@
    <ContentTemplate>
   <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" 
            ontextchanged="TextBox4_TextChanged"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox4" Format="dd/MM/yyyy"></asp:CalendarExtender>
+                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox4" Format="dd-MM-yyyy"></asp:CalendarExtender>
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -547,41 +574,39 @@
         onrowdatabound="GridView1_RowDataBound" PageSize="20" BackColor="White" BorderColor="#CCCCCC" 
            BorderStyle="None" BorderWidth="1px">
       <Columns>
-       <asp:TemplateField>
+       <asp:TemplateField ItemStyle-Width="10px" HeaderStyle-CssClass="10PX">
            
            <ItemTemplate>
-               <asp:CheckBox ID="CheckBox3" runat="server" />
+               <asp:CheckBox ID="CheckBox3" runat="server"/>
             </ItemTemplate>
            
            </asp:TemplateField>
       
-         <asp:BoundField HeaderText="ID" DataField="id"  >
+         <asp:BoundField HeaderText="Invoice No" DataField="Invoice_no"  ItemStyle-Width="50px">
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
-           <asp:BoundField HeaderText="Order Date" DataField="Order_Date"  >
+           <asp:BoundField HeaderText="Order Date" DataField="date" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-Width="50px">
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
-       <asp:BoundField HeaderText="Client" DataField="client_name"  >
+       <asp:BoundField HeaderText="Client" DataField="client_name" ItemStyle-Width="100px" >
         
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
         
-         <asp:BoundField HeaderText="Advance" DataField="advance"  >
+   
+         <asp:BoundField HeaderText="Address" DataField="cl_add"  ItemStyle-Width="200px" >
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
-         <asp:BoundField HeaderText="Address" DataField="cl_add"  >
+          <asp:BoundField HeaderText="Mobile" DataField="mobile" ItemStyle-Width="50px" >
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
-          <asp:BoundField HeaderText="Mobile" DataField="mobile"  >
-          <HeaderStyle CssClass="red" />
-          </asp:BoundField>
-         <asp:BoundField HeaderText="Service Name" DataField="Serv_Name"  >
+         <asp:BoundField HeaderText="Presented Bank" DataField="presented_bank"  ItemStyle-Width="100px">
             <HeaderStyle CssClass="red" />
           </asp:BoundField>
-            <asp:BoundField HeaderText="Service Cost" DataField="Serv_Cost"  >
+            <asp:BoundField HeaderText="Amount" DataField="grand_total" ItemStyle-Width="50px" >
               <HeaderStyle CssClass="red" />
           </asp:BoundField>
-              <asp:BoundField HeaderText="Advance" DataField="advance"  >
+<%--              <asp:BoundField HeaderText="Advance" DataField="advance"  >
                <HeaderStyle CssClass="red" />
           </asp:BoundField>
                <asp:BoundField HeaderText="Balance Amount" DataField="blnce"  >
@@ -598,7 +623,7 @@
                    <asp:BoundField HeaderText="Total Amount Collected From Cusomer" DataField="total_amt"  >
       
           <HeaderStyle CssClass="red" />
-          </asp:BoundField>
+          </asp:BoundField>--%>
       
       </Columns>
        <FooterStyle BackColor="White" ForeColor="#000066" />

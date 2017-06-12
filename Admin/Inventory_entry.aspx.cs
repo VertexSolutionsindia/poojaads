@@ -77,7 +77,7 @@ public partial class Admin_Vendor : System.Web.UI.Page
        
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Inventory set Taxi_Com='" + HttpUtility.HtmlDecode(TextBox6.Text) + "', Taxi_No='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Taxi_Drv_nme='" + HttpUtility.HtmlDecode(TextBox5.Text) + "',Taxi_Drvr_No='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Serv_name='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Durationfrm='" + HttpUtility.HtmlDecode(TextBox9.Text) + "',durationto='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',cost='" + HttpUtility.HtmlDecode(TextBox1.Text) + "',due_date='" + HttpUtility.HtmlDecode(TextBox14.Text) + "',advance='" + HttpUtility.HtmlDecode(TextBox15.Text) + "',balance='" + HttpUtility.HtmlDecode(TextBox21.Text) + "' where Invent_No='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
+        SqlCommand cmd = new SqlCommand("update Inventory set Taxi_Com='" + HttpUtility.HtmlDecode(TextBox6.Text) + "', Taxi_No='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Taxi_Drv_nme='" + HttpUtility.HtmlDecode(TextBox5.Text) + "',Taxi_Drvr_No='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Serv_name='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Durationfrm='" + HttpUtility.HtmlDecode(Convert.ToDateTime(TextBox9.Text).ToString("MM-dd-yyyy")) + "',durationto='" + HttpUtility.HtmlDecode(Convert.ToDateTime(TextBox10.Text).ToString("MM-dd-yyyy")) + "',cost='" + HttpUtility.HtmlDecode(TextBox1.Text) + "',due_date='" + HttpUtility.HtmlDecode(Convert.ToDateTime(TextBox14.Text).ToString("MM-dd-yyyy")) + "',advance='" + HttpUtility.HtmlDecode(TextBox15.Text) + "',balance='" + HttpUtility.HtmlDecode(TextBox21.Text) + "' where Invent_No='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -207,10 +207,10 @@ public partial class Admin_Vendor : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@Taxi_Drvr_No", TextBox19.Text);
             cmd.Parameters.AddWithValue("@Serv_type", DropDownList1.SelectedItem.Text);
             cmd.Parameters.AddWithValue("@Serv_name", DropDownList6.SelectedItem.Text);
-            cmd.Parameters.AddWithValue("@Durationfrm", TextBox11.Text);
-            cmd.Parameters.AddWithValue("@durationto", TextBox12.Text);
+            cmd.Parameters.AddWithValue("@Durationfrm", Convert.ToDateTime(TextBox11.Text).ToString("MM-dd-yyyy"));
+            cmd.Parameters.AddWithValue("@durationto", Convert.ToDateTime(TextBox12.Text).ToString("MM-dd-yyyy"));
             cmd.Parameters.AddWithValue("@cost", TextBox4.Text);
-            cmd.Parameters.AddWithValue("@due_date", TextBox17.Text);
+            cmd.Parameters.AddWithValue("@due_date", Convert.ToDateTime(TextBox17.Text).ToString("MM-dd-yyyy"));
             cmd.Parameters.AddWithValue("@advance", TextBox13.Text);
             cmd.Parameters.AddWithValue("@balance", TextBox20.Text);
             cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -540,17 +540,18 @@ public partial class Admin_Vendor : System.Web.UI.Page
     private void show_name()
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from product_entry where category_name='" + DropDownList1.SelectedItem.Text + "'  and Com_Id='" + company_id + "' ORDER BY code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from service_name where servicetype_name='" + DropDownList1.SelectedItem.Text + "' and Com_Id='" + company_id + "'", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         da.Fill(ds);
 
         DropDownList6.DataSource = ds;
-        DropDownList6.DataTextField = "product_name";
-        DropDownList6.DataValueField = "code";
+        DropDownList6.DataTextField = "servicename";
+        DropDownList6.DataValueField = "servicename_id";
         DropDownList6.DataBind();
         DropDownList6.Items.Insert(0, new ListItem("All", "0"));
+
         con.Close();
     }
         

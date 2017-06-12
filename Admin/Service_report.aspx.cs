@@ -96,13 +96,13 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
     protected void BindData()
     {
 
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT * from Order_entry where Com_Id ='" + company_id + "'", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        //SqlCommand CMD = new SqlCommand("SELECT * from Order_entry where Com_Id ='" + company_id + "'", con);
+        //DataTable dt1 = new DataTable();
+        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        //da1.Fill(dt1);
+        //GridView1.DataSource = dt1;
+        //GridView1.DataBind();
 
 
 
@@ -132,22 +132,22 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
     }
     private void show_category()
     {
-        
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY id asc", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
+
+        //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        //SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        //con.Open();
+        //DataSet ds = new DataSet();
+        //SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //da.Fill(ds);
 
 
-        DropDownList2.DataSource = ds;
-        DropDownList2.DataTextField = "Serv_Name";
-        DropDownList2.DataValueField = "id";
-        DropDownList2.DataBind();
-        DropDownList2.Items.Insert(0, new ListItem("All", "0"));
+        //DropDownList2.DataSource = ds;
+        //DropDownList2.DataTextField = "Serv_Name";
+        //DropDownList2.DataValueField = "Invoice_no";
+        //DropDownList2.DataBind();
+        //DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
-        con.Close();
+        //con.Close();
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {

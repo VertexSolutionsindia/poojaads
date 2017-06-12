@@ -85,7 +85,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     protected void BindData()
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "'ORDER BY id asc",con1);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "'ORDER BY Invoice_no asc", con1);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -167,7 +167,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry where Timefrom='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
+        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -180,7 +180,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry  where timeto between '" + TextBox3.Text + "' and '" + TextBox4.Text + "' and  Com_Id='" + company_id + "' order by id", con1);
+        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -215,7 +215,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY id asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -225,7 +225,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
         DropDownList3.DataSource = ds;
         DropDownList3.DataTextField = "client_name";
-        DropDownList3.DataValueField = "id";
+        DropDownList3.DataValueField = "Invoice_no";
         DropDownList3.DataBind();
         DropDownList3.Items.Insert(0, new ListItem("All", "0"));
 
@@ -235,7 +235,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and Com_Id='" + company_id + "'", con);
+        SqlCommand cmd = new SqlCommand("Select * from Order_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -243,7 +243,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
         DropDownList6.DataSource = ds;
         DropDownList6.DataTextField = "mobile";
-        DropDownList6.DataValueField = "id";
+        DropDownList6.DataValueField = "Invoice_no";
         DropDownList6.DataBind();
         DropDownList6.Items.Insert(0, new ListItem("All", "0"));
 
@@ -253,7 +253,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     protected void DropDownList6_SelectedIndexChanged(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY id asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);

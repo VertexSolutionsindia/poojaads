@@ -17,15 +17,15 @@ using System.Drawing;
 
 public partial class Admin_Daily_sales : System.Web.UI.Page
 {
+    float tot = 0;
+    float Costofservice_tot = 0;
+    float Expense_tot = 0;
     public static int company_id = 0;
-    float m = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
 
         if (!IsPostBack)
         {
-
-
             if (User.Identity.IsAuthenticated)
             {
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
@@ -40,44 +40,28 @@ public partial class Admin_Daily_sales : System.Web.UI.Page
                 con.Close();
             }
 
-            getinvoiceno();
-            show_category();
+            SqlConnection con10 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd10 = new SqlCommand("select * from currentfinancialyear where no='1'", con10);
+            SqlDataReader dr10;
+            con10.Open();
+            dr10 = cmd10.ExecuteReader();
+            if (dr10.Read())
+            {
+                Label1.Text = dr10["financial_year"].ToString();
+                TextBox3.Text = Convert.ToDateTime(dr10["start_date"]).ToString("dd-MM-yyyy");
+            }
             showrating();
-            BindData();
-
+            //BindData();
+            //BindData1();
+            //BindData2();
             active();
             created();
-            BindData1();
-          
+
+
+
 
 
         }
-    }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-
-
-    }
-    protected void Button9_Click(object sender, EventArgs e)
-    {
-
-    }
-    protected void Button10_Click(object sender, EventArgs e)
-    {
-
-    }
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-
-
-
-    }
-
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-
-        getinvoiceno();
-        show_category();
     }
     private void active()
     {
@@ -100,62 +84,145 @@ public partial class Admin_Daily_sales : System.Web.UI.Page
     {
 
     }
-    protected void BindData()
+    protected void Button1_Click(object sender, EventArgs e)
     {
-       
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+
+
+        if (TextBox3.Text != "")
+        {
+            if (TextBox4.Text != "")
+            {
+                BindData();
+                BindData1();
+                BindData2();
+
+                try
+                {
+                    //----------------------------------------------Finding Grossporift
+
+                    int Tot_Income = Convert.ToInt32(TextBox1.Text);
+
+                    int Tol_CostofService = Convert.ToInt32(TextBox2.Text);
+
+                    int Gross_profit = Tot_Income - Tol_CostofService;
+
+                    TextBox5.Text = Convert.ToString(Gross_profit);
+                    //-------------------------------------------------------------------
+
+                    //------------------------------------------------Finding Net Profit
+                    int Total_Grossprofit = Convert.ToInt32(TextBox5.Text);
+
+                    int Total_Expense = Convert.ToInt32(TextBox6.Text);
+
+                    int NetProfit = Total_Grossprofit - Total_Expense;
+
+                    TextBox7.Text = Convert.ToString(NetProfit);
+                    TextBox8.Text = Convert.ToString(NetProfit);
+                }
+                catch (Exception er)
+                { }
+
+                //--------------------------------------------------------------------
+
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select To Date')", true);
+            }
+        }
+        else
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select From Date')", true);
+        }
+
+        //----------------------------------------------Finding Grossporift
+
+        //---------------------------------------------------------------------
 
 
 
     }
 
+    protected void BindData()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1);
+            SqlDataReader dr;
+            con1.Open();
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand CMD = new SqlCommand("select client_name,Sum(grand_total) as Amount from Order_entry where date between '" +Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" +Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and Com_Id='" + company_id + "' and year='" + Label1.Text + "' group by client_name", con);
+                DataTable dt1 = new DataTable();
+                SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                da1.Fill(dt1);
+                GridView1.DataSource = dt1;
+                GridView1.DataBind();
+            }
+            con1.Close();
+        }
+    }
     protected void BindData1()
     {
-
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Expenses where Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt2 = new DataTable();
-        SqlDataAdapter da2 = new SqlDataAdapter(CMD);
-        da2.Fill(dt2);
-        GridView2.DataSource = dt2;
-        GridView2.DataBind();
-
-
+        if (User.Identity.IsAuthenticated)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con);
+            SqlDataReader dr;
+            con.Open();
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                //SqlCommand CMD = new SqlCommand("SELECT  CONVERT(datetime,date,101) as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM sales_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,amount,value", con1);
+                SqlCommand CMD2 = new SqlCommand("select CostofService_Name,Sum(Amount) as Amount from CostOfService_Entry where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and Com_Id='" + company_id + "' and year='" + Label1.Text + "' group by CostofService_Name", con2);
+                DataTable dt2 = new DataTable();
+                con2.Open();
+                SqlDataAdapter da2 = new SqlDataAdapter(CMD2);
+                da2.Fill(dt2);
+                GridView2.DataSource = dt2;
+                GridView2.DataBind();
+            }
+            con.Close();
+        }
+    }
+    protected void BindData2()
+    {
+        if (User.Identity.IsAuthenticated)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con);
+            SqlDataReader dr;
+            con.Open();
+            dr = cmd.ExecuteReader();
+            if (dr.Read())
+            {
+                SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                //SqlCommand CMD = new SqlCommand("SELECT  CONVERT(datetime,date,101) as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM sales_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(paid_amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_entry as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,paid_amount,value union SELECT DISTINCT date as Date, status as Particulars,sum(amount) as Debit,isnull(sum(value),0) as Credit FROM purchase_amount as a where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' group by date,status,amount,value", con1);
+                SqlCommand CMD2 = new SqlCommand("select Expense_Name,Sum(Amount) as Amount from Expence_Entry where date between '" +Convert.ToDateTime( TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" +Convert.ToDateTime( TextBox4.Text).ToString("MM-dd-yyyy") + "' and Com_Id='" + company_id + "' and year='" + Label1.Text + "' group by Expense_Name", con2);
+                DataTable dt2 = new DataTable();
+                con2.Open();
+                SqlDataAdapter da2 = new SqlDataAdapter(CMD2);
+                da2.Fill(dt2);
+                GridView3.DataSource = dt2;
+                GridView3.DataBind();
+            }
+            con.Close();
+        }
 
     }
     protected void ImageButton9_Click(object sender, ImageClickEventArgs e)
     {
-       
-        ImageButton img = (ImageButton)sender;
-        GridViewRow row = (GridViewRow)img.NamingContainer;
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("delete from Order_entry where id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
-        con.Open();
-        cmd.ExecuteNonQuery();
-        con.Close();
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Credit deleted successfully')", true);
-
-        BindData();
-        show_category();
-        getinvoiceno();
-
 
     }
     private void getinvoiceno()
     {
 
+    }
 
-    }
-    private void show_category()
-    {
-        
-    }
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {
         FormsAuthentication.SignOut();
@@ -168,31 +235,7 @@ public partial class Admin_Daily_sales : System.Web.UI.Page
         Session["name1"] = "";
         Response.Redirect("~/Admin/Category_Add.aspx");
     }
-    protected void Button11_Click(object sender, EventArgs e)
-    {
-       
-        foreach (GridViewRow gvrow in GridView1.Rows)
-        {
-            //Finiding checkbox control in gridview for particular row
-            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox2");
-            //Condition to check checkbox selected or not
-            if (chkdelete.Checked)
-            {
-                //Getting UserId of particular row using datakey value
-                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
-                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
-                con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Order_entry where id='" + usrid + "' and Com_Id='" + company_id + "'", con);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-            }
-        }
-        BindData();
-        getinvoiceno();
-
-    }
     private void showcustomertype()
     {
 
@@ -201,45 +244,10 @@ public partial class Admin_Daily_sales : System.Web.UI.Page
     {
 
     }
-    [System.Web.Script.Services.ScriptMethod()]
-    [System.Web.Services.WebMethod]
-
-    public static List<string> SearchCustomers2(string prefixText, int count)
-    {
-
-
-        using (SqlConnection conn = new SqlConnection())
-        {
-            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
-
-            using (SqlCommand cmd = new SqlCommand())
-            {
-
-
-                cmd.CommandText = "select Timefrom from Order_entry where  Com_Id=@Com_Id and  " +
-                "Timefrom like @Timefrom + '%' ";
-                cmd.Parameters.AddWithValue("@Timefrom", prefixText);
-                cmd.Parameters.AddWithValue("@Com_Id", company_id);
-                cmd.Connection = conn;
-                conn.Open();
-                List<string> customers = new List<string>();
-                using (SqlDataReader sdr = cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        customers.Add(sdr["categoryname"].ToString());
-                    }
-                }
-                conn.Close();
-                return customers;
-            }
-        }
-    }
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
         BindData();
-
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -248,27 +256,19 @@ public partial class Admin_Daily_sales : System.Web.UI.Page
             e.Row.Cells[0].Text = "Page " + (GridView1.PageIndex + 1) + " of " + GridView1.PageCount;
         }
 
+
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            Label Salary = (Label)e.Row.FindControl("lblSalary");
-
-            m = m + float.Parse(Salary.Text);
+            tot = tot + float.Parse(e.Row.Cells[1].Text);
 
         }
-        if (e.Row.RowType == DataControlRowType.Footer)
-        {
-            Label lblTotalPrice = (Label)e.Row.FindControl("Salary");
-            lblTotalPrice.Text = m.ToString();
-            TextBox1.Text = m.ToString();
-        }
+        TextBox1.Text = tot.ToString();
     }
-
 
     protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView2.PageIndex = e.NewPageIndex;
-        BindData();
-
+        BindData1();
     }
     protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -279,68 +279,96 @@ public partial class Admin_Daily_sales : System.Web.UI.Page
 
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            Label Salary = (Label)e.Row.FindControl("lblSalary");
-
-            m = m + float.Parse(Salary.Text);
+            Costofservice_tot = Costofservice_tot + float.Parse(e.Row.Cells[1].Text);
 
         }
+        TextBox2.Text = Costofservice_tot.ToString();
+
+    }
+    protected void GridView3_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView3.PageIndex = e.NewPageIndex;
+        BindData2();
+    }
+    protected void GridView3_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
         if (e.Row.RowType == DataControlRowType.Footer)
         {
-            Label lblTotalPrice = (Label)e.Row.FindControl("Salary");
-            lblTotalPrice.Text = m.ToString();
-            TextBox4.Text = m.ToString();
+            e.Row.Cells[0].Text = "Page " + (GridView3.PageIndex + 1) + " of " + GridView3.PageCount;
         }
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            Expense_tot = Expense_tot + float.Parse(e.Row.Cells[1].Text);
+
+        }
+        TextBox6.Text = Expense_tot.ToString();
+
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
 
     }
-    protected void TextBox3_TextChanged(object sender, EventArgs e)
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Timefrom='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
 
-
-
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD1 = new SqlCommand("select * from Expenses where Timefrom='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ORDER BY id asc", con1);
-        DataTable dt2 = new DataTable();
-        SqlDataAdapter da2 = new SqlDataAdapter(CMD);
-        da2.Fill(dt2);
-        GridView2.DataSource = dt2;
-        GridView2.DataBind();
-    }
-   
-    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
-    {
-       
     }
 
+
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
+    }
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
-      
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Timefrom between  '" + TextBox3.Text + "' and '" + TextBox2.Text + "' and  Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+
+    }
+    protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+    {
 
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD1 = new SqlCommand("select * from Expenses where Timefrom between  '" + TextBox3.Text + "' and '" + TextBox2.Text + "' and  Com_Id='" + company_id + "' ORDER BY id asc", con1);
-        DataTable dt2 = new DataTable();
-        SqlDataAdapter da2 = new SqlDataAdapter(CMD);
-        da2.Fill(dt2);
-        GridView2.DataSource = dt2;
-        GridView2.DataBind();
+
+
+    }
+    protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void TextBox3_TextChanged(object sender, EventArgs e)
+    {
+
+
+
+
+
+    }
+    protected void TextBox4_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void TextBox6_TextChanged(object sender, EventArgs e)
+    {
+        
+    }
+
+    public override void VerifyRenderingInServerForm(Control control)
+    {
+        /*Tell the compiler that the control is rendered
+         * explicitly by overriding the VerifyRenderingInServerForm event.*/
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        TextBox1.Text = "";
+        TextBox2.Text = "";
+        TextBox3.Text = "";
+        TextBox4.Text = "";
+        TextBox5.Text = "";
+        TextBox6.Text = "";
+        TextBox7.Text = "";
+        TextBox8.Text = "";
+        BindData();
+        BindData1();
+        BindData2();
     }
 }

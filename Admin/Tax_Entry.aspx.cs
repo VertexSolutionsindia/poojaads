@@ -81,7 +81,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
                 CON.Open();
                 cmd.ExecuteNonQuery();
                 CON.Close();
-                Label18.Text = "updated successfuly";
+                Label18.Text = "Updated successfuly";
                 this.ModalPopupExtender2.Hide();
                 showcustomertype();
                 show_category();
@@ -147,7 +147,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
             if (dr1.HasRows)
             {
 
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('product already exist')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Product already exist')", true);
                 TextBox3.Text = "";
             }
             else
@@ -169,6 +169,7 @@ public partial class Admin_Tax_Entry : System.Web.UI.Page
                         show_category();
                         getinvoiceno();
                         TextBox3.Text = "";
+                        TextBox1.Text = "";
                    
             }
         }

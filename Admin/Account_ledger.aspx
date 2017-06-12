@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Account_ledger.aspx.cs" Inherits="Admin_Account_ledger" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Account_Ledger.aspx.cs" Inherits="Admin_Account_Ledger" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -57,6 +57,10 @@
         } 
         .itemHighlighted {
         background-color: #ADD6FF;       
+        }
+        .get
+        {
+            text-align:center;
         }
             .red
             {
@@ -163,10 +167,10 @@
                 <button type="button" class="navbar-minimalize minimalize-styl-2  pull-left "><i class="fa fa-bars"></i></button>
                 <span class="search-icon"><i class="fa fa-search"></i></span>
                 <div class="search" style="display: none;">
-                    <form1 role="form">
+                    <form role="form">
                         <input type="text" class="form-control" autocomplete="off" placeholder="Write something and press enter">
                         <span class="search-close"><i class="fa fa-times"></i></span>
-                    </form1>
+                    </form>
                 </div>
                   <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -175,23 +179,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Dream Garments</a>
+                    <a class="navbar-brand" href="#">Pooja Advertising</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
+<%--                    <ul class="nav navbar-nav">
                         <li class="dropdown">
                            
-                         <li class="dropdown">
+                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 <asp:Button ID="Button4" runat="server"  Text="ADD" class="btn btn-primary"></asp:Button> <span aria-hidden="true" class="glyphicon glyphicon-plus"></span> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="Main.aspx"><i class="fa fa-home fa-2x" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Category</a></li>
                                    <li role="separator" class="divider"></li>
-                                <li><a href="Sub_category.aspx"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Sub Category </a></li>
+                                <li><a href="Billing_entry.aspx"><i class="fa fa-hdd-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Sub Category </a></li>
                                  <li role="separator" class="divider"></li>
-                                <li><a href="Product_entry.aspx"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product Entry </a></li>
+                                <li><a href="Service_entry.aspx"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Product Entry </a></li>
                                    <li role="separator" class="divider"></li>
-                                <li><a href="Purchase_entry.aspx"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Purchase Entry </a></li>
+                                <li><a href="Expense_entry.aspx"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;&nbsp&nbsp;Purchase Entry </a></li>
                                   <li role="separator" class="divider"></li>
                                 <li><a href="Stock_Inventory.aspx"><i class="fa fa-edit"></i> &nbsp;&nbsp&nbsp;Stock / Inventory </a></li>
                                  <li role="separator" class="divider"></li>
@@ -207,7 +211,7 @@
                                
                             </ul>
                         </li>
-                    </ul>
+                    </ul>--%>
                           
                     <ul class="nav navbar-nav navbar-right navbar-top-drops">
                         <li class="dropdown"><a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown">
@@ -219,9 +223,7 @@
                             <a href="#" class="dropdown-toggle button-wave" data-toggle="dropdown" role="button" ><img src="../default-profile-pic.png" alt="" width="25px"><%=User.Identity.Name%></b></span>  <span class="fa fa-caret-down" aria-hidden="true" style=""></a>
                             <ul class="dropdown-menu">
                                 <li><a href="Profile_main.aspx"><i class="fa fa-user"></i>My Profile</a></li>
-                                <li><a href="Seetings.aspx"><i class="fa fa-calendar"></i>Settings</a></li>                         
-                                <li><a href="Advanced_Settings.aspx"><i class="fa fa-envelope"></i>Advanced Settings</a></li>
-                                <li><a href="#"><i class="fa fa-barcode"></i>Custom Field</a></li>
+                              
                                 <li class="divider"></li>
                                
                                  <li ><a href="#" ><asp:LinkButton id="LoginLink" Text="Log Out"  class="fa fa-sign-out" aria-hidden="true"
@@ -246,116 +248,134 @@
                            </ul>
                             </li>
                             <li>
-                                <a href=""><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
                           
                           <ul class="nav nav-second-level collapse">
-                                    <li><a href="Main.aspx">Main Category</a></li>
+                                    <li><a href="Service_Type.aspx">Service Type</a></li>
+                           </ul>
+
+                            <ul class="nav nav-second-level collapse">
+                                    <li><a href="Service_name.aspx">Service Name</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
-                                    <li><a href="Sub_category.aspx">Brand</a></li>
+                                    <li><a href="Location.aspx">Location</a></li>
                            </ul>
                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Product_entry.aspx">Product Entry</a></li>
+                                    <li><a href="Tax_Entry.aspx">Tax Entry</a></li>
                            </ul>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Tax_Entry.aspx">Tax entry</a></li>
-
+                              <ul class="nav nav-second-level collapse">
+                                    <li><a href="Partners_entry.aspx">Partner Entry</a></li>
                            </ul>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Cutomer_type.aspx">Customer Type entry</a></li>
-
-                           </ul>
+                            
+                             
                                
                             </li>
-                           
-
-
-                           
-
                              <li>
-                                <a href="Purchase_entry.aspx"><i class="fa fa-paypal fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Purchase </span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customers </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Purchase_entry.aspx">Entry</a></li>
-                                     <li><a href="Purchase_report.aspx">Report</a></li>
+                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
                            </ul>
-                          
-                               
-                            </li>
-
-                             <li>
-                                <a href="Account_ledger.aspx"><i class="fa fa-line-chart fa-2x" aria-hidden="true"></i><span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
-                                    <li><a href="Purchase_payment_outstanding.aspx">Purchase Payment status</a></li>
+                           <ul class="nav nav-second-level collapse">
+                                    <li><a href="Client_Entry.aspx">Client Entry</a></li>
                            </ul>
                           
                                
                             </li>
                              <li>
-                                <a href="Stock_Inventory.aspx"><i class="fa fa-clone fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Stock_Inventory.aspx">Product Stock</a></li>
+                                    <li><a href="Staff-Entry.aspx">Staff Entry</a></li>
                            </ul>
+                          
+                               
+                            </li>
+                             <li>
+                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level collapse">
+                                    <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                             <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
+                            </ul>
                           
                                
                             </li>
                               <li>
-                                <a href="Customer-Entry.aspx"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customer </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Retail</a></li>
+                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="ExpenseName_Entry.aspx">Expense Name Entry</a></li>
                            </ul>
-                           <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer Wholesale.aspx">Wholesale</a></li>
+                            <ul class="nav nav-second-level collapse">
+                                <li><a href="Expense_entry.aspx">Expense Entry</a></li>
+                            </ul>
+                          
+                               
+                            </li>
+                                   <li>
+                                <a href="#"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Bank Details</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li><a href="Account_Entry.aspx">Account Entry</a></li>
+                           </ul>
+                           
+                          
+                               
+                            </li>
+
+                             <li>
+                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level collapse">
+                                   <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                           </ul>
+                             <ul class="nav nav-second-level collapse">
+                             <li><a href="profit_loss.aspx">Profit & loss</a></li>  
+                            </ul>
+                          
+                               
+                            </li>
+                         
+                             
+                            
+                           
+                             <li>
+                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Order</span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Order_entry.aspx">Order Entry</a></li>
+                                    <li><a href="Oreders_Report.aspx">Orders Report</a></li>
                            </ul>
                           
                                
                             </li>
                             
-                             <li>
-                                <a href="Vendor.aspx"><i class="fa fa-arrows-alt fa-2x" aria-hidden="true"></i>  <span class="nav-label">&nbsp;&nbsp; Supplier </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Vendor.aspx">Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
-                             <li>
-                                <a href="Department-Entry.aspx"><i class="fa fa-th fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Department </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Department-Entry.aspx">Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
-                             <li>
-                                <a href="Staff-Entry.aspx"><i class="fa fa-users fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Staff </span><span class="fa arrow"></span></a>
-                             <ul class="nav nav-second-level collapse">
-                                    <li><a href="Staff-Entry.aspx">Entry</a></li>
-                           </ul>
-                          
-                               
-                            </li>
                             
                              <li>
-                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Sales </span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Estimate </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                  <li><a href="Sales_entry.aspx">Retail Entry</a></li>
-                                     <li><a href="sales_report_details.aspx">Retail Report</a></li>
-                                     <li><a href="Sales_entry_wholesales.aspx">Wholesales Entry</a></li>
-                            <li><a href="Wholesales_report_details.aspx">wholesale Report</a></li>
+                                   
+                                     <li><a href="Estimate_entry.aspx">Estimate Entry</a></li>
+                                      <li><a href="Estimate_report.aspx">Estimates Report</a></li>
+                                    
+                           </ul>
+                          
+                               
+                            </li>
+
+                             <li>
+                                <a href="#"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Inventory_entry.aspx">Inventody Entry</a></li>
+                                     
+                                    
                            </ul>
                           
                                
                             </li>
                             <li>
-                                <a href="Sales_entry.aspx"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Reports </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                   <li><a href="Day_wise_purchase.aspx">Days wise Purchase</a></li>
-                                    <li><a href="Day_and_month_wise_purchase.aspx">Days and month wise purchase</a></li>
-                                     <li><a href="Daily_sales.aspx">Days wise sales</a></li>
-                                      <li><a href="Day_and_month_wise_report.aspx">Days and month sales</a></li>
-                                      <li><a href="Staff_wise_report.aspx">Day wise staff Sales</a></li>
-                                    <li><a href="Staff_wise_total _sales.aspx">day and Month wise Staff Sales</a></li>
+                                   <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
+                                    <li><a href="Service_report.aspx">Service Report</a></li>
+                                <li><a href="Estimate_report.aspx">Invoice Report</a></li>
+                                     
                                      
                            </ul>
                           
@@ -395,7 +415,7 @@
 
                     <div class="row see"  >
 
-
+                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                     <div class="container">
 
                            <div class="container">
@@ -425,7 +445,8 @@
   
                                     <asp:TextBox ID="TextBox3" runat="server" class="form-control input-x2 dropbox"  AutoPostBack="true"
                                         ontextchanged="TextBox3_TextChanged"></asp:TextBox>
-                                      <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox3"></asp:CalendarExtender>
+                                      <asp:CalendarExtender ID="CalendarExtender1" runat="server" 
+                                        TargetControlID="TextBox3" Format="dd-MM-yyyy" ></asp:CalendarExtender>
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
@@ -441,19 +462,23 @@
    <ContentTemplate>
   <asp:TextBox ID="TextBox4" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" 
            ontextchanged="TextBox4_TextChanged"></asp:TextBox>
-                                    <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox4"></asp:CalendarExtender>
+                                    <asp:CalendarExtender ID="CalendarExtender2" 
+           runat="server" TargetControlID="TextBox4" Format="dd-MM-yyyy"></asp:CalendarExtender>
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
 
 
 
+<div class="col-lg-6">
+                  <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+   <ContentTemplate>
+   <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px" Text="Find" onclick="Button2_Click"></asp:Button>
+ <asp:Button ID="Button3" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button3_Click" 
+                          ></asp:Button>
+                          </ContentTemplate>
+                           </asp:UpdatePanel>
 
-
-
-
-
-
-
+</div>
 
 </div>
 
@@ -478,28 +503,141 @@
      <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
    
- <asp:GridView ID="GridView1" runat="server" Width="100%" CellPadding="4" 
-         Font-Size="16px" 
-            AllowPaging="True" 
+<div class="col-md-12">
+   <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+   <ContentTemplate>
+   <asp:GridView ID="GridView1" runat="server" class="Grd1" Width="100%" CellPadding="3" 
+         Font-Size="16px" ShowFooter="true" 
+            AllowPaging="True" AutoGenerateColumns="false" 
         onpageindexchanging="GridView1_PageIndexChanging" 
-        onrowdatabound="GridView1_RowDataBound" ForeColor="#333333" 
-        GridLines="None" PageSize="20">
-       <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
-      
-       <EditRowStyle BackColor="#999999" />
-       <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
-       <HeaderStyle Height="40px" BackColor="#fafbfc" Font-Bold="True" CssClass="red" ForeColor="#656565" />
+        onrowdatabound="GridView1_RowDataBound" PageSize="20" BackColor="White" 
+           BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px">
+           <Columns>
+           
+           <asp:BoundField HeaderText="Date" DataField="date" DataFormatString="{0:dd/MM/yyyy}" HeaderStyle-CssClass="get" ItemStyle-CssClass="get"  />
+           <asp:BoundField HeaderText="Particulars" DataField="Particulars" HeaderStyle-CssClass="get" ItemStyle-CssClass="get"/>
+
+            <asp:TemplateField HeaderText="Debit" HeaderStyle-CssClass="get" ItemStyle-CssClass="get">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDebit" runat="server" Text='<%# Eval("Debit")%>' DataFormatString="{0:N2}" />
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <asp:Label ID="Debit" runat="server" />
+                    </FooterTemplate>
+                </asp:TemplateField>
+           
+
+            <asp:TemplateField HeaderText="Credit" HeaderStyle-CssClass="get" ItemStyle-CssClass="get">
+                    <ItemTemplate>
+                        <asp:Label ID="lblCredit" runat="server" Text='<%# Eval("Credit")%>' DataFormatString="{0:N2}" />
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        <asp:Label ID="Credit" runat="server" />
+                    </FooterTemplate>
+                </asp:TemplateField>
+              
+           
+           </Columns>
+   
+       <FooterStyle BackColor="White" ForeColor="#000066" />
+       <HeaderStyle Height="40px" BackColor="#006699" Font-Bold="True" CssClass="red" 
+           ForeColor="White" />
        <PagerSettings FirstPageText="First" LastPageText="Last" />
        <PagerStyle Wrap="true" BorderStyle="Solid" Width="100%" 
-           CssClass="gvwCasesPager" BackColor="#284775" ForeColor="White" 
-           HorizontalAlign="Center" />
-       <RowStyle Height="40px" BackColor="white" ForeColor="#333333" />
-       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-       <SortedAscendingCellStyle BackColor="#E9E7E2" />
-       <SortedAscendingHeaderStyle BackColor="#506C8C" />
-       <SortedDescendingCellStyle BackColor="#FFFDF8" />
-       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+           CssClass="gvwCasesPager" BackColor="White" ForeColor="#000066" 
+           HorizontalAlign="Left" />
+       <RowStyle Height="40px" ForeColor="#000066" />
+       <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+       <SortedAscendingCellStyle BackColor="#F1F1F1" />
+       <SortedAscendingHeaderStyle BackColor="#007DBB" />
+       <SortedDescendingCellStyle BackColor="#CAC9C9" />
+       <SortedDescendingHeaderStyle BackColor="#00547E" />
        </asp:GridView>
+  </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+                 <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="TextBox4" EventName="TextChanged"  />
+
+                               </Triggers>
+    </asp:UpdatePanel>
+
+
+
+     <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+   <ContentTemplate>
+        <asp:Button ID="Button15" runat="server" Text="Button" style="display:none"  />
+  
+  
+    <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
+                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="300px"  >
+    
+         <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
+                     <h3 style="font-size:20px; " class="control-label"> Update brand  <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" /></h3>
+  
+     
+  
+           
+        </div>
+        <div class="tablestyles">
+        <table>
+       
+        <tr>
+        <td>
+            <asp:Label ID="Label28" runat="server" class="col-lg-3 control-label" Width="200px" Text="SubCategory Id"></asp:Label></td>
+        <td>
+            <asp:Label ID="Label29" runat="server" Text=""></asp:Label></td>
+        </tr>
+        <tr>
+        <td >
+            <asp:Label ID="Label2" runat="server" class="col-lg-3 control-label" Width="200px"  Text="Category Name"></asp:Label></td>
+        <td>
+            <asp:DropDownList ID="DropDownList4" class="form-control input-x2 dropbox" runat="server"></asp:DropDownList></td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label30" runat="server" class="col-lg-3 control-label" Width="200px" Text="Brand Name"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox16" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
+        </tr>
+     
+                    
+       
+        </tr>
+            <tr>
+            <td></td>
+                <td>
+                 
+                </td>
+                <td>
+              
+                    <asp:Label ID="Label31" runat="server" Text=""></asp:Label>
+                </td>
+            </tr>
+        </table>
+       </div>
+
+        </asp:Panel>
+       <asp:ModalPopupExtender ID="ModalPopupExtender3" runat="server" TargetControlID="Button15" PopupControlID="Panel2" CancelControlID="ImageButton6" BackgroundCssClass="modelbackground">
+        </asp:ModalPopupExtender>
+
+
+        </ContentTemplate>
+    <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="GridView1"  />
+            
+                </Triggers>
+    </asp:UpdatePanel>
+
+  <br />
+ 
+
+ 
+
+</div>
+</div>
+</div>
+</div>
 
         </ContentTemplate>
                                      <Triggers>
@@ -508,10 +646,7 @@
                     
                   
                   </Triggers>
-              
-                
-               
-              
+
                            </asp:UpdatePanel>
                            <asp:Button ID="Button1" runat="server" 
            Text="Export to excel" onclick="Button1_Click"></asp:Button>
