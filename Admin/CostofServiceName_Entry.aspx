@@ -359,7 +359,7 @@
                              <ul class="nav nav-second-level collapse">
                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
                                     <li><a href="Service_report.aspx">Service Report</a></li>
-                                <li><a href="Estimate_report.aspx">Invoice Report</a></li>
+                           
                                      
                                      
                            </ul>

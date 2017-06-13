@@ -16,7 +16,7 @@ using System.Drawing;
 #endregion
 
 
-public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
+public partial class Admin_Estimate_report : System.Web.UI.Page
 {
     public static int company_id = 0;
     protected void Page_Load(object sender, EventArgs e)
@@ -85,7 +85,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     protected void BindData()
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "'ORDER BY Invoice_no asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from estimate_entry where Com_Id='" + company_id + "'ORDER BY Invoice_no asc", con1);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -166,27 +166,27 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     {
 
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        //SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        //SqlCommand CMD = new SqlCommand("SELECT *  FROM estimate_entry where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
+        //DataTable dt1 = new DataTable();
+        //con1.Open();
+        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        //da1.Fill(dt1);
+        //GridView1.DataSource = dt1;
+        //GridView1.DataBind();
     }
     protected void TextBox4_TextChanged(object sender, EventArgs e)
     {
 
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        //SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        //SqlCommand CMD = new SqlCommand("SELECT *  FROM estimate_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con1);
+        //DataTable dt1 = new DataTable();
+        //con1.Open();
+        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        //da1.Fill(dt1);
+        //GridView1.DataSource = dt1;
+        //GridView1.DataBind();
     }
     protected void TextBox6_TextChanged(object sender, EventArgs e)
     {
@@ -215,7 +215,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from estimate_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -228,6 +228,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
         DropDownList3.DataValueField = "Invoice_no";
         DropDownList3.DataBind();
         DropDownList3.Items.Insert(0, new ListItem("All", "0"));
+    
 
 
         con.Close();
@@ -235,7 +236,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from estimate_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -247,18 +248,20 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
         DropDownList6.DataBind();
         DropDownList6.Items.Insert(0, new ListItem("All", "0"));
 
+
         con.Close();
 
     }
     protected void DropDownList6_SelectedIndexChanged(object sender, EventArgs e)
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        //SqlCommand CMD = new SqlCommand("select * from estimate_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        //DataTable dt1 = new DataTable();
+        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        //da1.Fill(dt1);
+        //GridView1.DataSource = dt1;
+        //GridView1.DataBind();
+
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -274,7 +277,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Order_entry where id='" + usrid + "' and Com_Id='" + company_id + "'", con);
+                SqlCommand cmd = new SqlCommand("delete from estimate_entry where id='" + usrid + "' and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
                 DataBind();
@@ -371,5 +374,74 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Enter the INVOICE NUMBER')", true);
         }
+    }
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        if (TextBox3.Text == "" && TextBox4.Text == "" && DropDownList3.SelectedItem.Text == "All")
+        {
+
+        }
+        else
+        {
+            if (TextBox3.Text != "" && TextBox4.Text != "" && DropDownList3.SelectedItem.Text != "All")
+            {
+                if (DropDownList6.SelectedItem.Text != "All")
+                {
+                    SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand CMD = new SqlCommand("select * from estimate_entry where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' AND client_name='" + DropDownList3.SelectedItem.Text + "' AND mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+                    DataTable dt1 = new DataTable();
+                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                    da1.Fill(dt1);
+                    GridView1.DataSource = dt1;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select the Mobile Number')", true);
+                }
+            }
+            else
+            {
+                if (TextBox3.Text == "" && TextBox4.Text == "")
+                {
+                    SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand CMD = new SqlCommand("select * from estimate_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+                    DataTable dt1 = new DataTable();
+                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                    da1.Fill(dt1);
+                    GridView1.DataSource = dt1;
+                    GridView1.DataBind();
+                }
+                else
+                {
+
+                    if (TextBox3.Text != "" && TextBox4.Text != "")
+                    {
+
+                        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                        SqlCommand CMD = new SqlCommand("SELECT *  FROM estimate_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con);
+                        DataTable dt1 = new DataTable();
+                        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                        da1.Fill(dt1);
+                        GridView1.DataSource = dt1;
+                        GridView1.DataBind();
+
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select From And To Date')", true);
+                    }
+                }
+            }
+        }
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        BindData();
+        ClentName();
+        TextBox4.Text = "";
+        TextBox3.Text = "";
+        TextBox1.Text = "";
+        DropDownList6.Items.Clear(); 
     }
 }

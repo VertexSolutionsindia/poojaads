@@ -39,7 +39,7 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
             }
 
             getinvoiceno();
-            show_category();
+            show_ServiceDetails();
             showrating();
             BindData();
 
@@ -70,7 +70,7 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
     {
 
         getinvoiceno();
-        show_category();
+        show_ServiceDetails();
     }
     private void active()
     {
@@ -96,13 +96,13 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
     protected void BindData()
     {
 
-        //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        //SqlCommand CMD = new SqlCommand("SELECT * from Order_entry where Com_Id ='" + company_id + "'", con);
-        //DataTable dt1 = new DataTable();
-        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        //da1.Fill(dt1);
-        //GridView1.DataSource = dt1;
-        //GridView1.DataBind();
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("SELECT distinct Order_entry_details.Service_name,Order_entry.Invoice_no,Order_entry.client_name,Order_entry.date,Order_entry.cl_add,Order_entry.mobile,Order_entry.presented_bank,Order_entry.grand_total FROM Order_entry INNER JOIN Order_entry_details ON Order_entry.Invoice_no = Order_entry_details.Invoice_no WHERE Order_entry.Com_Id ='" + company_id + "' ORDER BY Order_entry.Invoice_no asc", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
 
 
 
@@ -120,7 +120,7 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Category deleted successfully')", true);
 
         BindData();
-        show_category();
+        show_ServiceDetails();
         getinvoiceno();
 
 
@@ -130,24 +130,24 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
 
 
     }
-    private void show_category()
+    private void show_ServiceDetails()
     {
 
-        //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        //SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-        //con.Open();
-        //DataSet ds = new DataSet();
-        //SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //da.Fill(ds);
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("SELECT distinct Order_entry_details.Service_name,Order_entry.Invoice_no FROM Order_entry INNER JOIN Order_entry_details ON Order_entry.Invoice_no = Order_entry_details.Invoice_no where Order_entry.Com_Id='" + company_id + "' ORDER BY Order_entry.Invoice_no asc", con);
+        con.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(ds);
 
 
-        //DropDownList2.DataSource = ds;
-        //DropDownList2.DataTextField = "Serv_Name";
-        //DropDownList2.DataValueField = "Invoice_no";
-        //DropDownList2.DataBind();
-        //DropDownList2.Items.Insert(0, new ListItem("All", "0"));
+        DropDownList2.DataSource = ds;
+        DropDownList2.DataTextField = "Service_name";
+        DropDownList2.DataValueField = "Invoice_no";
+        DropDownList2.DataBind();
+        DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
-        //con.Close();
+        con.Close();
     }
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {
@@ -161,73 +161,13 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
         Session["name1"] = "";
         Response.Redirect("~/Admin/Category_Add.aspx");
     }
-    protected void Button11_Click(object sender, EventArgs e)
-    {
-       
-        foreach (GridViewRow gvrow in GridView1.Rows)
-        {
-            //Finiding checkbox control in gridview for particular row
-            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox2");
-            //Condition to check checkbox selected or not
-            if (chkdelete.Checked)
-            {
-                //Getting UserId of particular row using datakey value
-                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
-                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
-                con.Open();
-                SqlCommand cmd = new SqlCommand("delete from category where category_id='" + usrid + "' and Com_Id='" + company_id + "'", con);
-                cmd.ExecuteNonQuery();
-                con.Close();
 
-            }
-        }
-        BindData();
-        getinvoiceno();
-
-    }
-    private void showcustomertype()
-    {
-
-    }
     private void showrating()
     {
 
     }
-    [System.Web.Script.Services.ScriptMethod()]
-    [System.Web.Services.WebMethod]
 
-    public static List<string> SearchCustomers2(string prefixText, int count)
-    {
-
-
-        using (SqlConnection conn = new SqlConnection())
-        {
-            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
-
-            using (SqlCommand cmd = new SqlCommand())
-            {
-
-
-                cmd.CommandText = "select Serv_Name from Order_entry where  Com_Id=@Com_Id and  " +
-                "Serv_Name like @Serv_Name + '%' ";
-                cmd.Parameters.AddWithValue("@Serv_Name", prefixText);
-                cmd.Parameters.AddWithValue("@Serv_Name", company_id);
-                cmd.Connection = conn;
-                conn.Open();
-                List<string> customers = new List<string>();
-                using (SqlDataReader sdr = cmd.ExecuteReader())
-                {
-                    while (sdr.Read())
-                    {
-                        customers.Add(sdr["Serv_Name"].ToString());
-                    }
-                }
-                conn.Close();
-                return customers;
-            }
-        }
-    }
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
@@ -246,45 +186,20 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
 
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        getstaffwise();
+      
     }
 
-    private void getstaffwise()
-    {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT * from Order_entry where Serv_Name = '" + DropDownList2.SelectedItem.Text + "' and  Com_Id ='" + company_id + "'", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
 
-
-    }
 
 
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
       
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Timefrom='" + TextBox1.Text + "' and Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
     }
 
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
        
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Timefrom between  '" + TextBox1.Text + "' and '" + TextBox2.Text + "' and  Com_Id='" + company_id + "' ORDER BY id asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
     }
    
    
@@ -292,6 +207,7 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
     {
 
     }
+
     protected void Button1_Click(object sender, EventArgs e)
     {
         Response.ClearContent();
@@ -308,6 +224,7 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
         /*Tell the compiler that the control is rendered
          * explicitly by overriding the VerifyRenderingInServerForm event.*/
     }
+
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.Footer)
@@ -328,5 +245,57 @@ public partial class Admin_Day_and_month_wise_purchase : System.Web.UI.Page
             lblTotalPrice.Text = m.ToString();
             TextBox3.Text = m.ToString();
         }
+    }
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        if (TextBox1.Text != "" && TextBox2.Text != "" && DropDownList2.SelectedItem.Text != "All")
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("SELECT distinct Order_entry_details.Service_name,Order_entry.Invoice_no,Order_entry.client_name,Order_entry.date,Order_entry.cl_add,Order_entry.mobile,Order_entry.presented_bank,Order_entry.grand_total FROM Order_entry INNER JOIN Order_entry_details ON Order_entry.Invoice_no = Order_entry_details.Invoice_no WHERE Order_entry.date Between '" + Convert.ToDateTime(TextBox1.Text).ToString("MM-dd-yyyy") + "' AND '" + Convert.ToDateTime(TextBox2.Text).ToString("MM-dd-yyyy") + "' AND Order_entry_details.Service_name='" + DropDownList2.SelectedItem.Text + "' AND Order_entry.Com_Id ='" + company_id + "' ORDER BY Order_entry.Invoice_no asc", con);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+
+            if (TextBox1.Text == "" && TextBox2.Text == "")
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand CMD = new SqlCommand("SELECT distinct Order_entry_details.Service_name,Order_entry.Invoice_no,Order_entry.client_name,Order_entry.date,Order_entry.cl_add,Order_entry.mobile,Order_entry.presented_bank,Order_entry.grand_total FROM Order_entry INNER JOIN Order_entry_details ON Order_entry.Invoice_no = Order_entry_details.Invoice_no WHERE Order_entry_details.Service_name='" + DropDownList2.SelectedItem.Text + "' AND Order_entry.Com_Id ='" + company_id + "' ORDER BY Order_entry.Invoice_no asc", con);
+                DataTable dt1 = new DataTable();
+                SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                da1.Fill(dt1);
+                GridView1.DataSource = dt1;
+                GridView1.DataBind();
+            }
+            else
+            {
+
+                if (TextBox1.Text != "" && TextBox2.Text != "")
+                {
+                    SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand CMD = new SqlCommand("SELECT distinct Order_entry_details.Service_name,Order_entry.Invoice_no,Order_entry.client_name,Order_entry.date,Order_entry.cl_add,Order_entry.mobile,Order_entry.presented_bank,Order_entry.grand_total FROM Order_entry INNER JOIN Order_entry_details ON Order_entry.Invoice_no = Order_entry_details.Invoice_no WHERE Order_entry.date Between '" + Convert.ToDateTime(TextBox1.Text).ToString("MM-dd-yyyy") + "' AND '" + Convert.ToDateTime(TextBox2.Text).ToString("MM-dd-yyyy") + "' AND Order_entry.Com_Id ='" + company_id + "' ORDER BY Order_entry.Invoice_no asc", con);
+                    DataTable dt1 = new DataTable();
+                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                    da1.Fill(dt1);
+                    GridView1.DataSource = dt1;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select From And To Date')", true);
+                }
+            }
+        }
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        TextBox1.Text = "";
+        TextBox2.Text = "";
+        show_ServiceDetails();
+        BindData();
     }
 }

@@ -200,7 +200,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
-                                    <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>
+                                  <%--  <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>--%>
                            </ul>
                              <ul class="nav nav-second-level collapse">
                              <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
@@ -270,7 +270,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Inventory_entry.aspx">Inventody Entry</a></li>
+                                    <li><a href="Inventory_entry.aspx">Inventory Entry</a></li>
                                      
                                     
                            </ul>
@@ -282,7 +282,7 @@
                              <ul class="nav nav-second-level collapse">
                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
                                     <li><a href="Service_report.aspx">Service Report</a></li>
-                                <li><a href="Estimate_report.aspx">Invoice Report</a></li>
+                            
                                      
                                      
                            </ul>

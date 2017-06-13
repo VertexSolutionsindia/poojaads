@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Service_report.aspx.cs" Inherits="Admin_Day_and_month_wise_purchase" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" EnableEventValidation="false" CodeFile="Service_report.aspx.cs" Inherits="Admin_Day_and_month_wise_purchase" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -55,7 +55,117 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+          <style>
+            .completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
+        .get
+        {
+            text-align:center;
+        }
+            .red
+            {
+                text-align:center;
+            }
+            .goo
+            {
+               color:#13c4a5;
+            }
+            .goo:hover
+            {
+                color:#3a5a7a;
+            }
+            .color
+            {
+                color:#555555;
+                height:30px;
+            }
+        .dropbox
+        {
+            width:100%;
+            height:30px;
+        display: block;
+        font-size:16px;
+        font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif;
+   
+ }
+        .gvwCasesPager
+        {
+           
+          color:black;
+          margin-right:20px;
+          text-align:right;
+          padding:20px;
+        }
+        .gvwCasesPager a
+            {
+               
+                margin-left:10px;
+                margin-right:10px;
+                font-size:20px;
+                
+                 padding:10px;
+                
+              
+              
+            }
 
+         .dropbox1
+        {
+            width:10%;
+            height:30px;
+           
+           
+            
+        }
+        
+        .see
+        {
+           height:400px; 
+           margin-top:-60px;
+        }
+        .see1
+        {
+            margin-top:-20px;
+        }
+         .see2
+        {
+          
+            margin-left:-15px;
+            margin-bottom:30px;
+        }
+        
+          @media (max-width: 767px)
+        {
+             .see
+        {
+           height:400px; 
+           margin-top:-10px;
+        }
+         .see1
+        {
+            margin-top:-40px;
+        }
+         .see2
+        {
+            margin-top:50px;
+            
+        }
+      
+        }
+        
+        </style>
 
     </head>
     <body>
@@ -193,7 +303,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
-                                    <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>
+                                   <%-- <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>--%>
                            </ul>
                              <ul class="nav nav-second-level collapse">
                              <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
@@ -263,7 +373,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-file-text-o fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Inventory </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Inventory_entry.aspx">Inventody Entry</a></li>
+                                    <li><a href="Inventory_entry.aspx">Inventory Entry</a></li>
                                      
                                     
                            </ul>
@@ -275,7 +385,7 @@
                              <ul class="nav nav-second-level collapse">
                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
                                     <li><a href="Service_report.aspx">Service Report</a></li>
-                                <li><a href="Estimate_report.aspx">Invoice Report</a></li>
+                               
                                      
                                      
                            </ul>
@@ -335,7 +445,7 @@
    <ContentTemplate>
  <asp:TextBox ID="TextBox1" runat="server"  AutoPostBack="true" ontextchanged="TextBox1_TextChanged" 
            ></asp:TextBox>
- <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox1" Format="dd/MM/yyyy"></asp:CalendarExtender>
+ <asp:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TextBox1" Format="dd-MM-yyyy"></asp:CalendarExtender>
    </ContentTemplate>
    
     </asp:UpdatePanel>
@@ -349,7 +459,7 @@
    <ContentTemplate>
  <asp:TextBox ID="TextBox2" runat="server"  AutoPostBack="true" ontextchanged="TextBox2_TextChanged"  
            ></asp:TextBox>
- <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox2" Format="dd/MM/yyyy"></asp:CalendarExtender>
+ <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox2" Format="dd-MM-yyyy"></asp:CalendarExtender>
    </ContentTemplate>
    
     </asp:UpdatePanel>
@@ -375,7 +485,9 @@
                 </Triggers>
     </asp:UpdatePanel>
    
-   </div>
+   </div> 
+    <asp:Button ID="Button4"   runat="server" CssClass="btn4" Text="Search" onclick="Button4_Click"></asp:Button>
+    <asp:Button ID="Button5"   runat="server" CssClass="btn4" Text="Clear" onclick="Button5_Click"></asp:Button>
     
 
 
@@ -441,32 +553,31 @@
         onrowdatabound="GridView1_RowDataBound" PageSize="20" BackColor="White" BorderColor="#CCCCCC" 
            BorderStyle="None" BorderWidth="1px" AutoGenerateColumns="False">
        <Columns>
-           <asp:BoundField DataField="Invoice_no" HeaderText="Service No" >
+           <asp:BoundField DataField="Invoice_no" HeaderText="Invoice No" >
            <HeaderStyle CssClass="red" />
            </asp:BoundField>
-           <asp:BoundField DataField="date" HeaderText="Date" >
+            <asp:BoundField DataField="Service_name" HeaderText="Service Name" >
            <HeaderStyle CssClass="red" />
            </asp:BoundField>
-           <asp:BoundField DataField="Serv_Type" HeaderText="Service Type">
+           <asp:BoundField DataField="date" HeaderText="Date" DataFormatString="{0:dd/MM/yyyy}" >
            <HeaderStyle CssClass="red" />
            </asp:BoundField>
-           <asp:BoundField DataField="Serv_Name" HeaderText="Service Name">
+           <asp:BoundField DataField="client_name" HeaderText="client Name">
+           <HeaderStyle CssClass="red" />
+           </asp:BoundField>
+           <asp:BoundField DataField="cl_add" HeaderText="client Address">
            <HeaderStyle CssClass="red" />
            </asp:BoundField>
            
-           <asp:BoundField DataField="Serv_Cost" HeaderText="Cost of the Service" >
+           <asp:BoundField DataField="mobile" HeaderText="Mobile No" >
            <HeaderStyle CssClass="red" />
            </asp:BoundField>
-           <asp:BoundField DataField="total_amt" HeaderText="Total Collected Amount" >
+           <asp:BoundField DataField="presented_bank" HeaderText="presented Bank" >
            <HeaderStyle CssClass="red" />
            </asp:BoundField>
-           <asp:BoundField DataField="blnce_pay" HeaderText="Balance" >
-           <HeaderStyle CssClass="red" />
-           </asp:BoundField>
-
            <asp:TemplateField HeaderText="Total Amount">
                     <ItemTemplate>
-                        <asp:Label ID="lblSalary" runat="server" Text='<%# Eval("total_amt")%>' DataFormatString="{0:N2}" />
+                        <asp:Label ID="lblSalary" runat="server" Text='<%# Eval("grand_total")%>' DataFormatString="{0:N2}" />
                     </ItemTemplate>
                     <FooterTemplate>
                         <asp:Label ID="Salary" runat="server" />
@@ -562,8 +673,7 @@
         </asp:ModalPopupExtender>                                   
                             <br />
                             <span aria-hidden="true" class="fa fa-caret-down">
-                            <asp:Button ID="Button1" runat="server" CssClass="btn2" onclick="Button1_Click" 
-                                Text="Export to excel" />
+                            
                             </span>                                   
               </ContentTemplate>
     <Triggers>
@@ -571,7 +681,8 @@
                  
                 </Triggers>
     </asp:UpdatePanel>                         
-                                       
+                       <asp:Button ID="Button1" runat="server" CssClass="btn2" onclick="Button1_Click" 
+                                Text="Export to Excel" />                
                                         
                                     
                                 </div>
