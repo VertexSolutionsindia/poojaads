@@ -36,11 +36,22 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
                 }
                 con1.Close();
             }
+            SqlConnection con10 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd10 = new SqlCommand("select * from currentfinancialyear where no='1'", con10);
+            SqlDataReader dr10;
+            con10.Open();
+            dr10 = cmd10.ExecuteReader();
+            if (dr10.Read())
+            {
+                Label2.Text = dr10["financial_year"].ToString();
+            }
+            con10.Close();
             getinvoiceno();
             show_category();
             showrating();
             BindData();
             ClentName();
+            clientmobile();
             active();
             created();
         }
@@ -166,27 +177,24 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
     {
 
 
-        //SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        //SqlCommand CMD = new SqlCommand("SELECT *  FROM estimate_entry where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
-        //DataTable dt1 = new DataTable();
-        //con1.Open();
-        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        //da1.Fill(dt1);
-        //GridView1.DataSource = dt1;
-        //GridView1.DataBind();
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from estimate_entry where date='" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "'  and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
     }
     protected void TextBox4_TextChanged(object sender, EventArgs e)
     {
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from estimate_entry where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "'  and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
 
-
-        //SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        //SqlCommand CMD = new SqlCommand("SELECT *  FROM estimate_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con1);
-        //DataTable dt1 = new DataTable();
-        //con1.Open();
-        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        //da1.Fill(dt1);
-        //GridView1.DataSource = dt1;
-        //GridView1.DataBind();
     }
     protected void TextBox6_TextChanged(object sender, EventArgs e)
     {
@@ -209,7 +217,24 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
          * explicitly by overriding the VerifyRenderingInServerForm event.*/
     }
 
+    private void clientmobile()
+    {
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd = new SqlCommand("Select * from estimate_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        con.Open();
+        DataSet ds = new DataSet();
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(ds);
 
+        DropDownList6.DataSource = ds;
+        DropDownList6.DataTextField = "mobile";
+        DropDownList6.DataValueField = "Invoice_no";
+        DropDownList6.DataBind();
+        DropDownList6.Items.Insert(0, new ListItem("All", "0"));
+
+
+        con.Close();
+    }
     private void ClentName()
     {
 
@@ -235,32 +260,51 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
     }
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from estimate_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
-
-        DropDownList6.DataSource = ds;
-        DropDownList6.DataTextField = "mobile";
-        DropDownList6.DataValueField = "Invoice_no";
-        DropDownList6.DataBind();
-        DropDownList6.Items.Insert(0, new ListItem("All", "0"));
-
-
-        con.Close();
+       
+        if (DropDownList3.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from estimate_entry where  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con1);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+        SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from estimate_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con2);
+        DataTable dt1 = new DataTable();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    }
 
     }
     protected void DropDownList6_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        //SqlCommand CMD = new SqlCommand("select * from estimate_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-        //DataTable dt1 = new DataTable();
-        //SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        //da1.Fill(dt1);
-        //GridView1.DataSource = dt1;
-        //GridView1.DataBind();
+        if (DropDownList3.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from estimate_entry where  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con1);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from estimate_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con2);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
 
     }
     protected void Button2_Click(object sender, EventArgs e)
@@ -286,155 +330,96 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
         }
     }
 
- 
 
+
+    #region " [ Button Event ] "
     protected void Button3_Click(object sender, EventArgs e)
     {
-        if (TextBox1.Text != "")
+        // select appropriate contenttype, while binary transfer it identifies filetype
+        string contentType = string.Empty;
+        if (DropDownList1.SelectedValue.Equals(".pdf"))
+            contentType = "application/pdf";
+        if (DropDownList1.SelectedValue.Equals(".doc"))
+            contentType = "application/ms-word";
+        if (DropDownList1.SelectedValue.Equals(".xls"))
+            contentType = "application/xls";
+
+        DataTable dsData = new DataTable();
+
+        DataSet ds = null;
+        SqlDataAdapter da = null;
+
+
+
+        try
         {
-            // select appropriate contenttype, while binary transfer it identifies filetype
-            string contentType = string.Empty;
-            if (DropDownList1.SelectedValue.Equals(".pdf"))
-                contentType = "application/pdf";
-            if (DropDownList1.SelectedValue.Equals(".doc"))
-                contentType = "application/ms-word";
-            if (DropDownList1.SelectedValue.Equals(".xls"))
-                contentType = "application/xls";
-
-            DataTable dsData = new DataTable();
-
-            DataSet ds = null;
-            SqlDataAdapter da = null;
-
-
-
-            try
+            string constring = ConfigurationManager.AppSettings["connection"];
+            using (SqlConnection con = new SqlConnection(constring))
             {
-                string constring = ConfigurationManager.AppSettings["connection"];
-                using (SqlConnection con = new SqlConnection(constring))
+                using (SqlCommand cmd = new SqlCommand("estimate_invoice", con))
                 {
-                    using (SqlCommand cmd = new SqlCommand("order_invoice", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@No", Convert.ToInt32(TextBox1.Text));
+                    cmd.Parameters.AddWithValue("@Com_Id", Convert.ToInt32(company_id));
+                    cmd.Parameters.AddWithValue("@year", Label2.Text);
+                    da = new SqlDataAdapter(cmd);
+                    ds = new DataSet();
+                    con.Open();
+                    da.Fill(ds);
+                    con.Close();
 
-                        cmd.Parameters.AddWithValue("@No", int.Parse(TextBox1.Text));
-                        cmd.Parameters.AddWithValue("@Com_Id", Convert.ToInt32(company_id));
-                        da = new SqlDataAdapter(cmd);
-                        ds = new DataSet();
-                        con.Open();
-                        da.Fill(ds);
-                        con.Close();
-
-                    }
                 }
             }
-            catch
-            {
-                throw;
-            }
-
-
-
-            dsData = ds.Tables[0];
-
-            string FileName = "File_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + DropDownList1.SelectedValue;
-            string extension;
-            string encoding;
-            string mimeType;
-            string[] streams;
-            Warning[] warnings;
-
-            LocalReport report = new LocalReport();
-            report.ReportPath = Server.MapPath("~/Admin/Report.rdlc");
-            ReportDataSource rds = new ReportDataSource();
-            rds.Name = "DataSet1";//This refers to the dataset name in the RDLC file
-            rds.Value = dsData;
-            report.DataSources.Add(rds);
-
-            Byte[] mybytes = report.Render(DropDownList1.SelectedItem.Text, null,
-                            out extension, out encoding,
-                            out mimeType, out streams, out warnings); //for exporting to PDF
-            using (FileStream fs = File.Create(Server.MapPath("~/img/") + FileName))
-            {
-                fs.Write(mybytes, 0, mybytes.Length);
-            }
-
-            Response.ClearHeaders();
-            Response.ClearContent();
-            Response.Buffer = true;
-            Response.Clear();
-            Response.ContentType = contentType;
-            Response.AddHeader("Content-Disposition", "attachment; filename=" + FileName);
-            Response.WriteFile(Server.MapPath("~/img/" + FileName));
-            Response.Flush();
-            Response.Close();
-            Response.End();
         }
-        else
+        catch
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Enter the INVOICE NUMBER')", true);
+            throw;
         }
+
+
+
+        dsData = ds.Tables[0];
+
+        string FileName = "Estimate_" + TextBox3.Text + DropDownList1.SelectedValue;
+        string extension;
+        string encoding;
+        string mimeType;
+        string[] streams;
+        Warning[] warnings;
+
+        LocalReport report = new LocalReport();
+        report.ReportPath = Server.MapPath("~/Admin/Report2.rdlc");
+        ReportDataSource rds = new ReportDataSource();
+        rds.Name = "DataSet1";//This refers to the dataset name in the RDLC file
+        rds.Value = dsData;
+        report.DataSources.Add(rds);
+
+        Byte[] mybytes = report.Render(DropDownList1.SelectedItem.Text, null,
+                        out extension, out encoding,
+                        out mimeType, out streams, out warnings); //for exporting to PDF
+        using (FileStream fs = File.Create(Server.MapPath("~/img/") + FileName))
+        {
+            fs.Write(mybytes, 0, mybytes.Length);
+        }
+
+        Response.ClearHeaders();
+        Response.ClearContent();
+        Response.Buffer = true;
+        Response.Clear();
+        Response.ContentType = contentType;
+        Response.AddHeader("Content-Disposition", "attachment; filename=" + FileName);
+        Response.WriteFile(Server.MapPath("~/img/" + FileName));
+        Response.Flush();
+        Response.Close();
+        Response.End();
+
+
+
+
+
     }
-    protected void Button4_Click(object sender, EventArgs e)
-    {
-        if (TextBox3.Text == "" && TextBox4.Text == "" && DropDownList3.SelectedItem.Text == "All")
-        {
-
-        }
-        else
-        {
-            if (TextBox3.Text != "" && TextBox4.Text != "" && DropDownList3.SelectedItem.Text != "All")
-            {
-                if (DropDownList6.SelectedItem.Text != "All")
-                {
-                    SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand CMD = new SqlCommand("select * from estimate_entry where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' AND client_name='" + DropDownList3.SelectedItem.Text + "' AND mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-                    DataTable dt1 = new DataTable();
-                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-                    da1.Fill(dt1);
-                    GridView1.DataSource = dt1;
-                    GridView1.DataBind();
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select the Mobile Number')", true);
-                }
-            }
-            else
-            {
-                if (TextBox3.Text == "" && TextBox4.Text == "")
-                {
-                    SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                    SqlCommand CMD = new SqlCommand("select * from estimate_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-                    DataTable dt1 = new DataTable();
-                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-                    da1.Fill(dt1);
-                    GridView1.DataSource = dt1;
-                    GridView1.DataBind();
-                }
-                else
-                {
-
-                    if (TextBox3.Text != "" && TextBox4.Text != "")
-                    {
-
-                        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                        SqlCommand CMD = new SqlCommand("SELECT *  FROM estimate_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con);
-                        DataTable dt1 = new DataTable();
-                        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-                        da1.Fill(dt1);
-                        GridView1.DataSource = dt1;
-                        GridView1.DataBind();
-
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Select From And To Date')", true);
-                    }
-                }
-            }
-        }
-    }
+    #endregion
+   
     protected void Button5_Click(object sender, EventArgs e)
     {
         BindData();

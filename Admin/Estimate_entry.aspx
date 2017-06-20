@@ -162,7 +162,7 @@
                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_Type.aspx">Service Type</a></li>
                            </ul>
-                            <ul class="nav nav-second-level collapse">
+                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_name.aspx">Service Name</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
@@ -181,7 +181,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customers </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                                    <li><a href="Agent-Entry.aspx">Agent Entry</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Client_Entry.aspx">Client Entry</a></li>
@@ -197,17 +197,7 @@
                           
                                
                             </li>
-                             <li>
-                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                  <%--  <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>--%>
-                           </ul>
-                             <ul class="nav nav-second-level collapse">
-                             <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
-                            </ul>
-                          
-                               
-                            </li>
+                           
                               <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -241,7 +231,16 @@
                                
                             </li>
                          
-                             
+                              <li>
+                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Agent bill</span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Agent_bill.aspx">Agent bill</a></li>
+                                   <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
                             
                            
                              <li>
@@ -282,7 +281,7 @@
                              <ul class="nav nav-second-level collapse">
                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
                                     <li><a href="Service_report.aspx">Service Report</a></li>
-                            
+                         
                                      
                                      
                            </ul>
@@ -322,7 +321,13 @@
            </ContentTemplate>
                             
                            </asp:UpdatePanel>
+                             <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+   <ContentTemplate>
                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+
+                             </ContentTemplate>
+                            
+                           </asp:UpdatePanel>
                             <asp:DropDownList ID="DropDownList2" runat="server" Height="30px" >
                                    <asp:ListItem>PDF</asp:ListItem>
                                    <asp:ListItem>WORD</asp:ListItem>
@@ -396,7 +401,7 @@
  
   <div class="panel panel-default">
   <div class="panel-body">
-  <br /><h2>Enter Order details here</h2><hr />
+  <br /><h2>Enter Estimate details here</h2><hr />
    <div class="col-md-6">
                  <div class="panel-body">
                            <div class="form-horizontal">
@@ -534,7 +539,8 @@
     <tr>
     <th align="center">S.No</th>
     <th align="center">Service type</th>
-    <th align="center">Service Name</th>
+    <th align="center">location</th>
+     <th align="center">Width & Height</th>
     <th align="center">Duration</th>
     <th>Size</th>
     <th>Rate</th>
@@ -592,13 +598,28 @@
   </asp:UpdatePanel>
    
    </td>
+    <td>
+    <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+   <ContentTemplate>
+              <asp:TextBox ID="TextBox5" runat="server"  Width="90px" height="34px"></asp:TextBox>
+             
+              <asp:TextBox ID="TextBox6" runat="server"  Width="90px" height="34px"></asp:TextBox>
+               
+    </ContentTemplate>
+     <Triggers>
+              
+              <asp:AsyncPostBackTrigger ControlID="Button4" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button5" EventName="Click"  />
+                </Triggers>
+
+  </asp:UpdatePanel>
+   </td>
    <td>
     <asp:UpdatePanel ID="UpdatePanel27" runat="server">
    <ContentTemplate>
               <asp:TextBox ID="TextBox23" runat="server"  Width="90px" height="34px"></asp:TextBox>
-              <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox23" Format="dd-MM-yyyy"></asp:CalendarExtender>
-              <asp:TextBox ID="TextBox21" runat="server"  Width="90px" height="34px"></asp:TextBox>
-                <asp:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="TextBox21" Format="dd-MM-yyyy"></asp:CalendarExtender>
+           
+             
     </ContentTemplate>
      <Triggers>
               
@@ -714,6 +735,7 @@
      <asp:BoundField DataField="s_no" HeaderText="S No" />
       <asp:BoundField DataField="service_type" HeaderText="Service Type" />
        <asp:BoundField DataField="Service_name" HeaderText="Service Name" />
+       <asp:BoundField DataField="wtdth_hright" HeaderText="Width & height" />
         <asp:BoundField DataField="Duration" HeaderText="Duration" />
          <asp:BoundField DataField="Size" HeaderText="Size" />
        <asp:BoundField DataField="rate" HeaderText="Rate" />
@@ -774,71 +796,7 @@
   <div class="panel-body">
   <br /><hr />
    <div class="col-md-6">
-                 <div class="panel-body">
-                           <div class="form-horizontal">
-
-
-
-                          
-                        
-<h3>Received Cheque Deatils</h3>
-
- <div class="form-group"><label class="col-lg-3 control-label">No </label>                  <div class="col-lg-9">
-                                  <asp:UpdatePanel ID="UpdatePanel16" runat="server">
-   <ContentTemplate>
-    <asp:TextBox ID="TextBox19" runat="server" class="form-control input-x2 dropbox"></asp:TextBox> 
-                                    
-              </ContentTemplate>
-               <Triggers>
-                
-               </Triggers>
-                           </asp:UpdatePanel>
-                          
-                                    
-                                    </div>
-                                
-                                
-                                </div>
- <div class="form-group"><label class="col-lg-3 control-label">Bank name </label>                  <div class="col-lg-9">
-                                  <asp:UpdatePanel ID="UpdatePanel18" runat="server">
-   <ContentTemplate>
-                         <asp:TextBox ID="TextBox15" runat="server" class="form-control input-x2 dropbox"></asp:TextBox> 
-                          <asp:CalendarExtender ID="CalendarExtender4" runat="server" TargetControlID="TextBox15" Format="dd-MM-yyyy"></asp:CalendarExtender>
-                                   
-              </ContentTemplate>
-               <Triggers>
-               
-               </Triggers>
-                           </asp:UpdatePanel>
-                          
-                                    
-                                    </div>
-                                
-                                
-                                </div>
-                                <div class="form-group"><label class="col-lg-3 control-label">Ifsc Code </label>                  <div class="col-lg-9">
-                                  <asp:UpdatePanel ID="UpdatePanel19" runat="server">
-   <ContentTemplate>
-                         <asp:TextBox ID="TextBox17" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>           
-              </ContentTemplate>
-               <Triggers>
-                
-               </Triggers>
-                           </asp:UpdatePanel>
-                          
-                                    
-                                    </div>
-                                
-                                
-                                </div>
-<h3>For Office Use</h3>
-  
-
-
-
-                           </div>
-                           </div>
-                           </div>
+   </div>
 <div class="col-md-6">
                  <div class="panel-body">
                            <div class="form-horizontal">

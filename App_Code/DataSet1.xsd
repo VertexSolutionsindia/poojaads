@@ -17,7 +17,8 @@
                          Order_entry.account_no, Order_entry.bank_date, Order_entry.amount, Order_entry.Com_Id, Order_entry.presented_bank, Order_entry_details.invoice_no AS Expr1, 
                          Order_entry_details.s_no, Order_entry_details.service_type, Order_entry_details.Service_name, Order_entry_details.Duration, Order_entry_details.Size, 
                          Order_entry_details.rate, Order_entry_details.qty, Order_entry_details.Amount AS Expr2, Order_entry_details.Com_Id AS Expr3, Company_detail.com_id AS Expr4, 
-                         Company_detail.company_name, Company_detail.Address, Company_detail.Mobile_number, Company_detail.Tin_no, Company_detail.Cst_no
+                         Company_detail.company_name, Company_detail.Address, Company_detail.Mobile_number, Company_detail.Tin_no, Company_detail.Cst_no, 
+                         Order_entry_details.wtdth_hright
 FROM            Order_entry INNER JOIN
                          Order_entry_details ON Order_entry.Invoice_no = Order_entry_details.invoice_no AND Order_entry.Com_Id = Order_entry_details.Com_Id AND 
                          Order_entry.Invoice_no = @x AND Order_entry.Com_Id = @y INNER JOIN
@@ -65,6 +66,7 @@ FROM            Order_entry INNER JOIN
               <Mapping SourceColumn="Mobile_number" DataSetColumn="Mobile_number" />
               <Mapping SourceColumn="Tin_no" DataSetColumn="Tin_no" />
               <Mapping SourceColumn="Cst_no" DataSetColumn="Cst_no" />
+              <Mapping SourceColumn="wtdth_hright" DataSetColumn="wtdth_hright" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -76,7 +78,7 @@ FROM            Order_entry INNER JOIN
   <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Estimate" msprop:Generator_TableClassName="EstimateDataTable" msprop:Generator_TableVarName="tableEstimate" msprop:Generator_TablePropName="Estimate" msprop:Generator_RowDeletingName="EstimateRowDeleting" msprop:Generator_UserTableName="Estimate" msprop:Generator_RowChangingName="EstimateRowChanging" msprop:Generator_RowEvHandlerName="EstimateRowChangeEventHandler" msprop:Generator_RowDeletedName="EstimateRowDeleted" msprop:Generator_RowEvArgName="EstimateRowChangeEvent" msprop:Generator_RowChangedName="EstimateRowChanged" msprop:Generator_RowClassName="EstimateRow">
+        <xs:element name="Estimate" msprop:Generator_TableClassName="EstimateDataTable" msprop:Generator_TableVarName="tableEstimate" msprop:Generator_TablePropName="Estimate" msprop:Generator_RowDeletingName="EstimateRowDeleting" msprop:Generator_RowChangingName="EstimateRowChanging" msprop:Generator_RowEvHandlerName="EstimateRowChangeEventHandler" msprop:Generator_RowDeletedName="EstimateRowDeleted" msprop:Generator_UserTableName="Estimate" msprop:Generator_RowChangedName="EstimateRowChanged" msprop:Generator_RowEvArgName="EstimateRowChangeEvent" msprop:Generator_RowClassName="EstimateRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Com_Id" msprop:Generator_ColumnVarNameInTable="columnCom_Id" msprop:Generator_ColumnPropNameInRow="Com_Id" msprop:Generator_ColumnPropNameInTable="Com_IdColumn" msprop:Generator_UserColumnName="Com_Id" type="xs:int" minOccurs="0" />
@@ -200,6 +202,13 @@ FROM            Order_entry INNER JOIN
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="wtdth_hright" msprop:Generator_ColumnVarNameInTable="columnwtdth_hright" msprop:Generator_ColumnPropNameInRow="wtdth_hright" msprop:Generator_ColumnPropNameInTable="wtdth_hrightColumn" msprop:Generator_UserColumnName="wtdth_hright" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

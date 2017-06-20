@@ -234,7 +234,7 @@
         </nav>
         <section class="page">
 
-             <nav class="navbar-aside navbar-static-side" role="navigation">
+            <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -251,7 +251,7 @@
                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_Type.aspx">Service Type</a></li>
                            </ul>
-                            <ul class="nav nav-second-level collapse">
+                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_name.aspx">Service Name</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
@@ -270,7 +270,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customers </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                                    <li><a href="Agent-Entry.aspx">Agent Entry</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Client_Entry.aspx">Client Entry</a></li>
@@ -286,17 +286,7 @@
                           
                                
                             </li>
-                             <li>
-                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                   <%-- <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>--%>
-                           </ul>
-                             <ul class="nav nav-second-level collapse">
-                             <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
-                            </ul>
-                          
-                               
-                            </li>
+                           
                               <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -321,7 +311,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
-                                     <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
                            </ul>
                              <ul class="nav nav-second-level collapse">
                              <li><a href="profit_loss.aspx">Profit & loss</a></li>  
@@ -330,7 +320,16 @@
                                
                             </li>
                          
-                             
+                              <li>
+                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Agent bill</span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Agent_bill.aspx">Agent bill</a></li>
+                                   <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
                             
                            
                              <li>
@@ -371,7 +370,7 @@
                              <ul class="nav nav-second-level collapse">
                                    <li><a href="Expenses_Report.aspx">Expenses Report</a></li>
                                     <li><a href="Service_report.aspx">Service Report</a></li>
-                            
+                         
                                      
                                      
                            </ul>
@@ -390,10 +389,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h1>Order Payment Check
+                                <h1>Order Reports
                                  </h1>
                              
-                             
+                             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
   
 
 
@@ -433,7 +432,7 @@
 
 <div class="panel-body">
    <div class="col-md-6">
-         <div class="form-group"><label class="col-lg-3 control-label">Service Type : </label>
+         <div class="form-group"><label class="col-lg-3 control-label">Client Type : </label>
 
                                     <div class="col-lg-7">
                                    <asp:UpdatePanel ID="UpdatePanel20" runat="server" >
@@ -566,7 +565,7 @@
      <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
    
- <asp:GridView ID="GridView1" runat="server" class="red" Width="200%" 
+ <asp:GridView ID="GridView1" runat="server" class="red" Width="100%" 
            AutoGenerateColumns="False" CellPadding="3" 
          Font-Size="16px" 
             AllowPaging="True" 

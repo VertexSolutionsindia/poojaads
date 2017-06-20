@@ -394,7 +394,27 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
             TextBox29.Text = dr1["mrp"].ToString();
             TextBox25.Text = "1";
-            TextBox24.Text = "1";
+            TextBox24.Text = dr1["size"].ToString();
+
+            string duration = dr1["width_Height"].ToString();
+
+
+
+            int count = 0;
+            string[] ar = { "/" };
+            foreach (string value in duration.Split(ar, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (count == 0) // add it to the first text box
+                {
+                    TextBox5.Text = value;
+                    count++; // increment count to add the next value after the split in the another text box
+                }
+                else
+                {
+                    TextBox6.Text = value;
+                }
+
+            }    
             float rate = float.Parse(TextBox29.Text);
             float qty = float.Parse(TextBox25.Text);
             float total = rate * qty;
@@ -492,17 +512,17 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             if (dr.HasRows)
             {
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("update Order_entry_details set service_type=@service_type,Service_name=@Service_name,Duration=@Duration,Size=@Size,rate=@rate,qty=@qty,Amount=@Amount where invoice_no=@invoice_no and s_no=@s_no and Com_Id='" + company_id + "' and year='" + Label2.Text + "'", CON);
+                SqlCommand cmd = new SqlCommand("update Order_entry_details set service_type=@service_type,Service_name=@Service_name,Duration=@Duration,Size=@Size,rate=@rate,qty=@qty,Amount=@Amount,wtdth_hright=@wtdth_hright where invoice_no=@invoice_no and s_no=@s_no and Com_Id='" + company_id + "' and year='" + Label2.Text + "'", CON);
                 cmd.Parameters.Add("@invoice_no", Label1.Text);
                 cmd.Parameters.Add("@s_no", Label9.Text);
                 cmd.Parameters.Add("@service_type", DropDownList3.SelectedItem.Text);
                 cmd.Parameters.Add("@Service_name", DropDownList5.SelectedItem.Text);
-                cmd.Parameters.Add("@Duration", TextBox23.Text + " > " + TextBox21.Text);
+                cmd.Parameters.Add("@Duration", TextBox23.Text + " to " + TextBox21.Text);
                 cmd.Parameters.Add("@Size", TextBox24.Text);
                 cmd.Parameters.Add("@rate", TextBox29.Text);
                 cmd.Parameters.AddWithValue("@qty", TextBox25.Text);
                 cmd.Parameters.Add("@Amount", TextBox22.Text);
-
+                cmd.Parameters.Add("@wtdth_hright", TextBox5.Text + "/" + TextBox6.Text);
 
 
 
@@ -522,13 +542,15 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 TextBox29.Text = "";
                 TextBox25.Text = "";
                 TextBox22.Text = "";
+                TextBox5.Text = "";
+                TextBox6.Text = "";
             }
             else
             {
 
 
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("insert into Order_entry_details values(@invoice_no,@s_no,@service_type,@Service_name,@Duration,@Size,@rate,@qty,@Amount,@Com_Id,@year)", CON);
+                SqlCommand cmd = new SqlCommand("insert into Order_entry_details values(@invoice_no,@s_no,@service_type,@Service_name,@Duration,@Size,@rate,@qty,@Amount,@Com_Id,@year,@wtdth_hright)", CON);
                 cmd.Parameters.Add("@invoice_no", Label1.Text);
                 cmd.Parameters.Add("@s_no", Label9.Text);
                 cmd.Parameters.Add("@service_type", DropDownList3.SelectedItem.Text);
@@ -540,7 +562,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 cmd.Parameters.Add("@Amount", TextBox22.Text);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
                 cmd.Parameters.Add("@year", Label2.Text);
-
+                cmd.Parameters.Add("@wtdth_hright",TextBox5.Text +"/"+ TextBox6.Text);
             
 
 
@@ -558,65 +580,69 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 TextBox29.Text = "";
                 TextBox25.Text = "";
                 TextBox22.Text = "";
+                TextBox5.Text = "";
+                TextBox6.Text = "";
             }
         }
     }
   
     protected void TextBox29_TextChanged(object sender, EventArgs e)
     {
-        float size = float.Parse(TextBox24.Text);
+        float size = float.Parse(TextBox25.Text);
         float rate = float.Parse(TextBox29.Text);
         float total = size * rate;
         TextBox22.Text = total.ToString();
     }
     protected void TextBox25_TextChanged(object sender, EventArgs e)
     {
-        float size = float.Parse(TextBox24.Text);
+      
         float rate = float.Parse(TextBox29.Text);
-        float total = size * rate;
+      
         float qty = float.Parse(TextBox25.Text);
-        float total1 = total * qty;
+        float total1 = rate * qty;
         TextBox22.Text = total1.ToString();
     }
 
     protected void TextBox24_TextChanged(object sender, EventArgs e)
     {
-        float size = float.Parse(TextBox24.Text);
-        float rate = float.Parse(TextBox29.Text);
-        float total = size * rate;
-        float qty = float.Parse(TextBox25.Text);
-        float total1 = total * qty;
-        TextBox22.Text = total1.ToString();
+        
     }
 
     protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            tot = tot + float.Parse(e.Row.Cells[7].Text);
+            tot = tot + float.Parse(e.Row.Cells[8].Text);
 
         }
         TextBox7.Text = tot.ToString();
 
-        float total = float.Parse(TextBox7.Text);
-        float servie_tax = float.Parse(TextBox1.Text);
-        float grand = total * servie_tax / 100;
-        TextBox14.Text = (grand + total).ToString();
+        if (TextBox1.Text != "")
+        {
+            float total = float.Parse(TextBox7.Text);
+            float servie_tax = float.Parse(TextBox1.Text);
+            float grand = total * servie_tax / 100;
+            TextBox14.Text = (grand + total).ToString();
+        }
 
 
+        if (TextBox12.Text != "")
+        {
+            float total1 = float.Parse(TextBox7.Text);
+            float educess = float.Parse(TextBox12.Text);
+            float grand1 = total1 * educess / 100;
+            float grand_total = float.Parse(TextBox14.Text);
+            TextBox14.Text = (grand_total + grand1).ToString();
+        }
 
-        float total1 = float.Parse(TextBox7.Text);
-        float educess = float.Parse(TextBox12.Text);
-        float grand1 = total1 * educess / 100;
-        float grand_total = float.Parse(TextBox14.Text);
-        TextBox14.Text = (grand_total + grand1).ToString();
-
-
-        float total2 = float.Parse(TextBox7.Text);
-        float hreducess = float.Parse(TextBox13.Text);
-        float grand2 = total2 * hreducess / 100;
-        float grand_total1 = float.Parse(TextBox14.Text);
-        TextBox14.Text = (grand_total1 + grand2).ToString(); 
+        if (TextBox13.Text != "")
+        {
+            float total2 = float.Parse(TextBox7.Text);
+            float hreducess = float.Parse(TextBox13.Text);
+            float grand2 = total2 * hreducess / 100;
+            float grand_total1 = float.Parse(TextBox14.Text);
+            TextBox14.Text = (grand_total1 + grand2).ToString();
+        }
     }
     protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
     {
@@ -1038,7 +1064,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
           
 
             int count = 0;
-            string[] ar={"To"};
+            string[] ar={"to"};
             foreach (string value in duration.Split(ar, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (count == 0) // add it to the first text box
@@ -1051,8 +1077,26 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox21.Text = value;
                 }
 
-            }    
+            }
+            string duration1 = dr2["wtdth_hright"].ToString();
 
+
+
+            int count1 = 0;
+            string[] ar1 = { "/" };
+            foreach (string value in duration1.Split(ar1, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (count1 == 0) // add it to the first text box
+                {
+                    TextBox5.Text = value;
+                    count1++; // increment count to add the next value after the split in the another text box
+                }
+                else
+                {
+                    TextBox6.Text = value;
+                }
+
+            }    
 
          
             TextBox24.Text = dr2["size"].ToString();
@@ -1060,7 +1104,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             TextBox25.Text = dr2["qty"].ToString();
             TextBox22.Text = dr2["Amount"].ToString();
 
-
+            est_cost();
 
         }
         con2.Close();
@@ -1078,5 +1122,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox29.Text = "";
         TextBox25.Text = "";
         TextBox22.Text = "";
+        TextBox5.Text = "";
+        TextBox6.Text = "";
     }
 }

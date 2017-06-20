@@ -36,11 +36,22 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
                 }
                 con1.Close();
             }
+            SqlConnection con10 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd10 = new SqlCommand("select * from currentfinancialyear where no='1'", con10);
+            SqlDataReader dr10;
+            con10.Open();
+            dr10 = cmd10.ExecuteReader();
+            if (dr10.Read())
+            {
+                Label1.Text = dr10["financial_year"].ToString();
+            }
+            con10.Close();
             getinvoiceno();
             show_category();
             showrating();
             BindData();
             ClentName();
+            clientmobile();
             active();
             created();
         }
@@ -85,7 +96,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     protected void BindData()
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "'ORDER BY Invoice_no asc", con1);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry where Com_Id='" + company_id + "' and year='"+Label1.Text+"' ORDER BY Invoice_no asc", con1);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -166,10 +177,9 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     {
 
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry where date='" + TextBox3.Text + "' and Com_Id='" + company_id + "' ", con1);
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry where date='" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "'  and  Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con);
         DataTable dt1 = new DataTable();
-        con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
@@ -179,10 +189,9 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     {
 
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("SELECT *  FROM Order_entry  where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "' and  Com_Id='" + company_id + "' order by Invoice_no", con1);
+        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry where date between '" + Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy") + "' and '" + Convert.ToDateTime(TextBox4.Text).ToString("MM-dd-yyyy") + "'  and  Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con);
         DataTable dt1 = new DataTable();
-        con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
         GridView1.DataSource = dt1;
@@ -215,7 +224,7 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
 
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -234,8 +243,55 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
     }
     protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (DropDownList3.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Order_entry where  Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con1);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Order_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and  Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con2);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+
+    }
+    protected void DropDownList6_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownList3.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Order_entry where  Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con1);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Order_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con2);
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+    }
+    private void clientmobile()
+    {
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Order_entry where client_name='" + DropDownList3.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Order_entry where Com_Id='" + company_id + "' and year='" + Label1.Text + "' ORDER BY Invoice_no asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -247,18 +303,8 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
         DropDownList6.DataBind();
         DropDownList6.Items.Insert(0, new ListItem("All", "0"));
 
-        con.Close();
 
-    }
-    protected void DropDownList6_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry where mobile='" + DropDownList6.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY Invoice_no asc", con);
-        DataTable dt1 = new DataTable();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        con.Close();
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -274,11 +320,11 @@ public partial class Admin_Purchase_pay_amount : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Order_entry where id='" + usrid + "' and Com_Id='" + company_id + "'", con);
+                SqlCommand cmd = new SqlCommand("delete from Order_entry where Invoice_no='" + usrid + "' and Com_Id='" + company_id + "' and year='" + Label1.Text + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
                 DataBind();
-
+                BindData();
             }
         }
     }

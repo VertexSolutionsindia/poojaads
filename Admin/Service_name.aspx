@@ -146,8 +146,7 @@
             </div><!--/.container-fluid -->
         </nav>
         <section class="page">
-
-             <nav class="navbar-aside navbar-static-side" role="navigation">
+         <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -158,7 +157,7 @@
                                     <li><a href="Dashboard.aspx">Dashboard </a></li>
                            </ul>
                             </li>
-                           <li>
+                            <li>
                                 <a href="#"><i class="fa fa-folder-open fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp;Master </span><span class="fa arrow"></span></a>
                           
                           <ul class="nav nav-second-level collapse">
@@ -180,12 +179,10 @@
                              
                                
                             </li>
-                           
-
                              <li>
                                 <a href="#"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customers </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                                    <li><a href="Agent-Entry.aspx">Agent Entry</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Client_Entry.aspx">Client Entry</a></li>
@@ -201,17 +198,7 @@
                           
                                
                             </li>
-                             <li>
-                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                    <%--<li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>--%>
-                           </ul>
-                             <ul class="nav nav-second-level collapse">
-                             <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
-                            </ul>
-                          
-                               
-                            </li>
+                           
                               <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -245,7 +232,16 @@
                                
                             </li>
                          
-                             
+                              <li>
+                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Agent bill</span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Agent_bill.aspx">Agent bill</a></li>
+                                   <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
                             
                            
                              <li>
@@ -300,7 +296,6 @@
                 </div>
                 
             </nav>
-                
             
             <div id="wrapper">
                 <div class="content-wrapper container">
@@ -423,14 +418,53 @@
                                 </div>
 
 
-                                <div class="form-group"><label class="col-lg-3 control-label">Service Name</label>
+                                <div class="form-group"><label class="col-lg-3 control-label">Location</label>
                               
                                     <div class="col-lg-9">
                                     <asp:Panel ID="Panel1" runat="server" DefaultButton="Button1">
                                      <asp:UpdatePanel ID="UpdatePanel4" runat="server">
    <ContentTemplate>
                                     <asp:TextBox ID="TextBox3" runat="server"  class="form-control input-x2 dropbox" 
-                                        ontextchanged="TextBox3_TextChanged" onload="TextBox3_Load"></asp:TextBox>
+                                      ></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    </asp:Panel>
+                                    </div>
+                                
+                                
+                                </div>
+                                  <div class="form-group"><label class="col-lg-3 control-label">Width & Height</label>
+                              
+                                    <div class="col-lg-9">
+                                    <asp:Panel ID="Panel4" runat="server" DefaultButton="Button1">
+                                     <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox5" runat="server" Width="200px" ontextchanged="TextBox5_TextChanged" AutoPostBack="true" 
+                                         onload="TextBox3_Load"></asp:TextBox>
+                                        <asp:TextBox ID="TextBox8" runat="server" Width="200px" AutoPostBack="true" ontextchanged="TextBox8_TextChanged" ></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button2" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    </asp:Panel>
+                                    </div>
+                                
+                                
+                                </div>
+                                  <div class="form-group"><label class="col-lg-3 control-label">Size</label>
+                              
+                                    <div class="col-lg-9">
+                                    <asp:Panel ID="Panel5" runat="server" DefaultButton="Button1">
+                                     <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox7" runat="server"  class="form-control input-x2 dropbox" 
+                                         onload="TextBox3_Load"></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
@@ -494,7 +528,7 @@
                        <asp:TextBox ID="TextBox1" runat="server" width="100%" 
                                     ontextchanged="TextBox1_TextChanged" AutoPostBack="true"></asp:TextBox>
 
-                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search Sub category"></asp:TextBoxWatermarkExtender>
+                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search Service name"></asp:TextBoxWatermarkExtender>
                            <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
@@ -549,12 +583,20 @@
             <HeaderStyle CssClass="Grd1" />
            <ItemStyle CssClass="Grd1" />
            </asp:BoundField>
-            <asp:BoundField HeaderText="Service Name" DataField="servicename"  >
+             <asp:BoundField HeaderText="Service Type" DataField="servicetype_name" >
+            <HeaderStyle CssClass="Grd1" />
+           <ItemStyle CssClass="Grd1" />
+           </asp:BoundField>
+            <asp:BoundField HeaderText="Location" DataField="servicename"  >
            <HeaderStyle CssClass="Grd1" />
            <ItemStyle CssClass="Grd1" />
            </asp:BoundField>
-             <asp:BoundField HeaderText="Service Type" DataField="servicetype_name" >
-            <HeaderStyle CssClass="Grd1" />
+           <asp:BoundField HeaderText="Width & height" DataField="width_Height"  >
+           <HeaderStyle CssClass="Grd1" />
+           <ItemStyle CssClass="Grd1" />
+           </asp:BoundField>
+            <asp:BoundField HeaderText="Size" DataField="size"  >
+           <HeaderStyle CssClass="Grd1" />
            <ItemStyle CssClass="Grd1" />
            </asp:BoundField>
            <asp:BoundField HeaderText="MRP" DataField="mrp" >
@@ -618,7 +660,7 @@
   
   
     <asp:Panel ID="Panel2" runat="server" class="panel1" BorderColor="Black" BorderStyle="Solid" BackColor="White" Direction="LeftToRight" style="display:none;" 
-                         HorizontalAlign="Left" ScrollBars="Both" Width="500px" Height="300px"  >
+                         HorizontalAlign="Left" ScrollBars="Both" Width="600px" Height="400px"  >
     
          <div style="padding:12px; border:1px solid #e5e5e5;   border-radius:10px; background-color:#E6E6FA;color:#233445; font-size:15px; font-weight:400px; font-family: 'Open Sans',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial,sans-serif; ">
                      <h3 style="font-size:20px; " class="control-label"> Update Service Name  <asp:ImageButton ID="ImageButton6" runat="server" ImageUrl="~/exit11.png" width="30px" height="30px" style="float:right" /></h3>
@@ -648,17 +690,31 @@
         <td>
             <asp:TextBox ID="TextBox16" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
+         <tr>
+        <td>
+            <asp:Label ID="Label4" runat="server" class="col-lg-3 control-label" Width="200px" Text="width/height"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox6" runat="server"  class="form-control input-x2 dropbox" ontextchanged="TextBox6_TextChanged" AutoPostBack="true"></asp:TextBox>
+            <asp:TextBox ID="TextBox10" runat="server"  class="form-control input-x2 dropbox" ontextchanged="TextBox10_TextChanged" AutoPostBack="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+        <td>
+            <asp:Label ID="Label5" runat="server" class="col-lg-3 control-label" Width="200px" Text="size"></asp:Label></td>
+        <td>
+            <asp:TextBox ID="TextBox9" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
+        </tr>      
+       
+        </tr>
      <tr>
         <td>
             <asp:Label ID="Label3" runat="server" class="col-lg-3 control-label" Width="200px" Text="MRP"></asp:Label></td>
         <td>
             <asp:TextBox ID="TextBox4" runat="server"  class="form-control input-x2 dropbox"></asp:TextBox></td>
         </tr>
-                    
-       
-        </tr>
+              
             <tr>
-            <td></td>
+            
                 <td>
                     <asp:UpdatePanel ID="UpdatePanel12" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>

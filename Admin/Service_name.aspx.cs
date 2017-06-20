@@ -81,7 +81,29 @@ public partial class Admin_Service_name : System.Web.UI.Page
                     DropDownList4.SelectedItem.Text = dr["servicetype_name"].ToString();
 
                     TextBox16.Text = dr["servicename"].ToString();
+                    TextBox6.Text = dr["width_Height"].ToString();
+                    string duration = dr["width_Height"].ToString();
+
+
+
+                    int count = 0;
+                    string[] ar = { "/" };
+                    foreach (string value in duration.Split(ar, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        if (count == 0) // add it to the first text box
+                        {
+                            TextBox6.Text = value;
+                            count++; // increment count to add the next value after the split in the another text box
+                        }
+                        else
+                        {
+                            TextBox10.Text = value;
+                        }
+
+                    }    
+
                     TextBox4.Text = dr["mrp"].ToString();
+                    TextBox9.Text = dr["size"].ToString();
                 }
                 con.Close();
 
@@ -104,7 +126,7 @@ public partial class Admin_Service_name : System.Web.UI.Page
                 company_id = Convert.ToInt32(dr1000["com_id"].ToString());
 
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("update service_name set servicetype_id='" + DropDownList4.SelectedItem.Value + "', servicetype_name='" + HttpUtility.HtmlDecode(DropDownList4.SelectedItem.Text) + "', servicename='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',mrp='" + HttpUtility.HtmlDecode(TextBox4.Text) + "' where servicename_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
+                SqlCommand cmd = new SqlCommand("update service_name set servicetype_id='" + DropDownList4.SelectedItem.Value + "', servicetype_name='" + HttpUtility.HtmlDecode(DropDownList4.SelectedItem.Text) + "', servicename='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',mrp='" + HttpUtility.HtmlDecode(TextBox4.Text) + "',width_Height='" + HttpUtility.HtmlDecode(TextBox6.Text +"/"+ TextBox10.Text) + "',size='" + HttpUtility.HtmlDecode(TextBox9.Text ) + "' where servicename_id='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", CON);
 
                 CON.Open();
                 cmd.ExecuteNonQuery();
@@ -190,7 +212,7 @@ public partial class Admin_Service_name : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        if (DropDownList3.SelectedItem.Text == "All")
+         if (DropDownList3.SelectedItem.Text == "All")
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please Select valid Service Type')", true);
         }
@@ -226,13 +248,16 @@ public partial class Admin_Service_name : System.Web.UI.Page
                         company_id = Convert.ToInt32(dr1000["com_id"].ToString());
 
                         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                        SqlCommand cmd = new SqlCommand("insert into service_name values(@servicename_id,@servicename,@servicetype_id,@Com_Id,@servicetype_name,@mrp)", CON);
+                        SqlCommand cmd = new SqlCommand("insert into service_name values(@servicename_id,@servicename,@servicetype_id,@Com_Id,@servicetype_name,@mrp,@width_Height,@size)", CON);
                         cmd.Parameters.AddWithValue("@servicename_id", Label1.Text);
                         cmd.Parameters.AddWithValue("@servicename", HttpUtility.HtmlDecode(TextBox3.Text));
                         cmd.Parameters.AddWithValue("@servicetype_id", HttpUtility.HtmlDecode(DropDownList3.SelectedItem.Value));
                         cmd.Parameters.AddWithValue("@Com_Id", company_id);
                         cmd.Parameters.AddWithValue("@servicetype_name", DropDownList3.SelectedItem.Text);
                         cmd.Parameters.AddWithValue("@mrp", TextBox2.Text);
+                     
+                        cmd.Parameters.AddWithValue("@width_Height", TextBox5.Text + "/" + TextBox8.Text);
+                        cmd.Parameters.AddWithValue("@size", TextBox7.Text);
                         CON.Open();
                         cmd.ExecuteNonQuery();
                         CON.Close();
@@ -552,6 +577,69 @@ public partial class Admin_Service_name : System.Web.UI.Page
     protected void TextBox3_TextChanged(object sender, EventArgs e)
     {
 
+    }
+    protected void TextBox8_TextChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            float w = float.Parse(TextBox5.Text);
+            float h = float.Parse(TextBox8.Text);
+            TextBox7.Text = (w * h).ToString();
+        }
+        catch (Exception we)
+        { }
+
+    }
+    protected void TextBox5_TextChanged(object sender, EventArgs e)
+    {
+          try
+        {
+        float w = float.Parse(TextBox5.Text);
+        float h = float.Parse(TextBox8.Text);
+        TextBox7.Text = (w * h).ToString();
+        }
+          catch (Exception we)
+          { }
+    }
+    protected void TextBox6_TextChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            float w = float.Parse(TextBox6.Text);
+            float h = float.Parse(TextBox10.Text);
+            TextBox9.Text = (w * h).ToString();
+            this.ModalPopupExtender3.Show();
+        }
+        catch (Exception we)
+        { }
+        if (TextBox10.Text == "")
+        {
+            this.ModalPopupExtender3.Show();
+        }
+        if (TextBox6.Text == "")
+        {
+            this.ModalPopupExtender3.Show();
+        }
+    }
+    protected void TextBox10_TextChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            float w = float.Parse(TextBox6.Text);
+            float h = float.Parse(TextBox10.Text);
+            TextBox9.Text = (w * h).ToString();
+            this.ModalPopupExtender3.Show();
+        }
+        catch (Exception we)
+        { }
+        if (TextBox10.Text == "")
+        {
+            this.ModalPopupExtender3.Show();
+        }
+        if (TextBox6.Text == "")
+        {
+            this.ModalPopupExtender3.Show();
+        }
     }
     protected void TextBox3_Load(object sender, EventArgs e)
     {

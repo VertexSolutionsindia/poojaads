@@ -148,6 +148,10 @@
           <DataField>Cst_no</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="wtdth_hright">
+          <DataField>wtdth_hright</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSet1</DataSourceName>
@@ -155,7 +159,7 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet1</rd:DataSetName>
-        <rd:SchemaPath>E:\pooja new\App_Code\DataSet1.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\poojaada1\App_Code\DataSet1.xsd</rd:SchemaPath>
         <rd:TableName>Estimate</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -172,22 +176,25 @@
               <Width>0.50128in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.77209in</Width>
+              <Width>2.29014in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.85407in</Width>
+              <Width>0.71298in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.60031in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.59612in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.75205in</Width>
+              <Width>0.55418in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.43969in</Width>
+              <Width>0.42927in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.05237in</Width>
+              <Width>1.29249in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -248,6 +255,39 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox71</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox11">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>W/H</Value>
+                              <Style>
+                                <FontSize>14pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox11</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -498,6 +538,39 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="wtdth_hright">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!wtdth_hright.Value</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>wtdth_hright</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Duration">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -674,6 +747,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -690,7 +764,7 @@
         <Top>0.35313cm</Top>
         <Left>0.36866cm</Left>
         <Height>1.73799cm</Height>
-        <Width>20.23788cm</Width>
+        <Width>20.261cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -759,8 +833,8 @@
       </Line>
       <Line Name="Line36">
         <Top>0.17674cm</Top>
-        <Left>8.68304cm</Left>
-        <Height>10.56499cm</Height>
+        <Left>7.45888cm</Left>
+        <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -770,9 +844,9 @@
         </Style>
       </Line>
       <Line Name="Line37">
-        <Top>0.17674cm</Top>
-        <Left>13.39237cm</Left>
-        <Height>10.63589cm</Height>
+        <Top>0.14111cm</Top>
+        <Left>14.84876cm</Left>
+        <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -782,9 +856,9 @@
         </Style>
       </Line>
       <Line Name="Line38">
-        <Top>0.14147cm</Top>
-        <Left>14.84876cm</Left>
-        <Height>10.67153cm</Height>
+        <Top>0.14111cm</Top>
+        <Left>16.25638cm</Left>
+        <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -795,22 +869,10 @@
       </Line>
       <Line Name="Line39">
         <Top>0.14111cm</Top>
-        <Left>16.81673cm</Left>
+        <Left>17.34673cm</Left>
         <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>9</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-        </Style>
-      </Line>
-      <Line Name="Line40">
-        <Top>0.14147cm</Top>
-        <Left>17.95663cm</Left>
-        <Height>10.63625cm</Height>
-        <Width>0cm</Width>
-        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -822,7 +884,31 @@
         <Left>0.33338cm</Left>
         <Height>0cm</Height>
         <Width>20.29627cm</Width>
+        <ZIndex>10</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line3">
+        <Top>0.14111cm</Top>
+        <Left>9.26984cm</Left>
+        <Height>10.56499cm</Height>
+        <Width>0cm</Width>
         <ZIndex>11</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line4">
+        <Top>0.14111cm</Top>
+        <Left>13.3595cm</Left>
+        <Height>10.60062cm</Height>
+        <Width>0cm</Width>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1047,10 +1133,10 @@ Private Shared Function translateCents(ByVal cents As [String]) As [String]
     Next
     Return cts
 End Function</Code>
-  <Width>8.35592in</Width>
+  <Width>9.28548in</Width>
   <Page>
     <PageHeader>
-      <Height>7.88458cm</Height>
+      <Height>7.9375cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <ReportItems>
         <Line Name="Line1">
@@ -1068,10 +1154,10 @@ End Function</Code>
           <Source>Embedded</Source>
           <Value>PoojaAdd</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.42368cm</Top>
+          <Top>0.3884cm</Top>
           <Left>0.50977cm</Left>
-          <Height>2.63771cm</Height>
-          <Width>6.52168cm</Width>
+          <Height>3.41431cm</Height>
+          <Width>7.01354cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
@@ -1255,10 +1341,10 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Address</rd:DefaultName>
-          <Top>3.2025cm</Top>
-          <Left>0.47449cm</Left>
-          <Height>0.63549cm</Height>
-          <Width>13.37239cm</Width>
+          <Top>1.12952cm</Top>
+          <Left>7.6997cm</Left>
+          <Height>2.70847cm</Height>
+          <Width>4.6255cm</Width>
           <ZIndex>11</ZIndex>
           <Style>
             <Border>
@@ -1527,8 +1613,8 @@ End Function</Code>
           <rd:DefaultName>cl_add</rd:DefaultName>
           <Top>4.96716cm</Top>
           <Left>2.82258cm</Left>
-          <Height>1.07625cm</Height>
-          <Width>11.23597cm</Width>
+          <Height>0.70583cm</Height>
+          <Width>16.03795cm</Width>
           <ZIndex>22</ZIndex>
           <Style>
             <Border>
@@ -1557,7 +1643,7 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>mobile</rd:DefaultName>
-          <Top>6.14924cm</Top>
+          <Top>5.77883cm</Top>
           <Left>2.82258cm</Left>
           <Height>0.6cm</Height>
           <Width>10.01417cm</Width>
@@ -1573,8 +1659,8 @@ End Function</Code>
           </Style>
         </Textbox>
         <Line Name="Line20">
-          <Top>6.89035cm</Top>
-          <Left>0.33338cm</Left>
+          <Top>6.55522cm</Top>
+          <Left>0.36866cm</Left>
           <Height>0cm</Height>
           <Width>20.33093cm</Width>
           <ZIndex>24</ZIndex>
@@ -1601,45 +1687,11 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
-          <Top>6.96091cm</Top>
+          <Top>6.7316cm</Top>
           <Left>3.85327cm</Left>
           <Height>0.66944cm</Height>
           <Width>12.64236cm</Width>
           <ZIndex>25</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Invoice_no">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=Sum(Fields!Invoice_no.Value, "DataSet1")</Value>
-                  <Style>
-                    <FontSize>14pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Left</TextAlign>
-              </Style>
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Invoice_no</rd:DefaultName>
-          <Top>1.44674cm</Top>
-          <Left>15.74716cm</Left>
-          <Height>0.6cm</Height>
-          <Width>3.63771cm</Width>
-          <ZIndex>26</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1674,7 +1726,7 @@ End Function</Code>
           <Left>15.88428cm</Left>
           <Height>0.9175cm</Height>
           <Width>4.18816cm</Width>
-          <ZIndex>27</ZIndex>
+          <ZIndex>26</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1690,13 +1742,48 @@ End Function</Code>
           <Left>0.33338cm</Left>
           <Height>3.66125cm</Height>
           <Width>0cm</Width>
-          <ZIndex>28</ZIndex>
+          <ZIndex>27</ZIndex>
           <Style>
             <Border>
               <Style>Solid</Style>
             </Border>
           </Style>
         </Line>
+        <Textbox Name="Invoice_no">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>=Fields!Invoice_no.Value</Value>
+                  <Style>
+                    <FontSize>14pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style>
+                <TextAlign>Left</TextAlign>
+              </Style>
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Invoice_no</rd:DefaultName>
+          <Top>1.44674cm</Top>
+          <Left>15.88428cm</Left>
+          <Height>0.86458cm</Height>
+          <Width>2.97625cm</Width>
+          <ZIndex>28</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
       </ReportItems>
       <Style>
         <Border>

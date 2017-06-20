@@ -44,18 +44,6 @@
           <DataField>grand_total</DataField>
           <rd:TypeName>System.Double</rd:TypeName>
         </Field>
-        <Field Name="account_no">
-          <DataField>account_no</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="bankname">
-          <DataField>bankname</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="IFSC_code">
-          <DataField>IFSC_code</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Com_Id">
           <DataField>Com_Id</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -140,6 +128,10 @@
           <DataField>Cst_no</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="wtdth_hright">
+          <DataField>wtdth_hright</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>estimate_report</DataSourceName>
@@ -147,7 +139,7 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>estimate_report</rd:DataSetName>
-        <rd:SchemaPath>E:\PoojaAds\poojaads\App_Code\estimate_report.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\poojaada1\App_Code\estimate_report.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -164,10 +156,13 @@
               <Width>0.50128in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.77209in</Width>
+              <Width>2.23911in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.85407in</Width>
+              <Width>0.98425in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.4432in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.59612in</Width>
@@ -240,6 +235,39 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox71</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox1">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>W/H</Value>
+                              <Style>
+                                <FontSize>14pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -486,6 +514,40 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="wtdth_hright">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!wtdth_hright.Value</Value>
+                              <Style>
+                                <FontSize>11pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>wtdth_hright</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -666,6 +728,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -682,7 +745,7 @@
         <Top>0.35278cm</Top>
         <Left>0.37698cm</Left>
         <Height>1.73799cm</Height>
-        <Width>20.23788cm</Width>
+        <Width>20.34052cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -751,7 +814,7 @@
       </Line>
       <Line Name="Line36">
         <Top>0.17639cm</Top>
-        <Left>8.69136cm</Left>
+        <Left>7.33758cm</Left>
         <Height>12.17083cm</Height>
         <Width>0cm</Width>
         <ZIndex>6</ZIndex>
@@ -763,7 +826,7 @@
       </Line>
       <Line Name="Line37">
         <Top>0.17639cm</Top>
-        <Left>13.40069cm</Left>
+        <Left>9.83758cm</Left>
         <Height>12.17083cm</Height>
         <Width>0cm</Width>
         <ZIndex>7</ZIndex>
@@ -774,8 +837,8 @@
         </Style>
       </Line>
       <Line Name="Line38">
-        <Top>0.14112cm</Top>
-        <Left>14.85708cm</Left>
+        <Top>0.17639cm</Top>
+        <Left>13.50332cm</Left>
         <Height>12.2061cm</Height>
         <Width>0cm</Width>
         <ZIndex>8</ZIndex>
@@ -786,8 +849,8 @@
         </Style>
       </Line>
       <Line Name="Line39">
-        <Top>0.14076cm</Top>
-        <Left>16.82505cm</Left>
+        <Top>0.17639cm</Top>
+        <Left>15.01746cm</Left>
         <Height>12.20646cm</Height>
         <Width>0cm</Width>
         <ZIndex>9</ZIndex>
@@ -799,7 +862,7 @@
       </Line>
       <Line Name="Line40">
         <Top>0.14112cm</Top>
-        <Left>17.96495cm</Left>
+        <Left>16.92767cm</Left>
         <Height>12.2061cm</Height>
         <Width>0cm</Width>
         <ZIndex>10</ZIndex>
@@ -815,6 +878,18 @@
         <Height>0cm</Height>
         <Width>20.29627cm</Width>
         <ZIndex>11</ZIndex>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+        </Style>
+      </Line>
+      <Line Name="Line3">
+        <Top>0.35278cm</Top>
+        <Left>18.04448cm</Left>
+        <Height>12.02971cm</Height>
+        <Width>0cm</Width>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1037,7 +1112,7 @@ Private Shared Function translateCents(ByVal cents As [String]) As [String]
     Next
     Return cts
 End Function</Code>
-  <Width>8.26042in</Width>
+  <Width>9.10034in</Width>
   <Page>
     <PageHeader>
       <Height>7.9375cm</Height>
@@ -1061,7 +1136,7 @@ End Function</Code>
           <Sizing>FitProportional</Sizing>
           <Top>0.42198cm</Top>
           <Left>0.56215cm</Left>
-          <Height>2.63771cm</Height>
+          <Height>3.34375cm</Height>
           <Width>6.52168cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
@@ -1199,7 +1274,7 @@ End Function</Code>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>INVOICE</Value>
+                  <Value>Estimate</Value>
                   <Style>
                     <FontFamily>Times New Roman</FontFamily>
                     <FontSize>16pt</FontSize>
@@ -1246,10 +1321,10 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Address</rd:DefaultName>
-          <Top>3.2008cm</Top>
-          <Left>0.52687cm</Left>
-          <Height>0.63549cm</Height>
-          <Width>13.37239cm</Width>
+          <Top>1.12754cm</Top>
+          <Left>7.88229cm</Left>
+          <Height>2.63819cm</Height>
+          <Width>4.40302cm</Width>
           <ZIndex>11</ZIndex>
           <Style>
             <Border>
@@ -1879,8 +1954,8 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox93</rd:DefaultName>
-          <Top>3.80944cm</Top>
-          <Left>1.00317cm</Left>
+          <Top>0.38813cm</Top>
+          <Left>2.0615cm</Left>
           <Height>0.6cm</Height>
           <Width>2.05021cm</Width>
           <ZIndex>10</ZIndex>
@@ -2129,224 +2204,6 @@ End Function</Code>
             </Border>
           </Style>
         </Line>
-        <Textbox Name="bankname">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=First(Fields!bankname.Value, "DataSet1")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>bankname</rd:DefaultName>
-          <Top>2.18611cm</Top>
-          <Left>3.4543cm</Left>
-          <Height>0.6cm</Height>
-          <Width>7.5841cm</Width>
-          <ZIndex>22</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox85">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Bank Name  :</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox84</rd:DefaultName>
-          <Top>2.18611cm</Top>
-          <Left>0.59742cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.8216cm</Width>
-          <ZIndex>23</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="IFSC_code">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=First(Fields!IFSC_code.Value, "DataSet1")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>IFSC_code</rd:DefaultName>
-          <Top>2.9625cm</Top>
-          <Left>3.4543cm</Left>
-          <Height>0.6cm</Height>
-          <Width>6.41855cm</Width>
-          <ZIndex>24</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox86">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>IFSC Code  :</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox84</rd:DefaultName>
-          <Top>2.9625cm</Top>
-          <Left>0.6327cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.8216cm</Width>
-          <ZIndex>25</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="account_no">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>=First(Fields!account_no.Value, "DataSet1")</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>account_no</rd:DefaultName>
-          <Top>1.445cm</Top>
-          <Left>3.4543cm</Left>
-          <Height>0.6cm</Height>
-          <Width>7.5841cm</Width>
-          <ZIndex>26</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox87">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Account No :</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox84</rd:DefaultName>
-          <Top>1.40972cm</Top>
-          <Left>0.59742cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.8216cm</Width>
-          <ZIndex>27</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
-        <Textbox Name="Textbox88">
-          <CanGrow>true</CanGrow>
-          <KeepTogether>true</KeepTogether>
-          <Paragraphs>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Bank details :</Value>
-                  <Style>
-                    <FontSize>11pt</FontSize>
-                  </Style>
-                </TextRun>
-              </TextRuns>
-              <Style />
-            </Paragraph>
-          </Paragraphs>
-          <rd:DefaultName>Textbox84</rd:DefaultName>
-          <Top>0.44105cm</Top>
-          <Left>0.6327cm</Left>
-          <Height>0.6cm</Height>
-          <Width>2.8216cm</Width>
-          <ZIndex>28</ZIndex>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <PaddingLeft>2pt</PaddingLeft>
-            <PaddingRight>2pt</PaddingRight>
-            <PaddingTop>2pt</PaddingTop>
-            <PaddingBottom>2pt</PaddingBottom>
-          </Style>
-        </Textbox>
         <Textbox Name="grand_total1">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
@@ -2366,7 +2223,7 @@ End Function</Code>
           <Left>0.44753cm</Left>
           <Height>0.6cm</Height>
           <Width>12.4416cm</Width>
-          <ZIndex>29</ZIndex>
+          <ZIndex>22</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>

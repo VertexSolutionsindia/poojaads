@@ -46,7 +46,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
             show_category();
             showrating();
             BindData();
-            show_type();
+        
             active();
             created();
 
@@ -67,8 +67,8 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         TextBox10.Text = ROW.Cells[4].Text;
     
         TextBox7.Text = ROW.Cells[5].Text;
-        TextBox8.Text = ROW.Cells[6].Text;
-        TextBox12.Text = ROW.Cells[7].Text;
+
+        TextBox12.Text = ROW.Cells[6].Text;
        
         this.ModalPopupExtender3.Show();
     }
@@ -77,7 +77,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         
 
         SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("update Customer_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Mobile_no='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Profession='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Customer_Type='" + HttpUtility.HtmlDecode(TextBox8.Text) + "',Company_Name='" + HttpUtility.HtmlDecode(TextBox12.Text) + "' where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "'", CON);
+        SqlCommand cmd = new SqlCommand("update Agent_Entry set Custom_Name='" + HttpUtility.HtmlDecode(TextBox16.Text) + "',Custom_Add='" + HttpUtility.HtmlDecode(TextBox6.Text) + "',Mobile_no='" + HttpUtility.HtmlDecode(TextBox10.Text) + "',Email_id='" + HttpUtility.HtmlDecode(TextBox7.Text) + "',Company_Name='" + HttpUtility.HtmlDecode(TextBox12.Text) + "' where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "'", CON);
 
         CON.Open();
         cmd.ExecuteNonQuery();
@@ -95,7 +95,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
       
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd1 = new SqlCommand("delete from Customer_Entry where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", con1);
+        SqlCommand cmd1 = new SqlCommand("delete from Agent_Entry where Custom_Code='" + Label29.Text + "'  and Com_Id='" + company_id + "' ", con1);
         con1.Open();
         cmd1.ExecuteNonQuery();
         con1.Close();
@@ -123,7 +123,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + usrid+"' and Com_Id='" + company_id + "'", con);
+                SqlCommand cmd = new SqlCommand("delete from Agent_Entry where Custom_Code='" + usrid+"' and Com_Id='" + company_id + "'", con);
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -147,32 +147,43 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         }
         else
         {
+            SqlConnection CON1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1 = new SqlCommand("select * from Agent_entry where Custom_Code='" + Label1.Text + "' or Custom_Name='" + TextBox3.Text + "' and Com_Id='"+company_id+"'", CON1);
+            CON1.Open();
+            SqlDataReader dr;
+            dr = cmd1.ExecuteReader();
+            if (dr.HasRows)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Agent Entry no already exist')", true);
+            }
+            else
+            {
 
-         
-            SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-            SqlCommand cmd = new SqlCommand("insert into Customer_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Mobile_no,@Profession,@Customer_Type,@Com_Id,@Company_Name)", CON);
-            cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
-            cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
-            cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
-            cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox9.Text));
-            cmd.Parameters.AddWithValue("@Profession", HttpUtility.HtmlDecode(TextBox4.Text));
-            cmd.Parameters.AddWithValue("@Customer_Type", HttpUtility.HtmlDecode(DropDownList1.SelectedItem.Text));
-            cmd.Parameters.AddWithValue("@Com_Id", company_id);
-            cmd.Parameters.AddWithValue("@Company_Name", TextBox5.Text);
-            
-            CON.Open();
-            cmd.ExecuteNonQuery();
-            CON.Close();
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Entry created successfully')", true);
-            BindData();
-            show_category();
-            getinvoiceno();
-            TextBox3.Text = "";
-            TextBox2.Text = "";
-            TextBox4.Text = "";
-            show_type();
-            TextBox9.Text = "";
-            TextBox5.Text = "";
+                SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                SqlCommand cmd = new SqlCommand("insert into Agent_Entry values(@Custom_Code,@Custom_Name,@Custom_Add,@Mobile_no,@Email_id,@Com_Id,@Company_Name)", CON);
+                cmd.Parameters.AddWithValue("@Custom_Code", Label1.Text);
+                cmd.Parameters.AddWithValue("@Custom_Name", HttpUtility.HtmlDecode(TextBox3.Text));
+                cmd.Parameters.AddWithValue("@Custom_Add", HttpUtility.HtmlDecode(TextBox2.Text));
+                cmd.Parameters.AddWithValue("@Mobile_no", HttpUtility.HtmlDecode(TextBox9.Text));
+                cmd.Parameters.AddWithValue("Email_id", HttpUtility.HtmlDecode(TextBox4.Text));
+
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Parameters.AddWithValue("@Company_Name", TextBox5.Text);
+
+                CON.Open();
+                cmd.ExecuteNonQuery();
+                CON.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Agent Entry created successfully')", true);
+                BindData();
+                show_category();
+                getinvoiceno();
+                TextBox3.Text = "";
+                TextBox2.Text = "";
+                TextBox4.Text = "";
+
+                TextBox9.Text = "";
+                TextBox5.Text = "";
+            }
            
         }
 
@@ -183,7 +194,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         TextBox3.Text = "";
         TextBox2.Text = "";
         TextBox4.Text = "";
-        show_type();
+       
         TextBox9.Text = "";
         getinvoiceno();
         show_category();
@@ -218,7 +229,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
        
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Customer_Entry where Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Agent_Entry where Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -234,11 +245,11 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
         con.Open();
-        SqlCommand cmd = new SqlCommand("delete from Customer_Entry where Custom_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
+        SqlCommand cmd = new SqlCommand("delete from Agent_Entry where Custom_Code='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
         cmd.ExecuteNonQuery();
         con.Close();
 
-        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Customer Details deleted successfully')", true);
+        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Agent Details deleted successfully')", true);
 
         BindData();
         show_category();
@@ -253,7 +264,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select COUNT(Custom_Code) from Customer_Entry where Com_Id='" + company_id + "'";
+        string query = "Select Max(Custom_Code) from Agent_Entry where Com_Id='" + company_id + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -275,7 +286,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     {
        
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from Customer_Entry where Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con);
+        SqlCommand cmd = new SqlCommand("Select * from Agent_Entry where Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con);
         con.Open();
         DataSet ds = new DataSet();
         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -291,25 +302,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
         con.Close();
     }
 
-    private void show_type()
-    {
-       
-        SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand cmd = new SqlCommand("Select * from customer_type where Com_Id='" + company_id + "' ORDER BY type_id asc", con);
-        con.Open();
-        DataSet ds = new DataSet();
-        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        da.Fill(ds);
-
-
-        DropDownList1.DataSource = ds;
-        DropDownList1.DataTextField = "type_name";
-        DropDownList1.DataValueField = "type_id";
-        DropDownList1.DataBind();
-        DropDownList1.Items.Insert(0, new ListItem("All", "0"));
-
-        con.Close();
-    }
+   
     protected void LoginLink_OnClick(object sender, EventArgs e)
     {
         FormsAuthentication.SignOut();
@@ -354,17 +347,30 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
 
+        if (DropDownList2.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Agent_Entry where Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Customer_Entry where Custom_Name='" + DropDownList2.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Agent_Entry where Custom_Name='" + DropDownList2.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY Custom_Code asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
     
     }
     //protected void Button5_Click(object sender, EventArgs e)
@@ -392,7 +398,18 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Customer_Entry where Mobile_no='" + TextBox1.Text + "' and Com_Id='" + company_id + "' ", con1);
+        SqlCommand CMD = new SqlCommand("select * from Agent_Entry where Custom_Name='" + TextBox1.Text + "' and Com_Id='" + company_id + "' ", con1);
+        DataTable dt1 = new DataTable();
+        con1.Open();
+        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+        da1.Fill(dt1);
+        GridView1.DataSource = dt1;
+        GridView1.DataBind();
+    }
+    protected void TextBox8_TextChanged(object sender, EventArgs e)
+    {
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand CMD = new SqlCommand("select * from Agent_Entry where Mobile_no='" + TextBox8.Text + "' and Com_Id='" + company_id + "' ", con1);
         DataTable dt1 = new DataTable();
         con1.Open();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
@@ -403,5 +420,65 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
 
+    }
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+
+    public static List<string> SearchCustomers2(string prefixText, int count)
+    {
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select distinct Custom_Name from Agent_Entry where Com_Id=@Com_Id and " +
+                "Custom_Name like @Custom_Name + '%'";
+                cmd.Parameters.AddWithValue("@Custom_Name", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> customers = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        customers.Add(sdr["Custom_Name"].ToString());
+                    }
+                }
+                conn.Close();
+                return customers;
+            }
+        }
+    }
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+
+    public static List<string> SearchCustomers3(string prefixText, int count)
+    {
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select distinct Mobile_no from Agent_Entry where Com_Id=@Com_Id and " +
+                "Mobile_no like @Mobile_no + '%'";
+                cmd.Parameters.AddWithValue("@Mobile_no", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> customers = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        customers.Add(sdr["Mobile_no"].ToString());
+                    }
+                }
+                conn.Close();
+                return customers;
+            }
+        }
     }
 }

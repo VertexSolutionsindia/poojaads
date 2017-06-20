@@ -249,7 +249,7 @@
                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_Type.aspx">Service Type</a></li>
                            </ul>
-                            <ul class="nav nav-second-level collapse">
+                           <ul class="nav nav-second-level collapse">
                                     <li><a href="Service_name.aspx">Service Name</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
@@ -268,7 +268,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-male fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Customers </span><span class="fa arrow"></span></a>
                              <ul class="nav nav-second-level collapse">
-                                    <li><a href="Customer-Entry.aspx">Customer Entry</a></li>
+                                    <li><a href="Agent-Entry.aspx">Agent Entry</a></li>
                            </ul>
                            <ul class="nav nav-second-level collapse">
                                     <li><a href="Client_Entry.aspx">Client Entry</a></li>
@@ -284,17 +284,7 @@
                           
                                
                             </li>
-                             <li>
-                                <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Cost of Service </span><span class="fa arrow"></span></a>
-                               <ul class="nav nav-second-level collapse">
-                                   <%-- <li><a href="CostofServiceName_Entry.aspx">Cost of Service Name Entry</a></li>--%>
-                           </ul>
-                             <ul class="nav nav-second-level collapse">
-                             <li><a href="Cost_of_Service_entry.aspx">Cost of Service Entry</a></li>  
-                            </ul>
-                          
-                               
-                            </li>
+                           
                               <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Expenses </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -319,7 +309,7 @@
                              <li>
                                 <a href="#"><i class="fa fa-arrow-right fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Accounts </span><span class="fa arrow"></span></a>
                                <ul class="nav nav-second-level collapse">
-                                     <li><a href="Account_ledger.aspx">Account ledger</a></li>
+                                    <li><a href="Account_ledger.aspx">Account ledger</a></li>
                            </ul>
                              <ul class="nav nav-second-level collapse">
                              <li><a href="profit_loss.aspx">Profit & loss</a></li>  
@@ -328,7 +318,16 @@
                                
                             </li>
                          
-                             
+                              <li>
+                                <a href="#"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i> <span class="nav-label">&nbsp;&nbsp; Agent bill</span><span class="fa arrow"></span></a>
+                             <ul class="nav nav-second-level collapse">
+                                    <li><a href="Agent_bill.aspx">Agent bill</a></li>
+                                   <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                           </ul>
+                          
+                               
+                            </li>
+                            
                             
                            
                              <li>
@@ -388,10 +387,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="page-title see2">
-                                <h1>Estimate Payment Check
+                                <h1>Estimate Reports
                                  </h1>
                              
-                             
+                               <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
   
 
 
@@ -503,8 +502,7 @@
                                       </ContentTemplate>
                                       </asp:UpdatePanel></div></div></div>
                                         <div class="col-md-12" >
-                                      <asp:Button ID="Button4"   runat="server" CssClass="btn4" Text="Search" onclick="Button4_Click"></asp:Button>
-                                      <asp:Button ID="Button5"   runat="server" CssClass="btn4" Text="Clear" onclick="Button5_Click"></asp:Button>
+                                    
 
 
 </div>
@@ -563,11 +561,11 @@
 
   <div class="panel panel-default">
   <div class="panel-body">
-   <div class="col-md-12" style="overflow: scroll">
+
      <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
    
- <asp:GridView ID="GridView1" runat="server" class="red" Width="200%" 
+ <asp:GridView ID="GridView1" runat="server" class="red" Width="100%" 
            AutoGenerateColumns="False" CellPadding="3" 
          Font-Size="16px" 
             AllowPaging="True" 
@@ -580,12 +578,15 @@
            <ItemTemplate>
                <asp:CheckBox ID="CheckBox3" runat="server"/>
             </ItemTemplate>
-           
+        
+           </asp:TemplateField>
+           <asp:TemplateField HeaderText="Invoice No" ItemStyle-Width="50px">
+           <ItemTemplate>
+              <asp:LinkButton ID="LinkButton1" runat="server" Text='<%# Eval("Invoice_no")%>'></asp:LinkButton>
+           </ItemTemplate>
            </asp:TemplateField>
       
-         <asp:BoundField HeaderText="Invoice No" DataField="Invoice_no"  ItemStyle-Width="50px">
-          <HeaderStyle CssClass="red" />
-          </asp:BoundField>
+      
            <asp:BoundField HeaderText="Estimate Date" DataField="date" DataFormatString="{0:dd/MM/yyyy}" ItemStyle-Width="20px">
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
@@ -601,9 +602,7 @@
           <asp:BoundField HeaderText="Mobile" DataField="mobile" ItemStyle-Width="30px" >
           <HeaderStyle CssClass="red" />
           </asp:BoundField>
-         <asp:BoundField HeaderText="Presented Bank" DataField="bankname"  ItemStyle-Width="100px">
-            <HeaderStyle CssClass="red" />
-          </asp:BoundField>
+     
             <asp:BoundField HeaderText="Amount" DataField="grand_total" ItemStyle-Width="50px" >
               <HeaderStyle CssClass="red" />
           </asp:BoundField>
