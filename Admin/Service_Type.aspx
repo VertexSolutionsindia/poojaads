@@ -28,6 +28,22 @@
 }
 
 </style>
+<style>
+.completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
+</style>
 
         <!-- Bootstrap -->
          <script type="text/javascript" language="javascript">
@@ -238,6 +254,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -250,6 +267,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                
@@ -341,7 +359,7 @@
    <div class="col-sm-7">
      <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
-   <asp:DropDownList ID="DropDownList2" runat="server"  
+   <asp:DropDownList ID="DropDownList2" runat="server" onselectedindexchanged="DropDownList2_SelectedIndexChanged"  
            CssClass="form-control"    data-width="100%" AutoPostBack="true"  ></asp:DropDownList>
    
    </ContentTemplate>
@@ -352,6 +370,7 @@
                  <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
                    <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged" />   
+              
                 </Triggers>
     </asp:UpdatePanel></div>
    </div>
@@ -518,7 +537,7 @@
           </asp:TemplateField>
            <asp:TemplateField HeaderText="Delete">
           <ItemTemplate >
-              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" headertext="Delete" />
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" headertext="Delete" OnClientClick = "return confirm('Do you want to delete?')" />
           
           </ItemTemplate>
           <HeaderStyle CssClass="Grd1" />
@@ -548,6 +567,7 @@
                  <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
                   <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
                    <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged" />   
+                        <asp:AsyncPostBackTrigger ControlID="DropDownList2" EventName="SelectedIndexChanged" />   
                 </Triggers>
     </asp:UpdatePanel>
   
@@ -555,7 +575,7 @@
            
            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
    <ContentTemplate>    
-  <br /> <asp:Button ID="Button11" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox"  OnClientClick="return validate1()"  
+  <br /> <asp:Button ID="Button11" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox"  OnClientClick = "return confirm('Do you want to delete?')"
             onclick="Button11_Click" />
                             <!-- End .form-group  -->
       <asp:Button ID="Button8" runat="server" Text="Button" style="display:none" />

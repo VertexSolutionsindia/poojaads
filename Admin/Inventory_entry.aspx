@@ -146,7 +146,7 @@
         </nav>
         <section class="page">
 
-           <nav class="navbar-aside navbar-static-side" role="navigation">
+            <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -237,6 +237,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -249,6 +250,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                

@@ -55,6 +55,32 @@ public partial class Admin_Main : System.Web.UI.Page
         }
 
     }
+    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownList2.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from category where  Com_Id='" + company_id + "' ORDER BY category_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from category where categoryname='" + DropDownList2.SelectedItem.Text + "' and  Com_Id='" + company_id + "' ORDER BY category_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+
+    }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
         ImageButton IMG = (ImageButton)sender;
@@ -352,19 +378,5 @@ public partial class Admin_Main : System.Web.UI.Page
         GridView1.DataSource = dt1;
         GridView1.DataBind();
     }
-    protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from category where categoryname='" + DropDownList2.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY category_id asc", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
-
-    }
+    
 }

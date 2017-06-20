@@ -138,12 +138,12 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
 
         if (TextBox3.Text == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter customer name')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter Agent Name')", true);
 
         }
         else if (TextBox9.Text == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter Mobile No')", true);
         }
         else
         {

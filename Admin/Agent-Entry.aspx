@@ -171,7 +171,7 @@
         </nav>
         <section class="page">
 
-            <nav class="navbar-aside navbar-static-side" role="navigation">
+             <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -262,6 +262,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -274,6 +275,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                
@@ -550,6 +552,8 @@
 
         </ContentTemplate>
                            </asp:UpdatePanel>
+                           <br />
+                           <br />
                            <asp:UpdatePanel ID="UpdatePanel13" runat="server">
    <ContentTemplate>
                        <asp:TextBox ID="TextBox8" runat="server" class="serachbx" width="50%" 
@@ -566,7 +570,7 @@
                         </div>
   <div class="col-sm-8">
     
-   <div class="col-md-4"><h4>Customer Name : </h4> </div><div class="col-sm-8">
+   <div class="col-md-4">Customer Name :  </div><div class="col-sm-8">
    
    
    <asp:DropDownList ID="DropDownList2" 
@@ -665,7 +669,7 @@
           </asp:TemplateField>
            <asp:TemplateField>
           <ItemTemplate>
-              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" OnClientClick = "return confirm('Do you want to delete?')" />
           
           </ItemTemplate>
           
@@ -702,7 +706,7 @@
 
      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
- <br />   <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+ <br />   <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox"  onclick="Button14_Click" OnClientClick = "return confirm('Do you want to delete?')"/>
     <%--   <asp:Button ID="Button5" runat="server" CssClass="btn2" Text="Export To Excel" 
            onclick="Button5_Click"></asp:Button>--%>
        

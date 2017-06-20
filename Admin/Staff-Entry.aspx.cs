@@ -58,17 +58,30 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
-      
 
+        if (DropDownList2.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Emp_Code='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from Staff_Entry where Emp_Code='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY Emp_Code asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
@@ -295,7 +308,7 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
         DropDownList2.DataTextField = "Emp_Name";
         DropDownList2.DataValueField = "Emp_Code";
         DropDownList2.DataBind();
-        DropDownList2.Items.Insert(0, new ListItem("Select Staff Name", "0"));
+        DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
         con.Close();
     }
@@ -394,5 +407,39 @@ public partial class Admin_Staff_Entry : System.Web.UI.Page
     public override void VerifyRenderingInServerForm(Control control)
     {
         /* Verifies that the control is rendered */
+    }
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+
+    public static List<string> SearchCustomers(string prefixText, int count)
+    {
+
+
+        using (SqlConnection conn = new SqlConnection())
+        {
+            conn.ConnectionString = ConfigurationManager.AppSettings["connection"];
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+
+
+                cmd.CommandText = "select Mob_No from Staff_Entry where  Com_Id=@Com_Id and  " +
+                "Mob_No like @Mob_No + '%' ";
+                cmd.Parameters.AddWithValue("@Mob_No", prefixText);
+                cmd.Parameters.AddWithValue("@Com_Id", company_id);
+                cmd.Connection = conn;
+                conn.Open();
+                List<string> customers = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        customers.Add(sdr["Mob_No"].ToString());
+                    }
+                }
+                conn.Close();
+                return customers;
+            }
+        }
     }
 }

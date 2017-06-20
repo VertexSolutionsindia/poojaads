@@ -284,6 +284,7 @@ public partial class Admin_Agent_bill_report : System.Web.UI.Page
                 cmd.ExecuteNonQuery();
                 con.Close();
                 DataBind();
+                BindData();
 
             }
         }

@@ -147,7 +147,7 @@
         </nav>
         <section class="page">
 
-              <nav class="navbar-aside navbar-static-side" role="navigation">
+               <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -238,6 +238,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -250,6 +251,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                
@@ -338,7 +340,7 @@
 
      <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
-  <asp:DropDownList ID="DropDownList1" runat="server" class="form-control input-x2 dropbox"></asp:DropDownList>
+  <asp:DropDownList ID="DropDownList1" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" onselectedindexchanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
      </ContentTemplate>
                                 <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button1" EventName="Click"  />
@@ -516,14 +518,14 @@
              <HeaderStyle CssClass="Grd1" />
            <ItemStyle CssClass="Grd1" />
            </asp:BoundField>
-            <asp:BoundField HeaderText="Tax Name" DataField="tax_per" >
+            <asp:BoundField HeaderText="Tax %" DataField="tax_per" >
              <HeaderStyle CssClass="Grd1" />
            <ItemStyle CssClass="Grd1" />
            </asp:BoundField>
              <asp:TemplateField HeaderText="Edit">
           <ItemTemplate>
             
-          <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Height="20px" Width="20px" onclick="ImageButton1_Click"  ></asp:ImageButton>
+          <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/edit4.jpg" Height="20px" Width="20px" onclick="ImageButton1_Click"   ></asp:ImageButton>
           </ItemTemplate>
           
                  <HeaderStyle CssClass="Grd1" />
@@ -532,7 +534,7 @@
           </asp:TemplateField>
            <asp:TemplateField HeaderText="Delete">
           <ItemTemplate>
-              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" OnClientClick = "return confirm('Do you want to delete?')" />
           
           </ItemTemplate>
           
@@ -569,7 +571,7 @@
            
            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
    <ContentTemplate>    
-    <asp:Button ID="Button11" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox"  OnClientClick="return validate1()"  
+    <asp:Button ID="Button11" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick = "return confirm('Do you want to delete?')"  
             onclick="Button11_Click" />
                             <!-- End .form-group  -->
       <asp:Button ID="Button8" runat="server" Text="Button" style="display:none" />

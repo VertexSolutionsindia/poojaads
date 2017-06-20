@@ -168,7 +168,7 @@ public partial class Admin_Partners_entry : System.Web.UI.Page
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter partner amount')", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter mobile no')", true);
             }
         }
         else

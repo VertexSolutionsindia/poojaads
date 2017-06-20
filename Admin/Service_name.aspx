@@ -34,7 +34,22 @@
                           }
                       }
 </script>
-
+<style>
+.completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
+</style>
 <style>
 .tablestyles table tr td
 {
@@ -146,7 +161,7 @@
             </div><!--/.container-fluid -->
         </nav>
         <section class="page">
-         <nav class="navbar-aside navbar-static-side" role="navigation">
+        <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -237,6 +252,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -249,6 +265,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                
@@ -344,11 +361,11 @@
      </asp:UpdatePanel>
    
    </div>
-     <div class="col-md-2"><h3>Service Name:</h3>
+     <div class="col-md-2"><h3>Location:</h3>
 
       <asp:UpdatePanel ID="UpdatePanel6" runat="server">
    <ContentTemplate>
-   <asp:DropDownList ID="DropDownList1" runat="server"  CssClass="form-control"  data-width="100%" AutoPostBack="true" ></asp:DropDownList>
+   <asp:DropDownList ID="DropDownList1" runat="server"  CssClass="form-control"  data-width="100%" AutoPostBack="true" onselectedindexchanged="DropDownList1_SelectedIndexChanged"  ></asp:DropDownList>
     
      </ContentTemplate>
        <Triggers>
@@ -503,7 +520,7 @@
                       <asp:UpdatePanel ID="UpdatePanel2" runat="server">
    <ContentTemplate>
 
-                      <asp:Button ID="Button1" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Create" onclick="Button1_Click" 
+                      <asp:Button ID="Button1" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Create" onclick="Button1_Click" OnClientClick = "return confirm('Do you want to Save?')" 
                           ></asp:Button>&nbsp;
  <asp:Button ID="Button2" runat="server" class="btn-primary" Width="70px" Height="30px"  Text="Clear" onclick="Button2_Click" 
                           ></asp:Button>
@@ -528,7 +545,7 @@
                        <asp:TextBox ID="TextBox1" runat="server" width="100%" 
                                     ontextchanged="TextBox1_TextChanged" AutoPostBack="true"></asp:TextBox>
 
-                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search Service name"></asp:TextBoxWatermarkExtender>
+                           <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="TextBox1" WatermarkText="Search by location"></asp:TextBoxWatermarkExtender>
                            <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
@@ -615,7 +632,7 @@
           </asp:TemplateField>
            <asp:TemplateField HeaderText="Delete">
           <ItemTemplate>
-              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" OnClientClick = "return confirm('Do you want to delete ?')" />
           
           </ItemTemplate>
           
@@ -655,7 +672,7 @@
 
      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
-    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+    <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick = "return confirm('Do you want to delete?')" onclick="Button14_Click"/>
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none"  />
   
   

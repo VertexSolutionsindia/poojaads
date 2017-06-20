@@ -226,6 +226,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -238,6 +239,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                
@@ -542,7 +544,7 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel6" runat="server">
    <ContentTemplate>
-                                   <asp:DropDownList ID="DropDownList4" runat="server" class="form-control input-x2 dropbox" ></asp:DropDownList>
+                                   <asp:DropDownList ID="DropDownList4" runat="server" class="form-control input-x2 dropbox" AutoPostBack="true" onselectedindexchanged="DropDownList4_SelectedIndexChanged" ></asp:DropDownList>
                                      
                                     <asp:TextBox ID="TextBox1" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
                                   
@@ -559,6 +561,27 @@
                                     
                                    
                                   </div>
+                                
+                                </div>
+                                <div class="form-group"><label class="col-lg-3 control-label">Size : </label>
+                              
+                                    <div class="col-lg-9">
+                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="Button6" EventName="Click"  />
+                  <asp:AsyncPostBackTrigger ControlID="Button7" EventName="Click"  />
+                    <asp:AsyncPostBackTrigger ControlID="Button8" EventName="Click"  />
+                      <asp:AsyncPostBackTrigger ControlID="Button9" EventName="Click"  />
+                        <asp:AsyncPostBackTrigger ControlID="Button10" EventName="Click"  />
+                           <asp:AsyncPostBackTrigger ControlID="Button11" EventName="Click"  />
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
                                 
                                 </div>
                                 <div class="form-group"><label class="col-lg-3 control-label">Bill Amount : </label>
@@ -587,7 +610,7 @@
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel9" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox7" runat="server" CssClass="form-control input-x2 dropbox"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox7" runat="server" CssClass="form-control input-x2 dropbox" ontextchanged="TextBox7_TextChanged" AutoPostBack="true"  ></asp:TextBox>
                                     </ContentTemplate>
                                      <Triggers>
             <asp:AsyncPostBackTrigger ControlID="Button6" EventName="Click"  />
@@ -603,7 +626,7 @@
                                 
                                 
                                 </div>
-                                  <div class="form-group"><label class="col-lg-3 control-label">Pending amount : </label>
+                                  <div class="form-group"><label class="col-lg-3 control-label">Pending amt : </label>
                               
                                     <div class="col-lg-9">
                                      <asp:UpdatePanel ID="UpdatePanel15" runat="server">

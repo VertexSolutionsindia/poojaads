@@ -596,7 +596,28 @@ public partial class Admin_Expense_entry : System.Web.UI.Page
 
     protected void Button14_Click(object sender, EventArgs e)
     {
+        foreach (GridViewRow gvrow in GridView1.Rows)
+        {
+            //Finiding checkbox control in gridview for particular row
+            CheckBox chkdelete = (CheckBox)gvrow.FindControl("CheckBox3");
+            //Condition to check checkbox selected or not
+            if (chkdelete.Checked)
+            {
+                //Getting UserId of particular row using datakey value
+                int usrid = Convert.ToInt32(gvrow.Cells[1].Text);
+                SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
 
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from Expence_Entry where Exp_Id='" + usrid + "'  and Com_Id='" + company_id + "' and year='"+Label8.Text+"'", con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+
+
+            }
+        }
+        BindData();
+        getinvoiceno();
     }
     protected void Button8_Click(object sender, EventArgs e)
     {

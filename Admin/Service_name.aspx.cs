@@ -218,8 +218,17 @@ public partial class Admin_Service_name : System.Web.UI.Page
         }
         else if (TextBox3.Text == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter Service Name')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter location Name')", true);
         }
+         else if (TextBox5.Text == "" && TextBox8.Text=="")
+         {
+             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter width $ height')", true);
+         }
+        
+         else if (TextBox2.Text == "")
+         {
+             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please enter location amount')", true);
+         }
         else
         {
             SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
@@ -267,6 +276,9 @@ public partial class Admin_Service_name : System.Web.UI.Page
                         getinvoiceno();
                         TextBox3.Text = "";
                         TextBox2.Text = "";
+                        TextBox5.Text = "";
+                        TextBox8.Text = "";
+                        TextBox7.Text = "";
                     }
                     con1000.Close();
                 }
@@ -280,6 +292,11 @@ public partial class Admin_Service_name : System.Web.UI.Page
         TextBox2.Text = "";
         getinvoiceno();
         show_category();
+        TextBox3.Text = "";
+        TextBox2.Text = "";
+        TextBox5.Text = "";
+        TextBox8.Text = "";
+        TextBox7.Text = "";
     }
     private void active()
     {
@@ -452,18 +469,57 @@ public partial class Admin_Service_name : System.Web.UI.Page
                 DropDownList1.Items.Insert(0, new ListItem("All", "0"));
 
                 con.Close();
-
-                SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand CMD = new SqlCommand("select * from service_name where servicetype_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY servicename_id asc", con1);
-                DataTable dt1 = new DataTable();
-                con1.Open();
-                SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-                da1.Fill(dt1);
-                GridView1.DataSource = dt1;
-                GridView1.DataBind();
+                if (DropDownList2.SelectedItem.Text == "All")
+                {
+                    SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand CMD = new SqlCommand("select * from service_name where Com_Id='" + company_id + "' ORDER BY servicename_id asc", con1);
+                    DataTable dt1 = new DataTable();
+                    con1.Open();
+                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                    da1.Fill(dt1);
+                    GridView1.DataSource = dt1;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                    SqlCommand CMD = new SqlCommand("select * from service_name where servicetype_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY servicename_id asc", con1);
+                    DataTable dt1 = new DataTable();
+                    con1.Open();
+                    SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+                    da1.Fill(dt1);
+                    GridView1.DataSource = dt1;
+                    GridView1.DataBind();
+                }
             }
             con1000.Close();
         }
+    }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownList1.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from service_name where servicetype_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from service_name where servicetype_id='" + DropDownList2.SelectedItem.Value + "' and servicename='" + DropDownList1.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+
     }
     private void show_category()
     {

@@ -45,7 +45,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
             show_category();
             showrating();
             BindData();
-
+          
             active();
             created();
 
@@ -287,6 +287,31 @@ public partial class Admin_Sub_category : System.Web.UI.Page
             }
         }
     }
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownList1.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from subcategory where subcategory_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from subcategory where subcategory_id='" + DropDownList1.SelectedItem.Value + "' and category_name='" + DropDownList2.SelectedItem.Text + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+    }
     protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
     {
       
@@ -309,16 +334,30 @@ public partial class Admin_Sub_category : System.Web.UI.Page
        
         con.Close();
 
-
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from subcategory where category_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
-        DataTable dt1 = new DataTable();
-        con1.Open();
-        SqlDataAdapter da1 = new SqlDataAdapter(CMD);
-        da1.Fill(dt1);
-        GridView1.DataSource = dt1;
-        GridView1.DataBind();
+        if (DropDownList2.SelectedItem.Text == "All")
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from subcategory where Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
+        else
+        {
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand CMD = new SqlCommand("select * from subcategory where category_id='" + DropDownList2.SelectedItem.Value + "' and Com_Id='" + company_id + "' ORDER BY subcategory_id asc", con1);
+            DataTable dt1 = new DataTable();
+            con1.Open();
+            SqlDataAdapter da1 = new SqlDataAdapter(CMD);
+            da1.Fill(dt1);
+            GridView1.DataSource = dt1;
+            GridView1.DataBind();
+        }
     }
+  
     private void show_category()
     {
        
@@ -329,15 +368,13 @@ public partial class Admin_Sub_category : System.Web.UI.Page
         SqlDataAdapter da = new SqlDataAdapter(cmd);
         da.Fill(ds);
 
-
         DropDownList2.DataSource = ds;
         DropDownList2.DataTextField = "categoryname";
         DropDownList2.DataValueField = "category_id";
         DropDownList2.DataBind();
         DropDownList2.Items.Insert(0, new ListItem("All", "0"));
 
-
-        DropDownList3.DataSource = ds;
+       DropDownList3.DataSource = ds;
         DropDownList3.DataTextField = "categoryname";
         DropDownList3.DataValueField = "category_id";
         DropDownList3.DataBind();

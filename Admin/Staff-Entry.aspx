@@ -50,7 +50,22 @@
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+        <style>
+.completionList {
+        border:solid 1px Gray;
+        margin:0px;
+        padding:3px;
+        height: 120px;
+        overflow:auto;
+        background-color:#FAEBD7;     
+        } 
+        .listItem {
+        color: #191919;
+        } 
+        .itemHighlighted {
+        background-color: #ADD6FF;       
+        }
+</style>
     </head>
     <body>
         <!-- Static navbar -->
@@ -135,7 +150,7 @@
         </nav>
         <section class="page">
 
-                  <nav class="navbar-aside navbar-static-side" role="navigation">
+                   <nav class="navbar-aside navbar-static-side" role="navigation">
                 <div class="sidebar-collapse nano">
                     <div class="nano-content">
                         <ul class="nav metismenu" id="side-menu">
@@ -226,6 +241,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Agent_bill.aspx">Agent bill</a></li>
                                    <li><a href="Agent_bill_report.aspx">Agent bill report</a></li>
+                                    <li><a href="agent_bill_payment_outstanding.aspx">Agent bill Outstanding</a></li>
                            </ul>
                           
                                
@@ -238,6 +254,7 @@
                              <ul class="nav nav-second-level collapse">
                                     <li><a href="Order_entry.aspx">Order Entry</a></li>
                                     <li><a href="Oreders_Report.aspx">Orders Report</a></li>
+                                    <li><a href="Order_bill_payment_outstanding.aspx">Order bill Oustanding</a></li>
                            </ul>
                           
                                
@@ -284,6 +301,7 @@
                     </div>
                 </div>
                 
+            </nav>
             </nav>
             <div id="wrapper">
                 <div class="content-wrapper container">
@@ -465,7 +483,7 @@
 
                            <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" 
                            TargetControlID="TextBox1" 
-                           WatermarkText="Drop Staff Mobile No here, For Search"></asp:TextBoxWatermarkExtender>
+                           WatermarkText="Search by mobile no"></asp:TextBoxWatermarkExtender>
                            <asp:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" MinimumPrefixLength="1" ServiceMethod="SearchCustomers" FirstRowSelected = "false" CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="TextBox1"  CompletionListCssClass="completionList"
      CompletionListItemCssClass="listItem"
      CompletionListHighlightedItemCssClass="itemHighlighted">
@@ -580,7 +598,7 @@
           </asp:TemplateField>
            <asp:TemplateField>
           <ItemTemplate>
-              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
+              <asp:ImageButton ID="ImageButton9" runat="server" ImageUrl="~/delete3.png" OnClientClick = "return confirm('Do you want to delete?')" Height="20px" Width="20px"  onclick="ImageButton9_Click" />
           
           </ItemTemplate>
           
@@ -619,7 +637,7 @@
    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
    <ContentTemplate>
 
-   <br /> <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick="return validate1()" onclick="Button14_Click"/>
+   <br /> <asp:Button ID="Button14" runat="server" Text="Delete Seleted Rows" CssClass="buttonbox" OnClientClick = "return confirm('Do you want to delete?')" onclick="Button14_Click"/>
         
         <asp:Button ID="Button15" runat="server" Text="Button" style="display:none" />
   

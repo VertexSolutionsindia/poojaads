@@ -63,6 +63,27 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
             TextBox1.Visible = false;
         }
     }
+    protected void TextBox7_TextChanged(object sender, EventArgs e)
+    {
+        float bill = float.Parse(TextBox6.Text);
+        float paid = float.Parse(TextBox7.Text);
+        float pending = bill - paid;
+        TextBox9.Text = pending.ToString();
+    }
+    protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SqlConnection con10 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+        SqlCommand cmd10 = new SqlCommand("select * from service_name where servicename='"+DropDownList4.SelectedItem.Text+"'", con10);
+        SqlDataReader dr10;
+        con10.Open();
+        dr10 = cmd10.ExecuteReader();
+        if (dr10.Read())
+        {
+            TextBox2.Text = dr10["size"].ToString();
+            TextBox6.Text = dr10["mrp"].ToString();
+        }
+        con10.Close();
+    }
     private void gettype()
     {
 
@@ -405,6 +426,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                     TextBox6.Text = dr2["bill_amount"].ToString();
                     TextBox7.Text = dr2["paid_amount"].ToString();
                     TextBox9.Text = dr2["pending_amount"].ToString();
+                    TextBox2.Text = dr2["size"].ToString();
                     getservicename();
                 }
                 else
@@ -465,6 +487,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                     TextBox6.Text = dr2["bill_amount"].ToString();
                     TextBox7.Text = dr2["paid_amount"].ToString();
                     TextBox9.Text = dr2["pending_amount"].ToString();
+                    TextBox2.Text = dr2["size"].ToString();
                     getservicename();
                 }
                 con2.Close();
@@ -481,9 +504,17 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
     }
     protected void Button9_Click(object sender, EventArgs e)
     {
-        if (DropDownList1.SelectedItem.Text == "All")
+        if (TextBox3.Text == "")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please select Agent Name')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please select bill date')", true);
+        }
+        else if (DropDownList1.SelectedItem.Text == "All")
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please select Agent Name')", true);
+            }
+        else if (TextBox10.Text==""|| TextBox11.Text=="")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Please select from and to date')", true);
         }
         else if (DropDownList3.SelectedItem.Text == "All")
         {
@@ -510,7 +541,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                 string status = "Agent Bill";
                 float value = 0;
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("update agent_bill set bill_date=@bill_date,agent_name=@agent_name,agent_add=@agent_add,fromdate=@fromdate,todate=@todate,service_type=@service_type,service_name=@service_name,bill_amount=@bill_amount,paid_amount=@paid_amount,pending_amount=@pending_amount,status=@status,value=@value where bill_no=@bill_no and Com_Id=@Com_Id and year=@year", CON);
+                SqlCommand cmd = new SqlCommand("update agent_bill set bill_date=@bill_date,agent_name=@agent_name,agent_add=@agent_add,fromdate=@fromdate,todate=@todate,service_type=@service_type,service_name=@service_name,bill_amount=@bill_amount,paid_amount=@paid_amount,pending_amount=@pending_amount,status=@status,value=@value,size=@size where bill_no=@bill_no and Com_Id=@Com_Id and year=@year", CON);
                 cmd.Parameters.AddWithValue("@bill_no", Label1.Text);
                 cmd.Parameters.AddWithValue("@bill_date", Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy"));
                 cmd.Parameters.AddWithValue("@agent_name", DropDownList1.SelectedItem.Text);
@@ -526,15 +557,91 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@year", Label4.Text);
                 cmd.Parameters.AddWithValue("@status", status);
                 cmd.Parameters.AddWithValue("@value", value);
-
+                cmd.Parameters.AddWithValue("@size", TextBox2.Text);
 
 
 
                 CON.Open();
                 cmd.ExecuteNonQuery();
                 CON.Close();
-                
 
+                float b11 = 0;
+                float f11 = 0;
+                float c11 = 0;
+
+                SqlConnection con100 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                SqlCommand check_User_Name100 = new SqlCommand("SELECT * FROM receive_amount_status WHERE Buyer = @Buyer and Com_Id='" + company_id + "' and year='" + Label4.Text + "' ", con100);
+                check_User_Name100.Parameters.AddWithValue("@Buyer", DropDownList1.SelectedItem.Text);
+                con100.Open();
+                SqlDataReader reader100 = check_User_Name100.ExecuteReader();
+                if (reader100.HasRows)
+                {
+                    SqlConnection con111 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                    SqlCommand cmd111 = new SqlCommand("Select * from receive_amount where Buyer='" + DropDownList1.SelectedItem.Text + "' and invoice_no='" + Label1.Text + "'  and Com_Id='" + company_id + "' and year='" + Label4.Text + "'", con111);
+                    con111.Open();
+                    SqlDataReader dr111;
+                    dr111 = cmd111.ExecuteReader();
+                    if (dr111.Read())
+                    {
+
+                        b11 = float.Parse(dr111["pending_amount"].ToString());
+
+
+
+
+
+
+                        SqlConnection con27 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                        SqlCommand cd27 = new SqlCommand("update receive_amount_status set pending_amount=pending_amount-@pending_amount where Buyer='" + DropDownList1.SelectedItem.Text + "' and Com_Id='" + company_id + "' and year='" + Label4.Text + "'", con27);
+                        cd27.Parameters.AddWithValue("@pending_amount", b11);
+                        con27.Open();
+                        cd27.ExecuteNonQuery();
+                        con27.Close();
+
+                        SqlConnection con272 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                        SqlCommand cd272 = new SqlCommand("update receive_amount set pending_amount=pending_amount-@pending_amount,outstanding=outstanding-@outstanding where Buyer='" + DropDownList1.SelectedItem.Text + "' and  invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label4.Text + "' ", con272);
+                        cd272.Parameters.AddWithValue("@pending_amount", b11);
+                        cd272.Parameters.AddWithValue("@outstanding", b11);
+                        con272.Open();
+                        cd272.ExecuteNonQuery();
+                        con272.Close();
+
+                        SqlConnection con271 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                        SqlCommand cd271 = new SqlCommand("update receive_amount_status set pending_amount=pending_amount+@pending_amount where Buyer='" + DropDownList1.SelectedItem.Text + "' and Com_Id='" + company_id + "' and year='" + Label4.Text + "'", con271);
+                        cd271.Parameters.AddWithValue("@pending_amount", float.Parse(TextBox9.Text));
+                        con271.Open();
+                        cd271.ExecuteNonQuery();
+                        con271.Close();
+
+
+
+                        float paid_amount = 0;
+                        string status1 = "Agent Bill";
+                        SqlConnection con26 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
+                        SqlCommand cmd26 = new SqlCommand("update receive_amount set Estimate_value=@Estimate_value,address=@address,total_amount=@total_amount,pay_amount=@pay_amount,pending_amount=@pending_amount,outstanding=outstanding+@outstanding,status=@status where Buyer='" + DropDownList1.SelectedItem.Text + "' AND invoice_no='" + Label1.Text + "' and year='" + Label4.Text + "'", con26);
+
+
+                        cmd26.Parameters.AddWithValue("@Estimate_value", float.Parse(TextBox6.Text));
+                        cmd26.Parameters.AddWithValue("@address", TextBox3.Text);
+
+                        cmd26.Parameters.AddWithValue("@total_amount", float.Parse(TextBox6.Text));
+                        cmd26.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
+                        cmd26.Parameters.AddWithValue("@pending_amount", float.Parse(TextBox9.Text));
+                        cmd26.Parameters.AddWithValue("@outstanding", float.Parse(TextBox9.Text));
+                        cmd26.Parameters.AddWithValue("@status", status1);
+
+
+                        con26.Open();
+                        cmd26.ExecuteNonQuery();
+                        con26.Close();
+
+
+
+                    }
+                    con111.Close();
+                }
+
+                con100.Close();
 
 
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert Message", "alert('Order Details updated successfully')", true);
@@ -559,7 +666,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                 string status = "Agent Bill";
                 float value = 0;
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("insert into agent_bill values(@bill_no,@bill_date,@agent_name,@agent_add,@fromdate,@todate,@service_type,@service_name,@bill_amount,@paid_amount,@pending_amount,@Com_Id,@year,@status,@value)", CON);
+                SqlCommand cmd = new SqlCommand("insert into agent_bill values(@bill_no,@bill_date,@agent_name,@agent_add,@fromdate,@todate,@service_type,@service_name,@bill_amount,@paid_amount,@pending_amount,@Com_Id,@year,@status,@value,@size)", CON);
                 cmd.Parameters.AddWithValue("@bill_no", Label1.Text);
                 cmd.Parameters.AddWithValue("@bill_date", Convert.ToDateTime(TextBox3.Text).ToString("MM-dd-yyyy"));
                 cmd.Parameters.AddWithValue("@agent_name", DropDownList1.SelectedItem.Text);
@@ -575,7 +682,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@year",Label4.Text);
                 cmd.Parameters.AddWithValue("@status", status);
                 cmd.Parameters.AddWithValue("@value", value);
-              
+                cmd.Parameters.AddWithValue("@size",TextBox2.Text);
                 CON.Open();
                 cmd.ExecuteNonQuery();
                 CON.Close();
@@ -619,7 +726,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                         cmd24.Parameters.AddWithValue("@address", TextBox13.Text);
 
                         cmd24.Parameters.AddWithValue("@total_amount", float.Parse(string.Format("{0:0.00}", TextBox6.Text)));
-                        cmd24.Parameters.AddWithValue("@pay_amount", paid_amount);
+                        cmd24.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
                         cmd24.Parameters.AddWithValue("@pending_amount", float.Parse(string.Format("{0:0.00}", TextBox9.Text)));
                         cmd24.Parameters.AddWithValue("@outstanding", float.Parse(string.Format("{0:0.00}", c11)));
 
@@ -684,7 +791,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                     cmd24.Parameters.AddWithValue("@address", TextBox13.Text);
 
                     cmd24.Parameters.AddWithValue("@total_amount", float.Parse(string.Format("{0:0.00}", TextBox6.Text)));
-                    cmd24.Parameters.AddWithValue("@pay_amount", paid_amount);
+                    cmd24.Parameters.AddWithValue("@pay_amount", TextBox7.Text);
                     cmd24.Parameters.AddWithValue("@pending_amount", float.Parse(string.Format("{0:0.00}", TextBox9.Text)));
                     cmd24.Parameters.AddWithValue("@outstanding", float.Parse(string.Format("{0:0.00}", TextBox9.Text)));
                     cmd24.Parameters.AddWithValue("@invoice_no", Label1.Text);
@@ -760,6 +867,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                     TextBox6.Text = dr2["bill_amount"].ToString();
                     TextBox7.Text = dr2["paid_amount"].ToString();
                     TextBox9.Text = dr2["pending_amount"].ToString();
+                    TextBox2.Text = dr2["size"].ToString();
                     getservicename();
                 }
                 con2.Close();
