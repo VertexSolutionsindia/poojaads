@@ -11,7 +11,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
-        <title>Pooja Advertising</title>
+        <title><%=User.Identity.Name%></title>
      
       
     <script>
@@ -229,7 +229,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Pooja Advertising</a>
+                    <a class="navbar-brand" href="#"><asp:Label ID="Label10" runat="server" Text="Label"></asp:Label></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                 <%--    <ul class="nav navbar-nav">

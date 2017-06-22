@@ -31,6 +31,7 @@ public partial class Profile_main : System.Web.UI.Page
                 if (dr1.Read())
                 {
                     company_id = Convert.ToInt32(dr1["com_id"].ToString());
+                    Label1.Text = dr1["company_name"].ToString();
                 }
                 con1.Close();
             }

@@ -33,6 +33,7 @@ public partial class Admin_Sub_category : System.Web.UI.Page
                 if (dr.Read())
                 {
                     company_id = Convert.ToInt32(dr["com_id"].ToString());
+                    Label3.Text = dr["company_name"].ToString();
                 }
                 con.Close();
             }

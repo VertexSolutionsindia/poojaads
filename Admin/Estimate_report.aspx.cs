@@ -33,6 +33,7 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
                 if (dr1.Read())
                 {
                     company_id = Convert.ToInt32(dr1["com_id"].ToString());
+                    Label1.Text = dr1["company_name"].ToString();
                 }
                 con1.Close();
             }
@@ -140,7 +141,7 @@ public partial class Admin_Estimate_report : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-        show_category();
+        BindData();
     }
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {

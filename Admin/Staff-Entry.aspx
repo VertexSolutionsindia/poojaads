@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Pooja Advertising</title>
+        <title><%=User.Identity.Name%></title>
       
 
               <script type="text/javascript">
@@ -91,7 +91,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Pooja Advertising</a>
+                    <a class="navbar-brand" href="#"><asp:Label ID="Label4" runat="server" Text="Label"></asp:Label></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                   <%--  <ul class="nav navbar-nav">

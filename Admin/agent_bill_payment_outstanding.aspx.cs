@@ -51,7 +51,7 @@ public partial class Admin_Sales_payment_outstanding : System.Web.UI.Page
                 if (dr1000.Read())
                 {
                     company_id = Convert.ToInt32(dr1000["com_id"].ToString());
-
+                    Label2.Text = dr1000["company_name"].ToString();
                 }
                 con1000.Close();
             }

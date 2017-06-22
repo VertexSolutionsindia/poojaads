@@ -37,6 +37,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
                 if (dr.Read())
                 {
                     company_id = Convert.ToInt32(dr["com_id"].ToString());
+                    Label2.Text = dr["company_name"].ToString();
                 }
                 con.Close();
             }
@@ -224,7 +225,7 @@ public partial class Admin_Agent_bill : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select Max(bill_no) from agent_bill where Com_Id='" + company_id + "'";
+        string query = "Select Max(bill_no) from agent_bill where Com_Id='" + company_id + "' and year='" + Label4.Text + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())

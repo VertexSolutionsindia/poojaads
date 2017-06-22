@@ -35,6 +35,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 if (dr1000.Read())
                 {
                     company_id = Convert.ToInt32(dr1000["com_id"].ToString());
+                    Label3.Text = dr1000["company_name"].ToString();
                 }
                
                 con1000.Close();
@@ -221,7 +222,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
 
                         cmd26.Parameters.AddWithValue("@Estimate_value", float.Parse(TextBox14.Text));
-                        cmd26.Parameters.AddWithValue("@address", TextBox3.Text);
+                        cmd26.Parameters.AddWithValue("@address", TextBox2.Text);
 
                         cmd26.Parameters.AddWithValue("@total_amount", float.Parse(TextBox14.Text));
                         cmd26.Parameters.AddWithValue("@pay_amount", TextBox27.Text);
@@ -335,7 +336,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                         cmd24.Parameters.AddWithValue("@Buyer", DropDownList1.SelectedItem.Text);
                         cmd24.Parameters.AddWithValue("@pay_date", Convert.ToDateTime(TextBox20.Text).ToString("MM-dd-yyyy"));
                         cmd24.Parameters.AddWithValue("@Estimate_value", float.Parse(TextBox14.Text));
-                        cmd24.Parameters.AddWithValue("@address", TextBox13.Text);
+                        cmd24.Parameters.AddWithValue("@address", TextBox2.Text);
 
                         cmd24.Parameters.AddWithValue("@total_amount", float.Parse(string.Format("{0:0.00}", TextBox14.Text)));
                         cmd24.Parameters.AddWithValue("@pay_amount", TextBox27.Text);
@@ -354,7 +355,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                         SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
                         SqlCommand cmd23 = new SqlCommand("update pay_amount_status set address=@address,total_amount=total_amount+@total_amount,pending_amount=pending_amount+@pending_amount where Buyer='" + DropDownList1.SelectedItem.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "'", con23);
 
-                        cmd23.Parameters.AddWithValue("@address", TextBox13.Text);
+                        cmd23.Parameters.AddWithValue("@address", TextBox2.Text);
 
                         cmd23.Parameters.AddWithValue("@total_amount", float.Parse(string.Format("{0:0.00}", TextBox14.Text)));
 
@@ -382,7 +383,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     SqlConnection con23 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connection"]);
                     SqlCommand cmd23 = new SqlCommand("insert into pay_amount_status values(@Buyer,@address,@total_amount,@pending_amount,@paid_amount,@Com_Id,@year)", con23);
                     cmd23.Parameters.AddWithValue("@Buyer", DropDownList1.SelectedItem.Text);
-                    cmd23.Parameters.AddWithValue("@address", TextBox13.Text);
+                    cmd23.Parameters.AddWithValue("@address", TextBox2.Text);
 
                     cmd23.Parameters.AddWithValue("@total_amount", float.Parse(string.Format("{0:0.00}", TextBox14.Text)));
 
@@ -400,7 +401,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     cmd24.Parameters.AddWithValue("@Buyer", DropDownList1.SelectedItem.Text);
                     cmd24.Parameters.AddWithValue("@pay_date", Convert.ToDateTime(TextBox20.Text).ToString("MM-dd-yyyy"));
                     cmd24.Parameters.AddWithValue("@Estimate_value", float.Parse(TextBox14.Text));
-                    cmd24.Parameters.AddWithValue("@address", TextBox13.Text);
+                    cmd24.Parameters.AddWithValue("@address", TextBox2.Text);
 
                     cmd24.Parameters.AddWithValue("@total_amount", float.Parse(string.Format("{0:0.00}", TextBox14.Text)));
                     cmd24.Parameters.AddWithValue("@pay_amount", TextBox27.Text);
@@ -485,7 +486,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
     {
        
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from Order_entry_details where invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "' ORDER BY invoice_no asc", con);
+        SqlCommand CMD = new SqlCommand("select * from Order_entry_details where invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "' ORDER BY s_no asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -502,7 +503,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select COUNT(invoice_no) from Order_entry where Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
+        string query = "Select max(invoice_no) from Order_entry where Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -527,7 +528,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select COUNT(invoice_no) from Order_entry_details where invoice_no='" + Label1.Text + "' and  Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
+        string query = "Select max(s_no) from Order_entry_details where invoice_no='" + Label1.Text + "' and  Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())

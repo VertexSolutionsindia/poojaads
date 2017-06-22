@@ -38,6 +38,7 @@ public partial class Admin_Expense_entry : System.Web.UI.Page
                 if (dr.Read())
                 {
                     company_id = Convert.ToInt32(dr["com_id"].ToString());
+                    Label10.Text = dr["company_name"].ToString();
                 }
                 con1.Close();
             }
@@ -183,7 +184,7 @@ public partial class Admin_Expense_entry : System.Web.UI.Page
 
                 SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
                 con1.Open();
-                string query = "Select max(Exp_Id) from Expence_Entry where Com_Id='" + company_id + "'";
+                string query = "Select max(Exp_Id) from Expence_Entry where Com_Id='" + company_id + "' and year='"+Label8.Text+"'";
                 SqlCommand cmd1 = new SqlCommand(query, con1);
                 SqlDataReader dr = cmd1.ExecuteReader();
                 if (dr.Read())
@@ -327,7 +328,7 @@ public partial class Admin_Expense_entry : System.Web.UI.Page
                 ImageButton img = (ImageButton)sender;
                 GridViewRow row = (GridViewRow)img.NamingContainer;
                 SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("delete from Expence_Entry where Exp_Id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' ", con);
+                SqlCommand cmd = new SqlCommand("delete from Expence_Entry where Exp_Id='" + row.Cells[1].Text + "' and Com_Id='" + company_id + "' and year='"+Label8.Text+"'", con);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();

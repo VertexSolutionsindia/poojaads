@@ -40,6 +40,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
                 if (dr1000.Read())
                 {
                     company_id = Convert.ToInt32(dr1000["com_id"].ToString());
+                    Label3.Text = dr1000["company_name"].ToString();
                 }
 
                 con1000.Close();
@@ -235,7 +236,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
     {
 
         SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        SqlCommand CMD = new SqlCommand("select * from estimate_entry_details where invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "' ORDER BY invoice_no asc", con);
+        SqlCommand CMD = new SqlCommand("select * from estimate_entry_details where invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "' ORDER BY s_no asc", con);
         DataTable dt1 = new DataTable();
         SqlDataAdapter da1 = new SqlDataAdapter(CMD);
         da1.Fill(dt1);
@@ -252,7 +253,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select COUNT(invoice_no) from estimate_entry where Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
+        string query = "Select max(invoice_no) from estimate_entry where Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())
@@ -277,7 +278,7 @@ public partial class Admin_Sales_entry : System.Web.UI.Page
 
         SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
         con1.Open();
-        string query = "Select COUNT(invoice_no) from estimate_entry_details where invoice_no='" + Label1.Text + "' and  Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
+        string query = "Select max(s_no) from estimate_entry_details where invoice_no='" + Label1.Text + "' and  Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
         SqlCommand cmd1 = new SqlCommand(query, con1);
         SqlDataReader dr = cmd1.ExecuteReader();
         if (dr.Read())

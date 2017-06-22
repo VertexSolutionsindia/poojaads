@@ -31,7 +31,7 @@ public partial class Admin_Sales_pay_amount : System.Web.UI.Page
             if (dr1.Read())
             {
                 Label1.Text = dr1["financial_year"].ToString();
-
+                Label2.Text = dr1["company_name"].ToString();
             }
             con1.Close();
             if (User.Identity.IsAuthenticated)

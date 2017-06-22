@@ -34,6 +34,7 @@ public partial class Admin_Customer_Entry : System.Web.UI.Page
                 if (dr.Read())
                 {
                     company_id = Convert.ToInt32(dr["com_id"].ToString());
+                    Label4.Text = dr["company_name"].ToString();
                 }
                 con.Close();
             }
