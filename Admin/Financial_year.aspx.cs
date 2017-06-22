@@ -584,24 +584,24 @@ public partial class Admin_Day_wise_purchase : System.Web.UI.Page
                         cmd10.Parameters.AddWithValue("@Com_Id", company_id);
                         if (ListBox1.SelectedItem.Text == "2017-2018")
                         {
-                            string date1 = "01-04-2017";
-                            string date2 = "31-03-2018";
+                            string date1 = "04-01-2017";
+                            string date2 = "03-31-2018";
 
                             cmd10.Parameters.AddWithValue("@start_date",Convert.ToDateTime( date1).ToString("MM-dd-yyyy"));
                             cmd10.Parameters.AddWithValue("@end_date", Convert.ToDateTime(date2).ToString("MM-dd-yyyy"));
                         }
                         if (ListBox1.SelectedItem.Text == "2018-2019")
                         {
-                            string date1 = "01-04-2018";
-                            string date2 = "31-03-2019";
+                            string date1 = "04-01-2018";
+                            string date2 = "03-31-2019";
 
                             cmd10.Parameters.AddWithValue("@start_date", Convert.ToDateTime(date1).ToString("MM-dd-yyyy"));
                             cmd10.Parameters.AddWithValue("@end_date", Convert.ToDateTime(date2).ToString("MM-dd-yyyy"));
                         }
                         if (ListBox1.SelectedItem.Text == "2019-2020")
                         {
-                            string date1 = "01-04-2019";
-                            string date2 = "31-03-2020";
+                            string date1 = "04-01-2019";
+                            string date2 = "03-31-2020";
 
                             cmd10.Parameters.AddWithValue("@start_date", Convert.ToDateTime(date1).ToString("MM-dd-yyyy"));
                             cmd10.Parameters.AddWithValue("@end_date", Convert.ToDateTime(date2).ToString("MM-dd-yyyy"));
@@ -621,24 +621,24 @@ public partial class Admin_Day_wise_purchase : System.Web.UI.Page
                         check_User_Name.Parameters.AddWithValue("@Com_Id", company_id);
                         if (ListBox1.SelectedItem.Text == "2017-2018")
                         {
-                            string date1 = "04/01/2017";
-                            string date2 = "03/31/2018";
+                            string date1 = "04-01-2017";
+                            string date2 = "03-31-2018";
 
                             check_User_Name.Parameters.AddWithValue("@start_date", date1);
                             check_User_Name.Parameters.AddWithValue("@end_date", date2);
                         }
                         if (ListBox1.SelectedItem.Text == "2018-2019")
                         {
-                            string date1 = "04/01/2017";
-                            string date2 = "03/31/2018";
+                            string date1 = "04-01-2017";
+                            string date2 = "03-31-2018";
 
                             check_User_Name.Parameters.AddWithValue("@start_date", date1);
                             check_User_Name.Parameters.AddWithValue("@end_date", date2);
                         }
                         if (ListBox1.SelectedItem.Text == "2019-2020")
                         {
-                            string date1 = "04/01/2017";
-                            string date2 = "03/31/2018";
+                            string date1 = "04-01-2017";
+                            string date2 = "03-31-2018";
 
                             check_User_Name.Parameters.AddWithValue("@start_date", date1);
                             check_User_Name.Parameters.AddWithValue("@end_date", date2);
@@ -724,18 +724,18 @@ public partial class Admin_Day_wise_purchase : System.Web.UI.Page
     {
         if (TextBox1.Text == "2017-2018")
         {
-            TextBox2.Text = "01-04-2017";
-            TextBox4.Text = "31-03-2018";
+            TextBox2.Text = "04-01-2017";
+            TextBox4.Text = "03-31-2018";
         }
         if (TextBox1.Text == "2018-2019")
         {
-            TextBox2.Text = "01-04-2018";
-            TextBox4.Text = "31-03-2019";
+            TextBox2.Text = "04-01-2018";
+            TextBox4.Text = "03-31-2019";
         }
         if (TextBox1.Text == "2019-2020")
         {
-            TextBox2.Text = "01-04-2019";
-            TextBox4.Text = "31-03-2020";
+            TextBox2.Text = "04-01-2019";
+            TextBox4.Text = "03-31-2020";
         }
     }
 }

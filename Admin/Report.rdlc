@@ -173,7 +173,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.50128in</Width>
+              <Width>0.43278in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.29014in</Width>
@@ -182,19 +182,19 @@
               <Width>0.71298in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.60031in</Width>
+              <Width>1.66448in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.59612in</Width>
+              <Width>0.74856in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.55418in</Width>
+              <Width>0.73783in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.42927in</Width>
+              <Width>0.426in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.29249in</Width>
+              <Width>0.964in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -212,7 +212,7 @@
                             <TextRun>
                               <Value>S.No</Value>
                               <Style>
-                                <FontSize>14pt</FontSize>
+                                <FontSize>12pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -479,7 +479,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!s_no.Value</Value>
+                              <Value>=RowNumber(Nothing)</Value>
                               <Style>
                                 <FontSize>11pt</FontSize>
                               </Style>
@@ -797,9 +797,9 @@
       </Line>
       <Line Name="Line27">
         <Top>10.77736cm</Top>
-        <Left>0.30051cm</Left>
+        <Left>0.33338cm</Left>
         <Height>0cm</Height>
-        <Width>20.3638cm</Width>
+        <Width>20.33093cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -820,8 +820,8 @@
         </Style>
       </Line>
       <Line Name="Line35">
-        <Top>0.17674cm</Top>
-        <Left>1.64192cm</Left>
+        <Top>0.14111cm</Top>
+        <Left>1.43991cm</Left>
         <Height>10.63625cm</Height>
         <Width>0cm</Width>
         <ZIndex>5</ZIndex>
@@ -833,7 +833,7 @@
       </Line>
       <Line Name="Line36">
         <Top>0.17674cm</Top>
-        <Left>7.45888cm</Left>
+        <Left>7.28488cm</Left>
         <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>6</ZIndex>
@@ -844,8 +844,8 @@
         </Style>
       </Line>
       <Line Name="Line37">
-        <Top>0.14111cm</Top>
-        <Left>14.84876cm</Left>
+        <Top>0.17674cm</Top>
+        <Left>15.25963cm</Left>
         <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>7</ZIndex>
@@ -857,8 +857,8 @@
       </Line>
       <Line Name="Line38">
         <Top>0.14111cm</Top>
-        <Left>16.25638cm</Left>
-        <Height>10.60062cm</Height>
+        <Left>17.09906cm</Left>
+        <Height>10.63625cm</Height>
         <Width>0cm</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -869,8 +869,8 @@
       </Line>
       <Line Name="Line39">
         <Top>0.14111cm</Top>
-        <Left>17.34673cm</Left>
-        <Height>10.60062cm</Height>
+        <Left>18.1811cm</Left>
+        <Height>10.63625cm</Height>
         <Width>0cm</Width>
         <ZIndex>9</ZIndex>
         <Style>
@@ -892,9 +892,9 @@
         </Style>
       </Line>
       <Line Name="Line3">
-        <Top>0.14111cm</Top>
-        <Left>9.26984cm</Left>
-        <Height>10.56499cm</Height>
+        <Top>0.17674cm</Top>
+        <Left>9.09585cm</Left>
+        <Height>10.60062cm</Height>
         <Width>0cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
@@ -905,8 +905,8 @@
       </Line>
       <Line Name="Line4">
         <Top>0.14111cm</Top>
-        <Left>13.3595cm</Left>
-        <Height>10.60062cm</Height>
+        <Left>13.32362cm</Left>
+        <Height>10.63625cm</Height>
         <Width>0cm</Width>
         <ZIndex>12</ZIndex>
         <Style>
@@ -1200,8 +1200,8 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.35313cm</Top>
-          <Left>8.71395cm</Left>
+          <Top>0.31785cm</Top>
+          <Left>8.23386cm</Left>
           <Height>0.6cm</Height>
           <Width>1.07125cm</Width>
           <ZIndex>3</ZIndex>
@@ -1344,7 +1344,7 @@ End Function</Code>
           <Top>1.12952cm</Top>
           <Left>7.6997cm</Left>
           <Height>2.70847cm</Height>
-          <Width>4.6255cm</Width>
+          <Width>6.25302cm</Width>
           <ZIndex>11</ZIndex>
           <Style>
             <Border>
@@ -1372,9 +1372,9 @@ End Function</Code>
           </Paragraphs>
           <rd:DefaultName>Mobile_number</rd:DefaultName>
           <Top>0.35313cm</Top>
-          <Left>9.92631cm</Left>
+          <Left>9.44623cm</Left>
           <Height>0.6cm</Height>
-          <Width>3.80118cm</Width>
+          <Width>4.47121cm</Width>
           <ZIndex>12</ZIndex>
           <Style>
             <Border>
@@ -1712,7 +1712,7 @@ End Function</Code>
                   <Value>=First(Fields!date.Value, "DataSet1")</Value>
                   <Style>
                     <FontSize>14pt</FontSize>
-                    <Format>d</Format>
+                    <Format>dd MMMM yyyy</Format>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1774,6 +1774,70 @@ End Function</Code>
           <Height>0.86458cm</Height>
           <Width>2.97625cm</Width>
           <ZIndex>28</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox7">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Address :</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox6</rd:DefaultName>
+          <Top>4.95862cm</Top>
+          <Left>0.47449cm</Left>
+          <Height>0.71437cm</Height>
+          <Width>2.1717cm</Width>
+          <ZIndex>29</ZIndex>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <PaddingLeft>2pt</PaddingLeft>
+            <PaddingRight>2pt</PaddingRight>
+            <PaddingTop>2pt</PaddingTop>
+            <PaddingBottom>2pt</PaddingBottom>
+          </Style>
+        </Textbox>
+        <Textbox Name="Textbox8">
+          <CanGrow>true</CanGrow>
+          <KeepTogether>true</KeepTogether>
+          <Paragraphs>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Mobile No :</Value>
+                  <Style>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+          </Paragraphs>
+          <rd:DefaultName>Textbox6</rd:DefaultName>
+          <Top>5.77882cm</Top>
+          <Left>0.43921cm</Left>
+          <Height>0.60854cm</Height>
+          <Width>2.38337cm</Width>
+          <ZIndex>30</ZIndex>
           <Style>
             <Border>
               <Style>None</Style>
@@ -2301,7 +2365,9 @@ End Function</Code>
               <TextRuns>
                 <TextRun>
                   <Value>=Fields!amount.Value</Value>
-                  <Style />
+                  <Style>
+                    <Format>0.00;(0.00)</Format>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style>
@@ -2719,7 +2785,7 @@ End Function</Code>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Code.changeToWords(CStr(Fields!grand_total.Value))</Value>
+                  <Value>=Code.changeToWords(CStr(Fields!grand_total.Value))+"Only"</Value>
                   <Style />
                 </TextRun>
               </TextRuns>

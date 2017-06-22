@@ -90,7 +90,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 con11.Close();
                 DateTime date = DateTime.Now;
                 TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
-                TextBox15.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
+               
             getinvoiceno();
             getinvoiceno1();
             //show_category();
@@ -152,7 +152,14 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@paid_amount", TextBox27.Text);
                 cmd.Parameters.AddWithValue("@pending_amount", TextBox28.Text);
                 cmd.Parameters.AddWithValue("@account_no", TextBox19.Text);
-                cmd.Parameters.AddWithValue("@bank_date", Convert.ToDateTime(TextBox15.Text).ToString("MM-dd-yyyy"));
+                if (TextBox15.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("@bank_date", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@bank_date", Convert.ToDateTime(TextBox15.Text).ToString("MM-dd-yyyy"));
+                }
                 cmd.Parameters.AddWithValue("@amount", TextBox17.Text);
                 cmd.Parameters.AddWithValue("@presented_bank", TextBox26.Text);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -267,7 +274,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 TextBox28.Text = "";
                 DateTime date = DateTime.Now;
                 TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
-                TextBox15.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
+               
             }
             else
             {
@@ -289,7 +296,14 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@paid_amount", TextBox27.Text);
                 cmd.Parameters.AddWithValue("@pending_amount", TextBox28.Text);
                 cmd.Parameters.AddWithValue("@account_no", TextBox19.Text);
-                cmd.Parameters.AddWithValue("@bank_date", Convert.ToDateTime(TextBox15.Text).ToString("MM-dd-yyyy"));
+                if (TextBox15.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("@bank_date", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@bank_date", Convert.ToDateTime(TextBox15.Text).ToString("MM-dd-yyyy"));
+                }
                 cmd.Parameters.AddWithValue("@amount", TextBox17.Text);
                 cmd.Parameters.AddWithValue("@presented_bank", TextBox26.Text);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
@@ -444,7 +458,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 TextBox28.Text = "";
                 DateTime date = DateTime.Now;
                 TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
-                TextBox15.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
+             
             }
             CON1.Close();
 
@@ -832,7 +846,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             float total = float.Parse(TextBox7.Text);
             float servie_tax = float.Parse(TextBox1.Text);
             float grand = total * servie_tax / 100;
-            TextBox14.Text = (grand + total).ToString();
+            TextBox14.Text = string.Format("{0:0.00}",Math.Round(  (grand + total))).ToString();
         }
 
 
@@ -842,7 +856,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             float educess = float.Parse(TextBox12.Text);
             float grand1 = total1 * educess / 100;
             float grand_total = float.Parse(TextBox14.Text);
-            TextBox14.Text = (grand_total + grand1).ToString();
+            TextBox14.Text = string.Format("{0:0.00}", Math.Round( (grand_total + grand1))).ToString();
         }
 
         if (TextBox13.Text != "")
@@ -851,7 +865,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             float hreducess = float.Parse(TextBox13.Text);
             float grand2 = total2 * hreducess / 100;
             float grand_total1 = float.Parse(TextBox14.Text);
-            TextBox14.Text = (grand_total1 + grand2).ToString();
+            TextBox14.Text = string.Format("{0:0.00}",Math.Round( (grand_total1 + grand2))).ToString();
         }
     }
     protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
@@ -874,7 +888,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         float gran_total = float.Parse(TextBox14.Text);
         float paid_amount = float.Parse(TextBox27.Text);
         float pending_amount = gran_total - paid_amount;
-        TextBox28.Text = pending_amount.ToString();
+        TextBox28.Text =string.Format("{0:0.00}",Math.Round(  pending_amount)).ToString();
     }
     protected void Button8_Click(object sender, EventArgs e)
     {
@@ -896,7 +910,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox28.Text = "";
         DateTime date = DateTime.Now;
         TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
-        TextBox15.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
+      
         est_cost();
         gettype();
         TextBox23.Text = "";
@@ -926,7 +940,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox28.Text = "";
         DateTime date = DateTime.Now;
         TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
-        TextBox15.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
+      
         est_cost();
         gettype();
         TextBox23.Text = "";
@@ -974,7 +988,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox27.Text = dr2["paid_amount"].ToString();
                     TextBox28.Text = dr2["pending_amount"].ToString();
                     TextBox19.Text = dr2["account_no"].ToString();
-                    TextBox15.Text = Convert.ToDateTime(dr2["bank_date"]).ToString("dd-MM-yyyy");
+                  
                     TextBox17.Text = dr2["amount"].ToString();
                     TextBox26.Text = dr2["presented_bank"].ToString();
                 }
@@ -1040,7 +1054,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox27.Text = dr2["paid_amount"].ToString();
                     TextBox28.Text = dr2["pending_amount"].ToString();
                     TextBox19.Text = dr2["account_no"].ToString();
-                    TextBox15.Text = Convert.ToDateTime(dr2["bank_date"]).ToString("dd-MM-yyyy");
+                 
                     TextBox17.Text = dr2["amount"].ToString();
                     TextBox26.Text = dr2["presented_bank"].ToString();
 
@@ -1148,7 +1162,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox27.Text = dr2["paid_amount"].ToString();
                     TextBox28.Text = dr2["pending_amount"].ToString();
                     TextBox19.Text = dr2["account_no"].ToString();
-                    TextBox15.Text = Convert.ToDateTime(dr2["bank_date"]).ToString("dd-MM-yyyy");
+                 
                     TextBox17.Text = dr2["amount"].ToString();
                     TextBox26.Text = dr2["presented_bank"].ToString();
 

@@ -413,7 +413,7 @@ arrow"></span></a>
         </asp:TemplateField>
           <asp:TemplateField>
         <ItemTemplate>
-        <asp:ImageButton ID="ImageButton5" runat="server"  ImageUrl="~/exit11.png" Width="20px" Height="20px" onclick="ImageButton5_Click" OnClientClick="Confirm1()" ></asp:ImageButton>
+        <asp:ImageButton ID="ImageButton5" runat="server"  ImageUrl="~/exit11.png" Width="20px" Height="20px" onclick="ImageButton5_Click" OnClientClick="return confirm('Do you want to close')" ></asp:ImageButton>
            </ItemTemplate>
         
         
@@ -457,7 +457,8 @@ arrow"></span></a>
                           <asp:TextBox ID="TextBox18" runat="server" style="width:90%;height:40px;border-radius:5px; margin-left:10px; border:solid 1px gray;"></asp:TextBox>
                          <br />
 
-                          <asp:TextBox ID="TextBox6" runat="server"  style="width:90%;height:40px;border-radius:5px; margin-left:10px; border:solid 1px gray;"></asp:TextBox>
+                          <asp:TextBox ID="TextBox6" runat="server" TextMode="MultiLine"  style="width:90%;height:40px; height:70px; border-radius:5px; margin-left:10px; border:solid 1px gray;"></asp:TextBox>
+                              
                               <br />
 
                           <asp:TextBox ID="TextBox7" runat="server"  style="width:90%;height:40px;border-radius:5px; margin-left:10px; border:solid 1px gray;"></asp:TextBox>

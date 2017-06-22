@@ -322,7 +322,14 @@
            </ContentTemplate>
                             
                            </asp:UpdatePanel>
+                             <asp:UpdatePanel ID="UpdatePanel12" runat="server">
+   <ContentTemplate>
                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+
+                            </ContentTemplate>
+                            
+                           </asp:UpdatePanel>
+
                             <asp:DropDownList ID="DropDownList2" runat="server" Height="30px" >
                                    <asp:ListItem>PDF</asp:ListItem>
                                    <asp:ListItem>WORD</asp:ListItem>
@@ -406,7 +413,7 @@
                                     <div class="col-lg-7">
                                      <asp:UpdatePanel ID="UpdatePanel3" runat="server">
    <ContentTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label> 
+                                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                                       </ContentTemplate>
                                 <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Button9" EventName="Click"  />
@@ -613,9 +620,9 @@
     <asp:UpdatePanel ID="UpdatePanel27" runat="server">
    <ContentTemplate>
               <asp:TextBox ID="TextBox23" runat="server"  Width="90px" height="34px"></asp:TextBox>
-              <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox23" Format="dd-MM-yyyy"></asp:CalendarExtender>
+              <asp:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="TextBox23" Format="dd-MM-yy"></asp:CalendarExtender>
               <asp:TextBox ID="TextBox21" runat="server"  Width="90px" height="34px"></asp:TextBox>
-                <asp:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="TextBox21" Format="dd-MM-yyyy"></asp:CalendarExtender>
+                <asp:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="TextBox21" Format="dd-MM-yy"></asp:CalendarExtender>
     </ContentTemplate>
      <Triggers>
               
