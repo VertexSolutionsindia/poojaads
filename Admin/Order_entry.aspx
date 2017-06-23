@@ -501,7 +501,24 @@
                                 
 
 <!---------------------------------editinggggggggggggg--------------------------------------->
-
+ <div class="form-group"><label class="col-lg-5 control-label">Email ID : </label>
+                              
+                                    <div class="col-lg-7">
+                                     <asp:UpdatePanel ID="UpdatePanel36" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox30" runat="server" class="form-control"></asp:TextBox>
+                                   
+                                   </ContentTemplate>
+                                     <Triggers>
+              
+                 
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
 
 <div class="form-group"><label class="col-lg-5 control-label">Order Date : </label>
 
@@ -517,6 +534,43 @@
                                     </div>
                                  
                                  </div>
+                                 
+                                     <div class="form-group"><label class="col-lg-5 control-label">Po number : </label>
+                              
+                                    <div class="col-lg-7">
+                                     <asp:UpdatePanel ID="UpdatePanel20" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox9" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    </ContentTemplate>
+                                     <Triggers>
+              
+                 
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
+                                
+                                 <div class="form-group"><label class="col-lg-5 control-label">Po Date : </label>
+                              
+                                    <div class="col-lg-7">
+                                     <asp:UpdatePanel ID="UpdatePanel21" runat="server">
+   <ContentTemplate>
+                                    <asp:TextBox ID="TextBox10" runat="server" class="form-control input-x2 dropbox"></asp:TextBox>
+                                    <asp:CalendarExtender ID="CalendarExtender5" runat="server" TargetControlID="TextBox10" Format="dd-MM-yyyy"></asp:CalendarExtender>
+                                   </ContentTemplate>
+                                     <Triggers>
+              
+                 
+                </Triggers>
+                           </asp:UpdatePanel>
+                                    
+                                    </div>
+                                
+                                
+                                </div>
                                     </div>
                                     </div>
                                     </div>
@@ -904,9 +958,15 @@
                                  <div class="form-group"><label class="col-lg-3 control-label">Service Tax </label>                  <div class="col-lg-9">
                                   <asp:UpdatePanel ID="UpdatePanel7" runat="server">
    <ContentTemplate>
-                                 <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" 
+   <div>
+   <div style="float:left">
+                                 <asp:TextBox ID="TextBox1" runat="server" width="100px" AutoPostBack="true" 
                                      class="form-control input-x2 dropbox"  ></asp:TextBox>
-                                    
+   </div><div style="float:right">
+
+                                     <asp:TextBox ID="TextBox16" runat="server" AutoPostBack="true" 
+                                     class="form-control input-x2 dropbox"  ></asp:TextBox>
+    </div></div>
               </ContentTemplate>
                <Triggers>
                      <asp:AsyncPostBackTrigger ControlID="TextBox1" EventName="TextChanged"  />
@@ -924,9 +984,17 @@
                                 <div class="form-group"><label class="col-lg-3 control-label">Edu. Cess </label>                  <div class="col-lg-9">
                                   <asp:UpdatePanel ID="UpdatePanel13" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox12" runat="server" AutoPostBack="true" 
+   <div>
+   <div style="float:left">
+                                    <asp:TextBox ID="TextBox12" runat="server" Width="100px" AutoPostBack="true" 
                                         class="form-control input-x2 dropbox" 
                                           ></asp:TextBox>
+   </div><div style="float:right">
+                                           <asp:TextBox ID="TextBox11" runat="server"  
+                                        class="form-control input-x2 dropbox" 
+                                          ></asp:TextBox>
+   </div></div>
+                                          
                                     
               </ContentTemplate>
                <Triggers>
@@ -942,9 +1010,17 @@
                                 <div class="form-group"><label class="col-lg-3 control-label">Hr.Edu. Cess </label>                  <div class="col-lg-9">
                                   <asp:UpdatePanel ID="UpdatePanel14" runat="server">
    <ContentTemplate>
-                                    <asp:TextBox ID="TextBox13" runat="server" AutoPostBack="true" 
+   <div>
+   <div style="float:left">
+                                    <asp:TextBox ID="TextBox13" Width="100px" runat="server" AutoPostBack="true" 
                                         class="form-control input-x2 dropbox" 
                                           ></asp:TextBox>
+     </div><div style="float:right">
+                                          <asp:TextBox ID="TextBox18" runat="server" AutoPostBack="true" 
+                                        class="form-control input-x2 dropbox" 
+                                          ></asp:TextBox>
+
+                                            </div></div>
                                     
               </ContentTemplate>
                <Triggers>

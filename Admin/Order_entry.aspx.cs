@@ -53,7 +53,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
 
           
                 SqlConnection con2 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd2 = new SqlCommand("select * from Tax where tax_name='Service Tax'", con2);
+                SqlCommand cmd2 = new SqlCommand("select * from Tax where tax_id='1'", con2);
                 SqlDataReader dr2;
                 con2.Open();
                 dr2 = cmd2.ExecuteReader();
@@ -66,7 +66,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
            
           
                 SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd1 = new SqlCommand("select * from Tax where tax_name='Edu.Cess'", con1);
+                SqlCommand cmd1 = new SqlCommand("select * from Tax where tax_id='2'", con1);
                 SqlDataReader dr1;
                 con1.Open();
                 dr1 = cmd1.ExecuteReader();
@@ -78,7 +78,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 con1.Close();
 
                 SqlConnection con11 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd11 = new SqlCommand("select * from Tax where tax_name='Hr.Edu.Cess'", con11);
+                SqlCommand cmd11 = new SqlCommand("select * from Tax where tax_id='3'", con11);
                 SqlDataReader dr11;
                 con11.Open();
                 dr11 = cmd11.ExecuteReader();
@@ -137,7 +137,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             if (dr.HasRows)
             {
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("update Order_entry set client_name=@client_name,cl_code=@cl_code,cl_add=@cl_add,mobile=@mobile,date=@date,Total=@Total,service_tax=@service_tax,edu_cess=@edu_cess,Hr_edu_cess=@Hr_edu_cess,grand_total=@grand_total,paid_amount=@paid_amount,pending_amount=@pending_amount,account_no=@account_no,bank_date=@bank_date,amount=@amount,presented_bank=@presented_bank,Com_Id=@Com_Id where Invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "'", CON);
+                SqlCommand cmd = new SqlCommand("update Order_entry set client_name=@client_name,cl_code=@cl_code,cl_add=@cl_add,mobile=@mobile,date=@date,Total=@Total,service_tax=@service_tax,edu_cess=@edu_cess,Hr_edu_cess=@Hr_edu_cess,grand_total=@grand_total,paid_amount=@paid_amount,pending_amount=@pending_amount,account_no=@account_no,bank_date=@bank_date,amount=@amount,presented_bank=@presented_bank,Com_Id=@Com_Id,service_amount=@service_amount,edu_cess_amount=@edu_cess_amount,hr_edu_cess_amount=@hr_edu_cess_amount,po_number=@po_number,po_date=@po_date,email=@email where Invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "'", CON);
                 cmd.Parameters.AddWithValue("@Invoice_no", Label1.Text);
                 cmd.Parameters.AddWithValue("@client_name", DropDownList1.SelectedItem.Text);
                 cmd.Parameters.AddWithValue("@cl_code", TextBox8.Text);
@@ -163,8 +163,20 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@amount", TextBox17.Text);
                 cmd.Parameters.AddWithValue("@presented_bank", TextBox26.Text);
                 cmd.Parameters.AddWithValue("@Com_Id", company_id);
-               
+                cmd.Parameters.AddWithValue("@service_amount", TextBox16.Text);
+                cmd.Parameters.AddWithValue("@edu_cess_amount", TextBox11.Text);
+                cmd.Parameters.AddWithValue("@hr_edu_cess_amount", TextBox18.Text);
+                cmd.Parameters.AddWithValue("@po_number", TextBox9.Text);
 
+                if (TextBox10.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("po_date", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@po_date", Convert.ToDateTime(TextBox10.Text).ToString("MM-dd-yyyy"));
+                }
+                cmd.Parameters.AddWithValue("@email", TextBox30.Text);
 
 
                 CON.Open();
@@ -272,6 +284,11 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 TextBox14.Text = "";
                 TextBox27.Text = "";
                 TextBox28.Text = "";
+                TextBox10.Text = "";
+                TextBox11.Text = "";
+                TextBox16.Text = "";
+                TextBox18.Text = "";
+                TextBox30.Text = "";
                 DateTime date = DateTime.Now;
                 TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
                
@@ -281,7 +298,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 string status = "Order Bill";
                 float value = 0;
                 SqlConnection CON = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-                SqlCommand cmd = new SqlCommand("insert into Order_entry values(@Invoice_no,@client_name,@cl_code,@cl_add,@mobile,@date,@Total,@service_tax,@edu_cess,@Hr_edu_cess,@grand_total,@paid_amount,@pending_amount,@account_no,@bank_date,@amount,@presented_bank,@Com_Id,@year,@status,@value)", CON);
+                SqlCommand cmd = new SqlCommand("insert into Order_entry values(@Invoice_no,@client_name,@cl_code,@cl_add,@mobile,@date,@Total,@service_tax,@edu_cess,@Hr_edu_cess,@grand_total,@paid_amount,@pending_amount,@account_no,@bank_date,@amount,@presented_bank,@Com_Id,@year,@status,@value,@service_amount,@edu_cess_amount,@hr_edu_cess_amount,@po_number,@po_date,@email)", CON);
                 cmd.Parameters.AddWithValue("@Invoice_no", Label1.Text);
                 cmd.Parameters.AddWithValue("@client_name", DropDownList1.SelectedItem.Text);
                 cmd.Parameters.AddWithValue("@cl_code", TextBox8.Text);
@@ -310,6 +327,19 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@year", Label2.Text);
                 cmd.Parameters.AddWithValue("@status", status);
                 cmd.Parameters.AddWithValue("@value", value);
+                cmd.Parameters.AddWithValue("@service_amount", TextBox16.Text);
+                cmd.Parameters.AddWithValue("@edu_cess_amount", TextBox11.Text);
+                cmd.Parameters.AddWithValue("@hr_edu_cess_amount", TextBox18.Text);
+                cmd.Parameters.AddWithValue("@po_number", TextBox9.Text);
+                if (TextBox10.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("po_date", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@po_date", Convert.ToDateTime(TextBox10.Text).ToString("MM-dd-yyyy"));
+                }
+                cmd.Parameters.AddWithValue("@email",TextBox30.Text);
                 CON.Open();
                 cmd.ExecuteNonQuery();
                 CON.Close();
@@ -456,6 +486,11 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                 TextBox14.Text = "";
                 TextBox27.Text = "";
                 TextBox28.Text = "";
+                TextBox10.Text = "";
+                TextBox11.Text = "";
+                TextBox16.Text = "";
+                TextBox18.Text = "";
+                TextBox30.Text = "";
                 DateTime date = DateTime.Now;
                 TextBox20.Text = Convert.ToDateTime(date).ToString("dd-MM-yyyy");
              
@@ -513,27 +548,42 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
    
     private void getinvoiceno()
     {
-        int a;
 
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
-        con1.Open();
-        string query = "Select max(invoice_no) from Order_entry where Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
-        SqlCommand cmd1 = new SqlCommand(query, con1);
-        SqlDataReader dr = cmd1.ExecuteReader();
-        if (dr.Read())
+        if (User.Identity.IsAuthenticated)
         {
-            string val = dr[0].ToString();
-            if (val == "")
+            SqlConnection con1000 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+            SqlCommand cmd1000 = new SqlCommand("select * from user_details where Name='" + User.Identity.Name + "'", con1000);
+            SqlDataReader dr1000;
+            con1000.Open();
+            dr1000 = cmd1000.ExecuteReader();
+            if (dr1000.Read())
             {
-                Label1.Text = "1";
+                company_id = Convert.ToInt32(dr1000["com_id"].ToString());
+                int a;
+
+                SqlConnection con1 = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
+                con1.Open();
+                string query = "Select max(invoice_no) from Order_entry where Com_Id='" + company_id + "' and year='" + Label2.Text + "'";
+                SqlCommand cmd1 = new SqlCommand(query, con1);
+                SqlDataReader dr = cmd1.ExecuteReader();
+                if (dr.Read())
+                {
+                    string val = dr[0].ToString();
+                    if (val == "")
+                    {
+                        Label1.Text = "1";
+                    }
+                    else
+                    {
+                        a = Convert.ToInt32(dr[0].ToString());
+                        TextBox3.Text = a.ToString();
+                        a = a + 1;
+                        Label1.Text = a.ToString();
+                    }
+                }
+                con1.Close();
             }
-            else
-            {
-                a = Convert.ToInt32(dr[0].ToString());
-                TextBox3.Text = a.ToString();
-                a = a + 1;
-                Label1.Text = a.ToString();
-            }
+            con1000.Close();
         }
     }
     private void getinvoiceno1()
@@ -638,10 +688,11 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox6.Text = value;
                 }
 
-            }    
+            }
+            float size = float.Parse(TextBox24.Text);
             float rate = float.Parse(TextBox29.Text);
             float qty = float.Parse(TextBox25.Text);
-            float total = rate * qty;
+            float total = rate * qty*size;
             TextBox22.Text = total.ToString();
            
         }
@@ -707,7 +758,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             TextBox8.Text = dr1["Client_Code"].ToString();
             TextBox2.Text = dr1["Client_Add"].ToString();
             TextBox4.Text = dr1["Mobile_No"].ToString();
-
+            TextBox30.Text = dr1["Mail_Id"].ToString();
         }
         con.Close();
 
@@ -812,24 +863,32 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
   
     protected void TextBox29_TextChanged(object sender, EventArgs e)
     {
-        float size = float.Parse(TextBox25.Text);
+        float size = float.Parse(TextBox24.Text);
         float rate = float.Parse(TextBox29.Text);
         float total = size * rate;
-        TextBox22.Text = total.ToString();
+        float qty = float.Parse(TextBox25.Text);
+        float total1 = total * qty;
+        TextBox22.Text = total1.ToString();
     }
     protected void TextBox25_TextChanged(object sender, EventArgs e)
     {
-      
+
+        float size = float.Parse(TextBox24.Text);
         float rate = float.Parse(TextBox29.Text);
-      
+        float total = size * rate;
         float qty = float.Parse(TextBox25.Text);
-        float total1 = rate * qty;
+        float total1 = total * qty;
         TextBox22.Text = total1.ToString();
     }
 
     protected void TextBox24_TextChanged(object sender, EventArgs e)
     {
-        
+        float size = float.Parse(TextBox24.Text);
+        float rate = float.Parse(TextBox29.Text);
+        float total = size * rate;
+        float qty = float.Parse(TextBox25.Text);
+        float total1 = total * qty;
+        TextBox22.Text = total1.ToString();
     }
 
     protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -846,6 +905,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             float total = float.Parse(TextBox7.Text);
             float servie_tax = float.Parse(TextBox1.Text);
             float grand = total * servie_tax / 100;
+            TextBox16.Text = grand.ToString();
             TextBox14.Text = string.Format("{0:0.00}",Math.Round(  (grand + total))).ToString();
         }
 
@@ -855,6 +915,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             float total1 = float.Parse(TextBox7.Text);
             float educess = float.Parse(TextBox12.Text);
             float grand1 = total1 * educess / 100;
+            TextBox11.Text = grand1.ToString();
             float grand_total = float.Parse(TextBox14.Text);
             TextBox14.Text = string.Format("{0:0.00}", Math.Round( (grand_total + grand1))).ToString();
         }
@@ -864,6 +925,7 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
             float total2 = float.Parse(TextBox7.Text);
             float hreducess = float.Parse(TextBox13.Text);
             float grand2 = total2 * hreducess / 100;
+            TextBox18.Text = grand2.ToString();
             float grand_total1 = float.Parse(TextBox14.Text);
             TextBox14.Text = string.Format("{0:0.00}",Math.Round( (grand_total1 + grand2))).ToString();
         }
@@ -919,6 +981,11 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox29.Text = "";
         TextBox25.Text = "";
         TextBox22.Text = "";
+        TextBox10.Text = "";
+        TextBox11.Text = "";
+        TextBox16.Text = "";
+        TextBox18.Text = "";
+        TextBox30.Text = "";
     }
     protected void Button10_Click(object sender, EventArgs e)
     {
@@ -949,6 +1016,11 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
         TextBox29.Text = "";
         TextBox25.Text = "";
         TextBox22.Text = "";
+        TextBox10.Text = "";
+        TextBox11.Text = "";
+        TextBox16.Text = "";
+        TextBox18.Text = "";
+        TextBox30.Text = "";
     }
     protected void Button6_Click(object sender, EventArgs e)
     {
@@ -988,9 +1060,28 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox27.Text = dr2["paid_amount"].ToString();
                     TextBox28.Text = dr2["pending_amount"].ToString();
                     TextBox19.Text = dr2["account_no"].ToString();
-                  
+                    TextBox30.Text = dr2["email"].ToString();
                     TextBox17.Text = dr2["amount"].ToString();
                     TextBox26.Text = dr2["presented_bank"].ToString();
+                    TextBox9.Text = dr2["po_number"].ToString();
+                    string date1 = dr2["bank_date"].ToString();
+                    if (date1 != "")
+                    {
+                        TextBox15.Text = Convert.ToDateTime(dr2["bank_date"]).ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        TextBox15.Text = dr2["bank_date"].ToString();
+                    }
+                    string date =dr2["po_date"].ToString();
+                    if (date != "")
+                    {
+                        TextBox10.Text = Convert.ToDateTime(dr2["po_date"]).ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        TextBox10.Text = dr2["po_date"].ToString();
+                    }
                 }
                 con2.Close();
 
@@ -1054,10 +1145,29 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox27.Text = dr2["paid_amount"].ToString();
                     TextBox28.Text = dr2["pending_amount"].ToString();
                     TextBox19.Text = dr2["account_no"].ToString();
-                 
+                    TextBox30.Text = dr2["email"].ToString();
                     TextBox17.Text = dr2["amount"].ToString();
                     TextBox26.Text = dr2["presented_bank"].ToString();
-
+                    TextBox9.Text = dr2["po_number"].ToString();
+                  
+                    string date1 = dr2["bank_date"].ToString();
+                    if (date1 != "")
+                    {
+                        TextBox15.Text = Convert.ToDateTime(dr2["bank_date"]).ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        TextBox15.Text = dr2["bank_date"].ToString();
+                    }
+                    string date = dr2["po_date"].ToString();
+                    if (date != "")
+                    {
+                        TextBox10.Text = Convert.ToDateTime(dr2["po_date"]).ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        TextBox10.Text = dr2["po_date"].ToString();
+                    }
                     SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
                     SqlCommand CMD = new SqlCommand("select * from Order_entry_details where invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "' ORDER BY s_no asc", con);
                     DataTable dt1 = new DataTable();
@@ -1162,10 +1272,29 @@ public partial class Admin_Department_Entry : System.Web.UI.Page
                     TextBox27.Text = dr2["paid_amount"].ToString();
                     TextBox28.Text = dr2["pending_amount"].ToString();
                     TextBox19.Text = dr2["account_no"].ToString();
-                 
+                    TextBox30.Text = dr2["email"].ToString();
                     TextBox17.Text = dr2["amount"].ToString();
                     TextBox26.Text = dr2["presented_bank"].ToString();
-
+                    TextBox9.Text = dr2["po_number"].ToString();
+                  
+                    string date1 = dr2["bank_date"].ToString();
+                    if (date1 != "")
+                    {
+                        TextBox15.Text = Convert.ToDateTime(dr2["bank_date"]).ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        TextBox15.Text = dr2["bank_date"].ToString();
+                    }
+                    string date = dr2["po_date"].ToString();
+                    if (date != "")
+                    {
+                        TextBox10.Text = Convert.ToDateTime(dr2["po_date"]).ToString("dd-MM-yyyy");
+                    }
+                    else
+                    {
+                        TextBox10.Text = dr2["po_date"].ToString();
+                    }
                     SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings["connection"]);
                     SqlCommand CMD = new SqlCommand("select * from Order_entry_details where invoice_no='" + Label1.Text + "' and Com_Id='" + company_id + "' and year='" + Label2.Text + "' ORDER BY s_no asc", con);
                     DataTable dt1 = new DataTable();
