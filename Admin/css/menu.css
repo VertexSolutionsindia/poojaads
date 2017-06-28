@@ -310,7 +310,7 @@ body.mini-navbar .profile-element, body.mini-navbar .nav-label, body.mini-navbar
     transition-property: height, visibility;
 }
 .navbar-aside {
-    background-color:#003311;
+    background-color:Maroon;
     border-color: #282f33;
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
@@ -339,7 +339,7 @@ body.mini-navbar .nav>li{
     display: inline-block;
 }*/
 .navbar-aside .nav > li > a:hover, .nav > li > a:focus{
-    background: transparent;
+    background-color:transparent;
 }
 
 .navbar-aside .nav > li.active > a {

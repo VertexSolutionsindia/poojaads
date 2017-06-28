@@ -816,9 +816,9 @@
         </Style>
       </Line>
       <Line Name="Line22">
-        <Top>0.14111cm</Top>
+        <Top>0.17674cm</Top>
         <Left>0.33338cm</Left>
-        <Height>13.84688cm</Height>
+        <Height>12.48833cm</Height>
         <Width>0cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
@@ -830,7 +830,7 @@
       <Line Name="Line28">
         <Top>0.14111cm</Top>
         <Left>20.62965cm</Left>
-        <Height>13.84688cm</Height>
+        <Height>12.52396cm</Height>
         <Width>0cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
@@ -842,7 +842,7 @@
       <Line Name="Line35">
         <Top>0.14111cm</Top>
         <Left>1.43991cm</Left>
-        <Height>13.84688cm</Height>
+        <Height>12.52396cm</Height>
         <Width>0cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
@@ -854,7 +854,7 @@
       <Line Name="Line36">
         <Top>0.17674cm</Top>
         <Left>7.28488cm</Left>
-        <Height>13.81125cm</Height>
+        <Height>12.48833cm</Height>
         <Width>0cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -866,7 +866,7 @@
       <Line Name="Line37">
         <Top>0.17674cm</Top>
         <Left>15.25963cm</Left>
-        <Height>13.81125cm</Height>
+        <Height>12.48833cm</Height>
         <Width>0cm</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -878,7 +878,7 @@
       <Line Name="Line38">
         <Top>0.14111cm</Top>
         <Left>17.09906cm</Left>
-        <Height>13.84688cm</Height>
+        <Height>12.52396cm</Height>
         <Width>0cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
@@ -890,7 +890,7 @@
       <Line Name="Line39">
         <Top>0.14111cm</Top>
         <Left>18.1811cm</Left>
-        <Height>13.84688cm</Height>
+        <Height>12.52396cm</Height>
         <Width>0cm</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -914,7 +914,7 @@
       <Line Name="Line3">
         <Top>0.17674cm</Top>
         <Left>9.09585cm</Left>
-        <Height>13.81125cm</Height>
+        <Height>12.48833cm</Height>
         <Width>0cm</Width>
         <ZIndex>10</ZIndex>
         <Style>
@@ -926,7 +926,7 @@
       <Line Name="Line4">
         <Top>0.14111cm</Top>
         <Left>13.32362cm</Left>
-        <Height>13.84688cm</Height>
+        <Height>12.52396cm</Height>
         <Width>0cm</Width>
         <ZIndex>11</ZIndex>
         <Style>
@@ -936,7 +936,7 @@
         </Style>
       </Line>
       <Line Name="Line7">
-        <Top>13.98799cm</Top>
+        <Top>12.66507cm</Top>
         <Left>0.33338cm</Left>
         <Height>0cm</Height>
         <Width>20.29806cm</Width>
@@ -948,7 +948,7 @@
         </Style>
       </Line>
     </ReportItems>
-    <Height>5.54539in</Height>
+    <Height>5.05236in</Height>
     <Style>
       <Border />
     </Style>
@@ -1168,7 +1168,7 @@ End Function</Code>
   <Width>9.28548in</Width>
   <Page>
     <PageHeader>
-      <Height>7.11729cm</Height>
+      <Height>8.12271cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <ReportItems>
         <Line Name="Line1">
@@ -1502,10 +1502,10 @@ End Function</Code>
           </Style>
         </Line>
         <Line Name="Line16">
-          <Top>7.03867cm</Top>
+          <Top>8.01687cm</Top>
           <Left>0.30051cm</Left>
           <Height>0cm</Height>
-          <Width>20.33093cm</Width>
+          <Width>20.3638cm</Width>
           <ZIndex>16</ZIndex>
           <Style>
             <Border>
@@ -1516,7 +1516,7 @@ End Function</Code>
         <Line Name="Line17">
           <Top>3.80222cm</Top>
           <Left>0.33338cm</Left>
-          <Height>3.23645cm</Height>
+          <Height>4.21465cm</Height>
           <Width>0cm</Width>
           <ZIndex>17</ZIndex>
           <Style>
@@ -1528,7 +1528,7 @@ End Function</Code>
         <Line Name="Line18">
           <Top>3.80222cm</Top>
           <Left>20.62965cm</Left>
-          <Height>3.23645cm</Height>
+          <Height>4.32049cm</Height>
           <Width>0cm</Width>
           <ZIndex>18</ZIndex>
           <Style>
@@ -1653,7 +1653,7 @@ End Function</Code>
           <Top>4.68444cm</Top>
           <Left>2.89314cm</Left>
           <Height>0.5118cm</Height>
-          <Width>17.56013cm</Width>
+          <Width>16.6593cm</Width>
           <ZIndex>22</ZIndex>
           <Style>
             <Border>
@@ -1682,10 +1682,10 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>mobile</rd:DefaultName>
-          <Top>5.30208cm</Top>
+          <Top>5.2668cm</Top>
           <Left>2.96369cm</Left>
           <Height>0.6cm</Height>
-          <Width>5.04cm</Width>
+          <Width>16.58875cm</Width>
           <ZIndex>23</ZIndex>
           <Style>
             <Border>
@@ -1698,10 +1698,10 @@ End Function</Code>
           </Style>
         </Textbox>
         <Line Name="Line20">
-          <Top>6.08701cm</Top>
-          <Left>0.36866cm</Left>
+          <Top>7.17986cm</Top>
+          <Left>0.33338cm</Left>
           <Height>0cm</Height>
-          <Width>20.26278cm</Width>
+          <Width>20.2227cm</Width>
           <ZIndex>24</ZIndex>
           <Style>
             <Border>
@@ -1726,9 +1726,9 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
-          <Top>6.19284cm</Top>
+          <Top>7.2857cm</Top>
           <Left>3.95085cm</Left>
-          <Height>0.66944cm</Height>
+          <Height>0.59007cm</Height>
           <Width>12.64236cm</Width>
           <ZIndex>25</ZIndex>
           <Style>
@@ -2037,10 +2037,10 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox6</rd:DefaultName>
-          <Top>5.36409cm</Top>
-          <Left>8.14481cm</Left>
+          <Top>5.9459cm</Top>
+          <Left>0.54504cm</Left>
           <Height>0.60854cm</Height>
-          <Width>2.06587cm</Width>
+          <Width>2.31282cm</Width>
           <ZIndex>35</ZIndex>
           <Style>
             <Border>
@@ -2069,10 +2069,10 @@ End Function</Code>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>email</rd:DefaultName>
-          <Top>5.37263cm</Top>
-          <Left>10.38706cm</Left>
+          <Top>5.97264cm</Top>
+          <Left>2.99897cm</Left>
           <Height>0.6cm</Height>
-          <Width>9.72065cm</Width>
+          <Width>16.89743cm</Width>
           <ZIndex>36</ZIndex>
           <Style>
             <Border>
@@ -3042,7 +3042,7 @@ End Function</Code>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Sum(Fields!service_amount.Value, "DataSet1")</Value>
+                  <Value>=Fields!service_amount.Value</Value>
                   <Style>
                     <FontSize>11pt</FontSize>
                   </Style>
@@ -3074,7 +3074,7 @@ End Function</Code>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Sum(Fields!edu_cess_amount.Value, "DataSet1")</Value>
+                  <Value>=Fields!edu_cess_amount.Value</Value>
                   <Style>
                     <FontSize>11pt</FontSize>
                   </Style>
@@ -3106,7 +3106,7 @@ End Function</Code>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=Sum(Fields!hr_edu_cess_amount.Value, "DataSet1")</Value>
+                  <Value>=Fields!hr_edu_cess_amount.Value</Value>
                   <Style>
                     <FontSize>11pt</FontSize>
                   </Style>
